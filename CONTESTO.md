@@ -236,3 +236,50 @@ sul divano. Si progetta a 390 px e si sale, non il contrario.
    dei giornali. Si usano le nostre.
 5. **Ogni pagina dichiara la fonte di ciò che afferma** quando è un fatto
    storico: il PDF della società, un articolo, il registro CONI.
+
+---
+
+## 10 · La federazione, il campionato, il campo — con le fonti
+
+**FISR — Federazione Italiana Sport Rotellistici**, sezione hockey pista.
+Codice di affiliazione della società: **3947**. Scheda federale: Via dei
+Girasoli 14, 61122 Pesaro; PEC `amatoripesaro@pec.it`.
+
+**Serie B**: terzo livello nazionale, sotto A1 e A2. Nel 2025-26 erano **37
+squadre in sei gironi**, andata e ritorno, spareggi e Final Six per due
+promozioni in A2.
+
+**Il girone 2025-26 — Girone B, sette squadre**: Amatori Pesaro, Pico
+Mirandola A, Pico Mirandola B, Correggio Hockey, RH Scandiano, Rotellistica
+Scandianese, Amatori Modena. Risultati recenti reperiti: 18-3 con Scandiano,
+9-4 con Pico Mirandola B, 6-1 con Amatori Modena. **La stagione 2026-27 è
+appena cominciata e il girone non è ancora pubblicato.**
+
+**Il campo.** «Pista al mare» è la **Pista di pattinaggio di Viale Trieste**,
+comunale, **scoperta**, usata da maggio a settembre — la stessa pista che
+costruì Enzo Boiani. Per l'inverno un dirigente parla di «una pista al chiuso
+di Borgo Santa Maria», ma il registro degli impianti del Comune non conferma
+quale sia: il **PalaBorgo** non elenca l'hockey fra gli sport. **Da chiedere
+al committente**: è l'unico che sa dove si gioca davvero d'inverno.
+
+**Nelle Marche l'Amatori Pesaro risulta l'unica società di hockey su pista.**
+È un fatto che vale come titolo, e ha una fonte: il registro FISR.
+
+### Calendario e risultati in automatico: si può, ma è fragile
+
+Non esiste nessuna API pubblica. Il portale federale carica frammenti di
+HTML via AJAX da un fornitore esterno, e i comunicati ufficiali sono **PDF**.
+L'unica strada praticabile è leggere l'HTML di un aggregatore non ufficiale
+(`hockeypista.info/squadre/amatori-pesaro/`), con i PDF federali come fonte
+di verità. Quindi: si fa, una volta a settimana, **e il sito deve reggere
+quando salta** — ultimo dato buono in pagina e una riga che dice quando è
+stato aggiornato. Mai una tabella vuota.
+
+### ⚠️ Un'incoerenza da chiarire
+
+Sul foglio del committente la **P.IVA** è `02689960413` e il **C.F.**
+`92054780413`. Il registro CONI riporta `92054780413`. Per una associazione
+sportiva dilettantistica è normale che i due numeri siano diversi, ma prima
+di stamparli nel piede del sito **vanno confermati dal commercialista o dal
+presidente**: oggi il sito ne mostra uno inventato, e il rimedio non è
+sostituirlo con un altro che non abbiamo verificato.
