@@ -139,10 +139,21 @@ export function Squadra() {
             })}
           </ul>
 
+          {/* La fonte è un indirizzo: si scrive come un collegamento, così chi
+              vuole controllare i numeri ci arriva invece di ricopiarli. */}
           <p className="mt-6 max-w-3xl text-[13px] leading-relaxed text-grigio">
-            Fonte: portale dei risultati FISR, {FONTE_FEDERALE} — rose depositate, presenze e gol della Serie B{' '}
-            {STAGIONE_ROSA}. I numeri di maglia vengono dai tabellini delle singole partite: chi in un tabellino non è
-            mai comparso non ha un numero da mostrare, e la scheda lascia l'angolo pulito invece di inventarlo.
+            Fonte:{' '}
+            <a
+              href={FONTE_FEDERALE}
+              target="_blank"
+              rel="noreferrer"
+              className="text-rosso-cupo underline underline-offset-2"
+            >
+              portale dei risultati FISR
+            </a>{' '}
+            — rose depositate, presenze e gol della Serie B {STAGIONE_ROSA}. I numeri di maglia vengono dai tabellini
+            delle singole partite: chi in un tabellino non è mai comparso non ha un numero da mostrare, e la scheda
+            lascia l'angolo pulito invece di inventarlo.
           </p>
         </div>
       </section>

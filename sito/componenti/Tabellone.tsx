@@ -166,15 +166,20 @@ export function Tabellone({ partite, fonte, filtri = false, oggi }: ProprietaTab
                       dateTime={p.data}
                       className="cifra text-sm whitespace-nowrap tracking-[0.06em] text-nero"
                     >
-                      {giorno} {mese}{' '}
-                      <span className="text-grigio">{p.data.slice(2, 4)}</span>
+                      {giorno} {mese} <span className="text-grigio">{p.data.slice(0, 4)}</span>
                     </time>
                   </td>
 
-                  {/* CATEGORIA */}
+                  {/* CATEGORIA — e insieme il «dove». Il casa/trasferta stava
+                      in fondo al nome dell'incontro e a 390 px si spezzava a
+                      metà («… in / casa»): qui sta su una riga sua, sopra, e
+                      non ha più niente da spezzare. */}
                   <td className="col-start-2 row-start-1 sm:table-cell sm:py-3 sm:pr-4 sm:align-middle">
-                    <span className="text-[0.6875rem] tracking-[0.1em] text-grigio uppercase">
+                    <span className="block text-[0.6875rem] tracking-[0.1em] text-grigio uppercase">
                       {ETICHETTA_CATEGORIA[p.categoria]}
+                    </span>
+                    <span className="block text-[0.625rem] tracking-[0.08em] whitespace-nowrap text-grigio uppercase">
+                      {inCasa(p) ? 'in casa' : 'in trasferta'}
                     </span>
                   </td>
 
@@ -185,9 +190,6 @@ export function Tabellone({ partite, fonte, filtri = false, oggi }: ProprietaTab
                       <span className={inCasa(p) ? 'font-semibold' : ''}>{p.casa}</span>
                       <span className="px-1.5 text-grigio">–</span>
                       <span className={inCasa(p) ? '' : 'font-semibold'}>{p.ospiti}</span>
-                    </span>
-                    <span className="ml-2 text-[0.6875rem] tracking-[0.08em] text-grigio uppercase">
-                      {inCasa(p) ? 'in casa' : 'in trasferta'}
                     </span>
                   </td>
 
@@ -218,8 +220,14 @@ export function Tabellone({ partite, fonte, filtri = false, oggi }: ProprietaTab
                         </span>
                       </span>
                     ) : (
-                      <span className="text-[0.6875rem] tracking-[0.08em] text-grigio uppercase">
-                        {daGiocare ? 'da giocare' : 'risultato non disponibile'}
+                      /* «Non disponibile» per esteso occupava due righe in una
+                         colonna stretta: la parola «risultato» resta nel DOM
+                         per chi legge con uno screen reader, e sparisce dalla
+                         colonna per chi legge con gli occhi — che la parola
+                         «Risultato» ce l'ha già scritta in cima. */
+                      <span className="text-[0.6875rem] tracking-[0.08em] whitespace-nowrap text-grigio uppercase">
+                        <span className="sr-only">risultato </span>
+                        {daGiocare ? 'da giocare' : 'non disponibile'}
                       </span>
                     )}
                   </td>

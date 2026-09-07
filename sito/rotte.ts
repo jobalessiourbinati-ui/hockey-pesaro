@@ -65,14 +65,14 @@ export const ROTTE: readonly Rotta[] = [
     file: 'eventi/index.html',
     etichetta: 'Eventi',
     titolo: 'Eventi e calendario — Amatori Hockey Pesaro',
-    descrizione: 'Le partite in casa e in trasferta, i tornei, il Memorial Perry e il Trofeo Boattini.',
+    descrizione: 'I tornei della società: il Torneo Città di Pesaro, il Memorial Perry, il Trofeo Boattini.',
   },
   {
     percorso: '/notizie/',
     file: 'notizie/index.html',
     etichetta: 'Notizie',
     titolo: 'Notizie — Amatori Hockey Pesaro',
-    descrizione: 'Gli aggiornamenti della società, partita per partita.',
+    descrizione: 'Le notizie dai social della società e i risultati del campionato, partita per partita.',
   },
 ] as const
 

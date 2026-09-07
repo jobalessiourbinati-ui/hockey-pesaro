@@ -30,7 +30,7 @@
  * ===========================================================================
  */
 
-import { STAGIONE_ROSA } from '../../dati/rosa.ts'
+import { FONTE_FEDERALE, STAGIONE_ROSA } from '../../dati/rosa.ts'
 import { GIRONE_CAMPIONATO } from '../../dati/stagione-2026-27.ts'
 import { SeparatoreBastoni } from '../componenti/Scudetto.tsx'
 
@@ -161,8 +161,23 @@ export function Storia() {
                 <span aria-hidden="true" className="absolute top-2 -left-[7px] block h-3 w-3 bg-rosso-cupo" />
 
                 {/* Una tappa non ha l'anno, ed è quella che conta di più non
-                    falsificare: vedi la nota in testa al file. */}
-                {t.anno !== null && <p className="cifra text-[clamp(1.75rem,7vw,2.75rem)] text-rosso">{t.anno}</p>}
+                    falsificare: vedi la nota in testa al file.
+                    Le altre a volte hanno un anno («1946») e a volte un
+                    periodo («Gli anni d'oro»). Non si scrivono uguale: la
+                    classe `.cifra` ha interlinea 0,82, misura giusta per le
+                    cifre che non hanno discendenti e sbagliata per una «g»,
+                    che finiva addosso al titolo sotto. Quindi le cifre restano
+                    cifre, e i periodi diventano un occhiello grande — più
+                    piccolo, quindi in rosso-cupo, che a quella misura tiene i
+                    4,5:1 mentre il rosso della marca no. */}
+                {t.anno !== null &&
+                  (/^\d/.test(t.anno) ? (
+                    <p className="cifra text-[clamp(1.75rem,7vw,2.75rem)] text-rosso">{t.anno}</p>
+                  ) : (
+                    <p className="font-titolo text-[clamp(1.25rem,5vw,1.75rem)] leading-tight tracking-[0.02em] text-rosso-cupo uppercase">
+                      {t.anno}
+                    </p>
+                  ))}
 
                 <div className={t.evidenza ? 'mt-3 border-4 border-rosso-cupo bg-panna p-5 sm:p-8' : 'mt-2'}>
                   {t.evidenza && <p className="occhiello text-rosso-cupo">Il risultato più prestigioso</p>}
@@ -208,7 +223,16 @@ export function Storia() {
           </h2>
           <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-grigio">
             Non è una ricostruzione a memoria. Ogni fatto scritto qui sopra ha una di queste fonti, e dove la fonte
-            tace il testo lo dice invece di colmare il vuoto.
+            tace il testo lo dice invece di colmare il vuoto. Rose, staff e calendari si controllano sul{' '}
+            <a
+              href={FONTE_FEDERALE}
+              target="_blank"
+              rel="noreferrer"
+              className="text-rosso-cupo underline underline-offset-2"
+            >
+              portale dei risultati FISR
+            </a>
+            .
           </p>
           <ul className="mt-6 max-w-3xl divide-y divide-riga border-y border-riga">
             {FONTI.map((f) => (
