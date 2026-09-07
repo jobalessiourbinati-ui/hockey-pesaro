@@ -1,0 +1,328 @@
+{
+  "aggiornato": "2026-09-07T23:12:03.963Z",
+  "fonte": {
+    "portale": "https://hockeypista.fisr.it/",
+    "calendario": "https://www.server2.sidgad.es/fisr/fisr_cal_idc_1894_1.php",
+    "classifica": "https://www.server2.sidgad.es/fisr/fisr_clasif_idc_1894_1.php",
+    "nota": "HTML del portale federale, letto da uno script. Non è un’API: può cambiare senza preavviso."
+  },
+  "stagione": "2026/27",
+  "idc": 1894,
+  "squadraId": 5320,
+  "squadra": "AMATORI PESARO",
+  "girone": "SERIE B - GIRONE D",
+  "squadre": [
+    "AMATORI MODENA",
+    "AMATORI PESARO",
+    "HOCKEY PICO MIRANDOLA",
+    "HOCKEY SCANDIANO",
+    "MINIMOTOR CORREGGIO",
+    "ROTELLISTICA SCANDIANESE"
+  ],
+  "classificaDisponibile": false,
+  "classifica": [],
+  "classificaNota": "La FISR non pubblica ancora la classifica di questo girone: il campionato non è cominciato. La pagina deve dirlo, non mostrare una tabella di zeri.",
+  "partite": [
+    {
+      "data": "2027-01-08",
+      "ora": "20:45",
+      "casaId": 5202,
+      "ospitiId": 5192,
+      "casa": "AMATORI MODENA",
+      "ospiti": "HOCKEY SCANDIANO",
+      "risultato": null,
+      "nostra": false
+    },
+    {
+      "data": "2027-01-09",
+      "ora": "18:00",
+      "casaId": 5330,
+      "ospitiId": 5174,
+      "casa": "HOCKEY PICO MIRANDOLA",
+      "ospiti": "MINIMOTOR CORREGGIO",
+      "risultato": null,
+      "nostra": false
+    },
+    {
+      "data": "2027-01-10",
+      "ora": "18:00",
+      "casaId": 5187,
+      "ospitiId": 5320,
+      "casa": "ROTELLISTICA SCANDIANESE",
+      "ospiti": "AMATORI PESARO",
+      "risultato": null,
+      "nostra": true
+    },
+    {
+      "data": "2027-01-24",
+      "ora": "15:00",
+      "casaId": 5174,
+      "ospitiId": 5187,
+      "casa": "MINIMOTOR CORREGGIO",
+      "ospiti": "ROTELLISTICA SCANDIANESE",
+      "risultato": null,
+      "nostra": false
+    },
+    {
+      "data": "2027-01-24",
+      "ora": "17:30",
+      "casaId": 5320,
+      "ospitiId": 5202,
+      "casa": "AMATORI PESARO",
+      "ospiti": "AMATORI MODENA",
+      "risultato": null,
+      "nostra": true
+    },
+    {
+      "data": "2027-01-24",
+      "ora": "18:00",
+      "casaId": 5192,
+      "ospitiId": 5330,
+      "casa": "HOCKEY SCANDIANO",
+      "ospiti": "HOCKEY PICO MIRANDOLA",
+      "risultato": null,
+      "nostra": false
+    },
+    {
+      "data": "2027-01-29",
+      "ora": "20:45",
+      "casaId": 5202,
+      "ospitiId": 5174,
+      "casa": "AMATORI MODENA",
+      "ospiti": "MINIMOTOR CORREGGIO",
+      "risultato": null,
+      "nostra": false
+    },
+    {
+      "data": "2027-01-31",
+      "ora": "15:00",
+      "casaId": 5187,
+      "ospitiId": 5330,
+      "casa": "ROTELLISTICA SCANDIANESE",
+      "ospiti": "HOCKEY PICO MIRANDOLA",
+      "risultato": null,
+      "nostra": false
+    },
+    {
+      "data": "2027-01-31",
+      "ora": "18:00",
+      "casaId": 5192,
+      "ospitiId": 5320,
+      "casa": "HOCKEY SCANDIANO",
+      "ospiti": "AMATORI PESARO",
+      "risultato": null,
+      "nostra": true
+    },
+    {
+      "data": "2027-02-06",
+      "ora": "18:00",
+      "casaId": 5330,
+      "ospitiId": 5202,
+      "casa": "HOCKEY PICO MIRANDOLA",
+      "ospiti": "AMATORI MODENA",
+      "risultato": null,
+      "nostra": false
+    },
+    {
+      "data": "2027-02-07",
+      "ora": "15:00",
+      "casaId": 5174,
+      "ospitiId": 5320,
+      "casa": "MINIMOTOR CORREGGIO",
+      "ospiti": "AMATORI PESARO",
+      "risultato": null,
+      "nostra": true
+    },
+    {
+      "data": "2027-02-07",
+      "ora": "18:00",
+      "casaId": 5187,
+      "ospitiId": 5192,
+      "casa": "ROTELLISTICA SCANDIANESE",
+      "ospiti": "HOCKEY SCANDIANO",
+      "risultato": null,
+      "nostra": false
+    },
+    {
+      "data": "2027-02-19",
+      "ora": "20:45",
+      "casaId": 5202,
+      "ospitiId": 5187,
+      "casa": "AMATORI MODENA",
+      "ospiti": "ROTELLISTICA SCANDIANESE",
+      "risultato": null,
+      "nostra": false
+    },
+    {
+      "data": "2027-02-21",
+      "ora": "17:30",
+      "casaId": 5320,
+      "ospitiId": 5330,
+      "casa": "AMATORI PESARO",
+      "ospiti": "HOCKEY PICO MIRANDOLA",
+      "risultato": null,
+      "nostra": true
+    },
+    {
+      "data": "2027-02-21",
+      "ora": "18:00",
+      "casaId": 5192,
+      "ospitiId": 5174,
+      "casa": "HOCKEY SCANDIANO",
+      "ospiti": "MINIMOTOR CORREGGIO",
+      "risultato": null,
+      "nostra": false
+    },
+    {
+      "data": "2027-02-27",
+      "ora": "18:00",
+      "casaId": 5174,
+      "ospitiId": 5330,
+      "casa": "MINIMOTOR CORREGGIO",
+      "ospiti": "HOCKEY PICO MIRANDOLA",
+      "risultato": null,
+      "nostra": false
+    },
+    {
+      "data": "2027-02-28",
+      "ora": "17:30",
+      "casaId": 5320,
+      "ospitiId": 5187,
+      "casa": "AMATORI PESARO",
+      "ospiti": "ROTELLISTICA SCANDIANESE",
+      "risultato": null,
+      "nostra": true
+    },
+    {
+      "data": "2027-02-28",
+      "ora": "18:00",
+      "casaId": 5192,
+      "ospitiId": 5202,
+      "casa": "HOCKEY SCANDIANO",
+      "ospiti": "AMATORI MODENA",
+      "risultato": null,
+      "nostra": false
+    },
+    {
+      "data": "2027-03-20",
+      "ora": "18:00",
+      "casaId": 5202,
+      "ospitiId": 5320,
+      "casa": "AMATORI MODENA",
+      "ospiti": "AMATORI PESARO",
+      "risultato": null,
+      "nostra": true
+    },
+    {
+      "data": "2027-03-20",
+      "ora": "18:00",
+      "casaId": 5330,
+      "ospitiId": 5192,
+      "casa": "HOCKEY PICO MIRANDOLA",
+      "ospiti": "HOCKEY SCANDIANO",
+      "risultato": null,
+      "nostra": false
+    },
+    {
+      "data": "2027-03-21",
+      "ora": "18:00",
+      "casaId": 5187,
+      "ospitiId": 5174,
+      "casa": "ROTELLISTICA SCANDIANESE",
+      "ospiti": "MINIMOTOR CORREGGIO",
+      "risultato": null,
+      "nostra": false
+    },
+    {
+      "data": "2027-04-03",
+      "ora": "18:00",
+      "casaId": 5330,
+      "ospitiId": 5187,
+      "casa": "HOCKEY PICO MIRANDOLA",
+      "ospiti": "ROTELLISTICA SCANDIANESE",
+      "risultato": null,
+      "nostra": false
+    },
+    {
+      "data": "2027-04-04",
+      "ora": "15:00",
+      "casaId": 5174,
+      "ospitiId": 5202,
+      "casa": "MINIMOTOR CORREGGIO",
+      "ospiti": "AMATORI MODENA",
+      "risultato": null,
+      "nostra": false
+    },
+    {
+      "data": "2027-04-04",
+      "ora": "17:30",
+      "casaId": 5320,
+      "ospitiId": 5192,
+      "casa": "AMATORI PESARO",
+      "ospiti": "HOCKEY SCANDIANO",
+      "risultato": null,
+      "nostra": true
+    },
+    {
+      "data": "2027-04-16",
+      "ora": "20:45",
+      "casaId": 5202,
+      "ospitiId": 5330,
+      "casa": "AMATORI MODENA",
+      "ospiti": "HOCKEY PICO MIRANDOLA",
+      "risultato": null,
+      "nostra": false
+    },
+    {
+      "data": "2027-04-18",
+      "ora": "17:30",
+      "casaId": 5320,
+      "ospitiId": 5174,
+      "casa": "AMATORI PESARO",
+      "ospiti": "MINIMOTOR CORREGGIO",
+      "risultato": null,
+      "nostra": true
+    },
+    {
+      "data": "2027-04-18",
+      "ora": "18:00",
+      "casaId": 5192,
+      "ospitiId": 5187,
+      "casa": "HOCKEY SCANDIANO",
+      "ospiti": "ROTELLISTICA SCANDIANESE",
+      "risultato": null,
+      "nostra": false
+    },
+    {
+      "data": "2027-04-24",
+      "ora": "18:00",
+      "casaId": 5330,
+      "ospitiId": 5320,
+      "casa": "HOCKEY PICO MIRANDOLA",
+      "ospiti": "AMATORI PESARO",
+      "risultato": null,
+      "nostra": true
+    },
+    {
+      "data": "2027-04-25",
+      "ora": "18:00",
+      "casaId": 5187,
+      "ospitiId": 5202,
+      "casa": "ROTELLISTICA SCANDIANESE",
+      "ospiti": "AMATORI MODENA",
+      "risultato": null,
+      "nostra": false
+    },
+    {
+      "data": "2027-04-25",
+      "ora": "18:00",
+      "casaId": 5174,
+      "ospitiId": 5192,
+      "casa": "MINIMOTOR CORREGGIO",
+      "ospiti": "HOCKEY SCANDIANO",
+      "risultato": null,
+      "nostra": false
+    }
+  ],
+  "partiteGiocate": 0
+}

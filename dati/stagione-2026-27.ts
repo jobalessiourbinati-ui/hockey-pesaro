@@ -6,11 +6,12 @@
  * Italia di Serie B 2026/27 di hockey su pista».
  * https://hockeyitalia21.com/2026/08/05/definito-il-calendario-della-coppa-italia-di-serie-b-2026-27-di-hockey-su-pista/
  *
- * ⚠️ IL CAMPIONATO NON È ANCORA USCITO. Al 08/09/2026 la FISR ha pubblicato
- * solo la Coppa Italia: il girone di Serie B 2026/27 non è ancora sorteggiato.
- * La pagina del sito deve dire questo — «il calendario di campionato non è
- * ancora uscito» — invece di mostrare una tabella vuota o, peggio, quella
- * dell'anno scorso spacciata per questa.
+ * ⚠️ AGGIORNATO L'08/09/2026, SERA. Il campionato È uscito: leggendo il
+ * portale federale (non l'annuncio sui giornali) risultano il **girone D** e
+ * dieci giornate dal 10/01/2027. Il file non le ricopia: le legge
+ * `dati/classifica.json`, che `npm run aggiorna` riscrive da solo. Qui resta
+ * solo la Coppa Italia, che è l'unica cosa che comincia PRIMA — il 26
+ * settembre — e che quindi serve alla home già da domani.
  * ===========================================================================
  */
 
@@ -42,5 +43,13 @@ export function prossimaPartita(oggi: Date, calendario: readonly Partita[] = COP
   return calendario.find((p) => p.data >= iso) ?? null
 }
 
-/** Il campionato 2026/27 non è ancora stato sorteggiato: la pagina lo dice. */
-export const CAMPIONATO_2026_27_USCITO = false
+/**
+ * Il campionato 2026/27 è sorteggiato: girone D, dieci giornate dal
+ * 10/01/2027, contro Rotellistica Scandianese, Amatori Modena, Hockey
+ * Scandiano, Minimotor Correggio e Hockey Pico Mirandola.
+ * Le partite NON stanno qui: le scrive `npm run aggiorna` in
+ * `dati/classifica.json` leggendo il portale federale, così restano vere
+ * anche quando la federazione sposta una data — e succede spesso.
+ */
+export const CAMPIONATO_2026_27_USCITO = true
+export const GIRONE_CAMPIONATO = 'Girone D'

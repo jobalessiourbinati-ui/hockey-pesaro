@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES2023",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "strict": true,
+    "skipLibCheck": true,
+
+    // `include: ["scripts"]` non trovava nessun file: gli script sono .mjs e
+    // senza `allowJs` TypeScript non li considera ingressi, quindi `tsc -b`
+    // si fermava su TS18003 e con lui l'intero `npm run build`.
+    // `checkJs` resta spento: il JavaScript viene letto, non controllato —
+    // così questo progetto compila senza imporre i tipi a chi scrive gli
+    // script di aggiornamento.
+    "allowJs": true,
+    "checkJs": false
+  },
+  "include": ["scripts"]
+}

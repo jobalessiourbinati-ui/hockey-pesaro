@@ -1,0 +1,104 @@
+# ===========================================================================
+# L'aggiornamento automatico del sito
+# ===========================================================================
+# Gira ogni ora. Legge Instagram, Facebook e il portale federale, e se
+# qualcosa è cambiato fa il commit dei JSON e delle immagini nuove.
+#
+# ⚠️ I TOKEN NON STANNO IN QUESTO FILE, e non ci staranno mai: questo file è
+# nel repository, i token no. Stanno nei Secrets:
+#   Settings → Secrets and variables → Actions → New repository secret.
+# Se un giorno vedi un token scritto qui dentro, è un incidente: va revocato
+# su developers.facebook.com e rifatto.
+#
+# Quando questa azione FALLISCE, GitHub manda una mail. Non è un fastidio: è
+# il modo in cui ci si accorge che il portale federale ha cambiato pagina o
+# che un token è scaduto. Vedi AGGIORNAMENTO.md.
+# ===========================================================================
+
+name: Aggiorna news e campionato
+
+on:
+  schedule:
+    # Ogni ora al minuto 17: non allo scoccare, quando mezzo mondo lancia i suoi.
+    - cron: '17 * * * *'
+  workflow_dispatch: # e il pulsante «Run workflow» per lanciarlo a mano
+
+# Un giro alla volta: due che scrivono gli stessi file si pestano i piedi.
+concurrency:
+  group: aggiorna
+  cancel-in-progress: false
+
+permissions:
+  contents: write # serve per il commit dei dati aggiornati
+
+jobs:
+  aggiorna:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Scarica il repository
+        uses: actions/checkout@v4
+
+      - name: Prepara Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Installa le dipendenze
+        run: npm ci
+
+      - name: Aggiorna i dati
+        id: aggiorna
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          FB_TOKEN: ${{ secrets.FB_TOKEN }}
+          # Facoltative: si impostano solo se servono davvero.
+          META_API_VERSION: ${{ vars.META_API_VERSION }}
+          IG_API_HOST: ${{ vars.IG_API_HOST }}
+        run: |
+          set +e
+          npm run aggiorna
+          codice=$?
+          echo "codice=$codice" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Commit e push di quello che è cambiato
+        run: |
+          set -e
+          git config user.name  "aggiornamento automatico"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Solo i file che l'aggiornamento ha il diritto di toccare — e solo
+          # quelli che esistono davvero: al primo giro `classifica.json` e la
+          # cartella delle immagini potrebbero ancora non esserci.
+          for p in dati/notizie.json dati/classifica.json public/media/notizie; do
+            if [ -e "$p" ]; then git add "$p"; fi
+          done
+
+          if git diff --cached --quiet; then
+            echo "Niente di nuovo: nessun commit."
+            exit 0
+          fi
+
+          git commit -m "dati: aggiornamento automatico $(date -u '+%Y-%m-%d %H:%M UTC')"
+
+          # Qualcuno potrebbe aver spinto nel frattempo: ci si accoda.
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Riporta l'esito dell'aggiornamento
+        if: steps.aggiorna.outputs.codice != '0'
+        run: |
+          codice="${{ steps.aggiorna.outputs.codice }}"
+          echo "::error::L'aggiornamento è finito con codice $codice."
+          case "$codice" in
+            1) echo "::error::Il portale federale è cambiato: i marcatori attesi non ci sono più. Il file dei dati NON è stato riscritto — sul sito resta l'ultimo buono. Va rifatto il parser in scripts/fonti/fisr.mjs." ;;
+            2) echo "::error::Il portale federale non risponde da troppo tempo e i dati in pagina sono vecchi. Se dura, va detto alla FISR o va cambiata la fonte." ;;
+            3) echo "::error::Meta ha rifiutato un token che è configurato: quasi sempre è scaduto o revocato. Si rifà seguendo AGGIORNAMENTO.md, sezione «Quando i token scadono», e si riscrive il Secret." ;;
+            *) echo "::error::Codice non previsto: guarda il log qui sopra." ;;
+          esac
+          exit 1

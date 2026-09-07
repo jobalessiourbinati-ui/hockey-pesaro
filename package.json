@@ -1,0 +1,30 @@
+{
+  "name": "hockey-pesaro",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Sito dell'Amatori Hockey Pesaro ASD — codice, non WordPress",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "oxlint",
+    "aggiorna": "node scripts/aggiorna.mjs"
+  },
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.4",
+    "@vitejs/plugin-react": "^5.1.0",
+    "oxlint": "^1.24.0",
+    "playwright-core": "^1.62.1",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^4.3.3",
+    "typescript": "~6.0.2",
+    "vite": "^8.2.0"
+  }
+}

@@ -1,0 +1,188 @@
+/*
+ * ===========================================================================
+ * IL TEMA — bianco, rosso, un po' di nero
+ * ===========================================================================
+ * La direzione del committente, alla lettera: «fai tutto estetica come del
+ * logo dell'Amatori Hockey Pesaro, ovvero bianco rosso e un po' di nero».
+ * Il sito di oggi fa il contrario — nero dominante, rosso al neon, ombre
+ * rosse sotto ogni cosa — quindi qui si ribalta: la pagina è bianca, il
+ * rosso è l'accento che decide dove guardare, il nero è la struttura
+ * (testata, piede, una fascia) e non il fondo.
+ *
+ * I COLORI SONO MISURATI, NON SCELTI A OCCHIO.
+ * Letti con sharp da `public/media/stemma.png`, contando i pixel:
+ *   #E72F35  11.660 px — il rosso dello scudetto
+ *   #1C1728  11.453 px — il blu-nero dei bastoni
+ *   #FFFFFF  17.840 px — il bianco dei quarti
+ * Il rosso della marca su bianco fa 4,32:1. Basta per il testo grande
+ * (AA vuole 3:1 sopra i 24 px, o 18,66 px in grassetto) ma NON per il testo
+ * piccolo, che vuole 4,5:1. Perciò il rosso è due colori:
+ *   --rosso        #E72F35  la marca: forme, scudetto, titoli enormi
+ *   --rosso-cupo   #C4282D  la marca scurita del 15%: 5,69:1 su bianco —
+ *                           tutto il testo piccolo e i fondi dei bottoni
+ *   --rosso-chiaro #F4565B  5,26:1 sul nero — il rosso piccolo sul nero
+ * I rapporti sono tutti misurati con uno script, non stimati: stanno nel
+ * rapporto di consegna.
+ * ===========================================================================
+ */
+
+@import 'tailwindcss';
+
+@theme {
+  /* --- i colori, misurati dal logo --- */
+  --color-rosso: #e72f35;
+  --color-rosso-cupo: #c4282d;
+  --color-rosso-chiaro: #f4565b;
+  --color-nero: #1c1728;
+  --color-nero-fondo: #120e1a;
+  --color-grigio: #5b5666;
+  --color-grigio-chiaro: #b8b3c2;
+  --color-panna: #f2f1ee;
+  --color-riga: #ddd9e2;
+
+  /* --- la tipografia ---
+   * Anton: un grottesco condensato pesantissimo, un peso solo, fatto per
+   * stare in maiuscolo e in grande. È il registro del sito attuale, che su
+   * quello aveva ragione. La pila di ripiego è vera: Impact e
+   * Haettenschweiler su Windows, Arial Narrow ovunque — se Google Fonts non
+   * risponde la pagina resta condensata, non diventa Times.
+   * Inter per il testo: legge bene a 16 px sul telefono. */
+  --font-titolo: 'Anton', 'Haettenschweiler', 'Impact', 'Arial Narrow', 'Franklin Gothic Medium', sans-serif;
+  --font-testo: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* ---------------------------------------------------------------------------
+ * LA BASE
+ * ------------------------------------------------------------------------- */
+
+html {
+  /* Nessuno scorrimento morbido imposto: chi ha chiesto di ridurre il
+   * movimento non lo vuole, e chi non l'ha chiesto non se ne accorge. */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: #fff;
+  color: var(--color-nero);
+  font-family: var(--font-testo);
+  font-size: 1rem;
+  line-height: 1.6;
+  /* Il fondo bianco non deve mai scorrere di lato: a 320 px una tabella o un
+   * titolo che sfora si vede subito, e il committente il sito lo apre dal
+   * telefono. Il contenimento vero lo fanno i componenti; questo è la rete. */
+  overflow-x: hidden;
+}
+
+/* I titoli sono il segno della società quanto il rosso: condensati, in
+ * maiuscolo, stretti. `balance` evita la riga orfana di una parola sola. */
+.titolo {
+  font-family: var(--font-titolo);
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 0.86;
+  letter-spacing: 0.005em;
+  text-wrap: balance;
+}
+
+/* L'occhiello sopra i titoli: piccolo, spaziato, rosso cupo perché è testo
+ * piccolo e deve reggere i 4,5:1. */
+.occhiello {
+  font-family: var(--font-testo);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+/* I numeri grandi: cifre di larghezza fissa, così la colonna non balla
+ * quando il dato cambia. */
+.cifra {
+  font-family: var(--font-titolo);
+  font-variant-numeric: tabular-nums;
+  line-height: 0.82;
+}
+
+/* ---------------------------------------------------------------------------
+ * IL FUOCO — visibile, sempre, e sopra a tutto
+ * Un contorno rosso su fondo chiaro e bianco su fondo scuro: `currentColor`
+ * non basta, perché in testata il testo è già bianco e sparirebbe.
+ * ------------------------------------------------------------------------- */
+:where(a, button, [tabindex]):focus-visible {
+  outline: 3px solid var(--color-rosso-cupo);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.su-nero :where(a, button, [tabindex]):focus-visible {
+  outline-color: #fff;
+}
+
+/* ---------------------------------------------------------------------------
+ * I BOTTONI — bordi decisi, niente ombre morbide, niente sfumature.
+ * È sport: il bottone è un rettangolo pieno che si vede da lontano.
+ * L'altezza minima è 44 px perché è la misura di un dito, non un'opinione.
+ * ------------------------------------------------------------------------- */
+.bottone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3rem;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-titolo);
+  font-size: 1.0625rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 2px solid transparent;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.bottone-pieno {
+  background: var(--color-rosso-cupo);
+  color: #fff;
+}
+.bottone-pieno:hover {
+  background: var(--color-nero);
+}
+
+.bottone-vuoto {
+  border-color: var(--color-nero);
+  color: var(--color-nero);
+  background: transparent;
+}
+.bottone-vuoto:hover {
+  background: var(--color-nero);
+  color: #fff;
+}
+
+/* ---------------------------------------------------------------------------
+ * IL MOVIMENTO — poco, e revocabile.
+ * Chi ha chiesto al sistema operativo di ridurre le animazioni le vede
+ * sparire tutte, comprese quelle che qui non ci sono ancora ma ci saranno.
+ * ------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Il salto al contenuto: c'è sempre, si vede solo con la tastiera. */
+.salta {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+}
+.salta:focus {
+  left: 0.5rem;
+  top: 0.5rem;
+  background: var(--color-nero);
+  color: #fff;
+  padding: 0.75rem 1rem;
+}

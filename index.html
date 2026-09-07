@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Amatori Hockey Pesaro — hockey su pista, Serie B</title>
+    <meta
+      name="description"
+      content="L'Amatori Hockey Pesaro ASD: hockey su pista in Serie B, settore giovanile dall'Under 11 all'Under 19, sulla pista di Viale Trieste."
+    />
+    <meta name="theme-color" content="#1c1728" />
+    <link rel="icon" href="/media/logo.png" />
+    <link rel="apple-touch-icon" href="/media/stemma.png" />
+
+    <link rel="stylesheet" href="/sito/tema.css" />
+
+    <!--
+      I CARATTERI.
+      Anton: un grottesco condensato pesantissimo, in maiuscolo — il registro
+      del sito attuale, che su quello aveva ragione. Inter per il testo.
+      `display=swap` perché la pagina si deve poter leggere anche mentre i
+      caratteri arrivano; la pila di ripiego in `tema.css` è vera, così se
+      Google Fonts non risponde il titolo resta condensato invece di
+      diventare un Times largo il doppio.
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&display=swap"
+    />
+
+    <!--
+      Dati strutturati: solo cose verificate nel rilievo (scheda federale
+      FISR e pagine social confermate dal Comune di Pesaro). Niente data di
+      fondazione, perché 1946 è lo Skating Club e 2016 è l'Amatori: un solo
+      numero qui direbbe una cosa falsa. Niente partita IVA, per il motivo
+      spiegato in `sito/componenti/Piede.tsx`.
+    -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsClub",
+        "name": "Amatori Hockey Pesaro ASD",
+        "sport": "Hockey su pista",
+        "email": "info@hockeypesaro.it",
+        "telephone": "+39 347 513 2745",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Via dei Girasoli 14",
+          "postalCode": "61122",
+          "addressLocality": "Pesaro",
+          "addressRegion": "PU",
+          "addressCountry": "IT"
+        },
+        "sameAs": [
+          "https://www.facebook.com/amatorihockeypesaro",
+          "https://www.instagram.com/amatori_hockey_pesaro_asd"
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="radice"></div>
+    <script type="module" src="/sito/main.tsx"></script>
+  </body>
+</html>
