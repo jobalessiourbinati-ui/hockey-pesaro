@@ -1,136 +1,130 @@
 /*
  * ===========================================================================
- * LA ROSA — quello che si trova in fonti pubbliche, con la fonte accanto
+ * LA ROSA — dal portale federale FISR, non dai giornali
  * ===========================================================================
- * ⚠️ LEGGERE PRIMA DI PUBBLICARE QUALUNQUE NOME.
+ * FONTE PRIMARIA: il portale dei risultati della FISR (hockeypista.fisr.it),
+ * che pubblica le rose depositate, le presenze, i gol e lo staff tesserato.
+ * È la fonte ufficiale: qui dentro c'è quello che la società ha depositato in
+ * federazione, non quello che ha scritto un giornale.
  *
- * Questo file NON è la rosa della stagione in corso: è **ciò che è stato
- * trovato scritto** su articoli, comunicati e documenti della società. Ogni
- * riga porta la fonte e la stagione a cui quella fonte si riferisce. La rosa
- * vera la conferma la società — finché lo `stato` è `'da-confermare'`, il nome
- * può comparire nel sito solo dentro un racconto storico, mai in un elenco
- * intitolato «la squadra di quest'anno».
+ * Endpoint (POST, con `Referer: http://hockeypista.fisr.it/`):
+ *   https://www.server2.sidgad.es/fisr/fisr_stats_1_1634.php
+ *   body: idc=1634&tipo_stats=plantillas&site_lang=it
+ * `idc` è competizione+stagione (1634 = Serie B 2025/26, 1894 = 2026/27); la
+ * squadra è `teamid_4666`. I numeri di maglia NON stanno in quella tabella:
+ * vengono dai tabellini delle singole partite (`fisr_gr_<idp>_1.php`), dove
+ * ogni evento porta il dorsale di chi lo ha fatto.
  *
- * E ne è già arrivata una smentita, il primo giorno: **Juan Giraldo non c'è
- * più**, detto da chi gioca in quella squadra. È esattamente il motivo per cui
- * un elenco pescato dai giornali non si pubblica così com'è.
+ * ⚠️ QUESTA È LA STAGIONE 2025/26, quella appena conclusa. La rosa 2026/27
+ * non è ancora depositata — il campionato comincia il 10/01/2027 — e finché
+ * non lo è la pagina mostra questa **dicendo di quale stagione è**.
  *
- * Perché tanta cautela su una cosa che sembra banale: mettere in pagina un
- * giocatore che non c'è più, o dimenticarne uno che c'è, su un sito che
- * leggono i compagni di squadra e i loro genitori, è il tipo di errore che
- * non si perdona a un professionista. E i numeri di maglia non li ha nessuna
- * fonte pubblica: si chiedono.
- *
- * SUI MINORI. Tre dei nomi qui sotto erano minorenni all'epoca dell'articolo
- * (Gasparini 2010, Tomassini 2009, e probabilmente i Boniolo). Il fatto che
- * un giornale li abbia nominati non ci autorizza a metterli sul sito della
- * società: serve la liberatoria di chi esercita la responsabilità
- * genitoriale. Il campo `minoreAllEpoca` esiste per non dimenticarlo.
+ * ⚠️ SUI MINORI. Tomassini è del 2009 e Gasparini del 2010. Nome e cognome
+ * sono già pubblici sul portale federale, ma **una fotografia è un'altra
+ * cosa** e vuole la liberatoria di chi esercita la responsabilità
+ * genitoriale. Il campo `minore` esiste per non dimenticarlo.
  * ===========================================================================
  */
 
-export type Ruolo = 'portiere' | 'movimento' | 'allenatore' | 'dirigente'
+export type Ruolo = 'portiere' | 'movimento' | 'allenatore' | 'dirigente' | 'proprietario'
 
 export interface Persona {
   readonly nome: string
   readonly cognome: string
-  readonly ruolo: Ruolo
-  /** Numero di maglia: nessuna fonte pubblica lo riporta. Lo dà la società. */
+  /** Tutti i ruoli: in una società piccola una persona ne ha più d'uno. */
+  readonly ruoli: readonly Ruolo[]
+  /** Numero di maglia dai tabellini; `null` se non è mai comparso in un evento. */
   readonly numero: number | null
-  /** Anno di nascita, solo se scritto in una fonte. */
   readonly nato: number | null
-  /** Da dove viene, se la fonte lo dice. */
   readonly provenienza: string | null
-  /** La stagione a cui si riferisce la fonte, non la stagione in corso. */
-  readonly stagione: string
-  /** L'indirizzo della pagina in cui il nome è scritto. */
-  readonly fonte: string
-  /**
-   * Tre stati, non due, e il terzo è il motivo per cui questo campo esiste:
-   *   'in-rosa'       la società (o il committente, che gioca in squadra) ha
-   *                   confermato che c'è nella stagione in corso;
-   *   'uscito'        c'era e non c'è più. NON si cancella la riga: chi ha
-   *                   giocato qui resta nella storia della società, e sapere
-   *                   che è uscito evita di ritrovarselo in pagina fra sei
-   *                   mesi quando qualcuno ripesca una vecchia fonte;
-   *   'da-confermare' trovato in una fonte pubblica, mai verificato. Non si
-   *                   pubblica in un elenco intitolato «quest'anno».
-   */
+  /** Gol e presenze 2025/26, dal portale federale. */
+  readonly gol: number | null
+  readonly presenze: number | null
   readonly stato: 'in-rosa' | 'uscito' | 'da-confermare'
-  /** Quando e da chi è arrivata la conferma o la smentita. */
   readonly verificato?: string
-  /** `true` se all'epoca della fonte era minorenne: serve la liberatoria. */
-  readonly minoreAllEpoca?: boolean
-  /** Una riga di contesto, dalla fonte. Mai un giudizio nostro. */
+  readonly minore?: boolean
   readonly nota?: string
+  /** Il file in `public/media/rosa/`, quando la società ce lo darà. */
+  readonly foto?: string
 }
 
-const HI21_ROSA =
-  'https://hockeyitalia21.com/2025/01/02/lamatori-pesaro-pronta-per-il-campionato-di-serie-b-2024-25-con-il-rinforzo-di-stefano-scutece/'
-const CARLINO_INIZIO = 'https://www.ilrestodelcarlino.it/pesaro/sport/hockey-serie-b-inizia-21e8e6ac'
-const VIVERE_2022 = 'https://www.viverepesaro.it/2022/09/03/presentate-le-squadre-della-amatori-hockey-pesaro/2100248697/'
-const PDF_STORIA = 'rilievo/pdf/AHP-La-Storia.pdf'
+export const FONTE_FEDERALE = 'http://hockeypista.fisr.it'
+export const STAGIONE_ROSA = '2025/26'
 
 /**
- * PRIMA SQUADRA — la formazione presentata per il campionato 2024/25.
- * Fonte principale: l'articolo di hockeyitalia21 del 02/01/2025, che è la
- * presentazione della squadra alla vigilia del campionato. Dodici nomi.
+ * PRIMA SQUADRA — Serie B 2025/26, diciassette tesserati.
+ * L'ordine è quello con cui la pagina li mostra: prima chi ha segnato, per
+ * gol, poi gli altri. Non è una gerarchia: è una tabella che si legge.
  */
-export const PRIMA_SQUADRA_2024_25: readonly Persona[] = [
-  /* 08/09/2026 — «Juan Giraldo non c'è più», Alessio Urbinati, che gioca in
-     prima squadra: fonte diretta, e vale più di un articolo del gennaio 2025.
-     La riga resta perché il portiere colombiano è parte della storia recente
-     (era anche il preparatore dei portieri della società), ma esce dagli
-     elenchi della stagione in corso. */
-  { nome: 'Juan', cognome: 'Giraldo', ruolo: 'portiere', numero: null, nato: null, provenienza: 'Colombia', stagione: '2024/25', fonte: HI21_ROSA, stato: 'uscito', verificato: 'Alessio Urbinati, 08/09/2026', nota: '24 anni, portiere colombiano; è stato anche preparatore dei portieri della società.' },
-  { nome: 'Alessandro', cognome: 'Tomassini', ruolo: 'portiere', numero: null, nato: 2009, provenienza: null, stagione: '2024/25', fonte: HI21_ROSA, stato: 'da-confermare', minoreAllEpoca: true, nota: 'Secondo portiere, classe 2009: esordio in prima squadra a gennaio 2025.' },
-  { nome: 'Stefano', cognome: 'Scutece', ruolo: 'movimento', numero: null, nato: null, provenienza: 'Modena', stagione: '2024/25', fonte: HI21_ROSA, stato: 'da-confermare', nota: 'Il rinforzo della stagione: passato da Amatori Modena, Villa Oro, Scandiano e Lodi.' },
-  { nome: 'Edgar', cognome: 'Barberi', ruolo: 'movimento', numero: null, nato: null, provenienza: null, stagione: '2024/25', fonte: HI21_ROSA, stato: 'da-confermare', nota: 'Giocatore e presidente della società dal 2016.' },
-  { nome: 'Pierluigi', cognome: 'Morri', ruolo: 'movimento', numero: null, nato: null, provenienza: null, stagione: '2024/25', fonte: HI21_ROSA, stato: 'da-confermare' },
-  { nome: 'Nicholas', cognome: 'Ridolfi', ruolo: 'movimento', numero: null, nato: null, provenienza: 'Pesaro', stagione: '2024/25', fonte: HI21_ROSA, stato: 'da-confermare' },
-  { nome: 'Filippo', cognome: 'Roberti', ruolo: 'movimento', numero: null, nato: null, provenienza: 'Pesaro', stagione: '2024/25', fonte: HI21_ROSA, stato: 'da-confermare' },
-  { nome: 'Alessio', cognome: 'Urbinati', ruolo: 'movimento', numero: null, nato: null, provenienza: 'Pesaro', stagione: '2024/25', fonte: HI21_ROSA, stato: 'da-confermare' },
-  { nome: 'Gianluca', cognome: 'Gasparini', ruolo: 'movimento', numero: null, nato: 2010, provenienza: 'Pesaro', stagione: '2024/25', fonte: HI21_ROSA, stato: 'da-confermare', minoreAllEpoca: true, nota: 'Fra i migliori 10 Under 17 di Emilia-Romagna e Marche alle selezioni Promote.' },
-  { nome: 'Jordan', cognome: 'Boniolo', ruolo: 'movimento', numero: null, nato: null, provenienza: 'Pesaro', stagione: '2024/25', fonte: HI21_ROSA, stato: 'da-confermare', minoreAllEpoca: true, nota: 'Infortunio al crociato nella stagione 2024/25.' },
-  { nome: 'Samuel', cognome: 'Boniolo', ruolo: 'movimento', numero: null, nato: null, provenienza: 'Pesaro', stagione: '2024/25', fonte: HI21_ROSA, stato: 'da-confermare', minoreAllEpoca: true },
-  { nome: 'Chiara', cognome: 'Galli', ruolo: 'movimento', numero: null, nato: null, provenienza: 'Pesaro', stagione: '2024/25', fonte: HI21_ROSA, stato: 'da-confermare', nota: 'Anche allenatrice del settore giovanile.' },
+export const PRIMA_SQUADRA: readonly Persona[] = [
+  {
+    nome: 'Edgar Vincent', cognome: 'Barberi', ruoli: ['movimento', 'allenatore', 'dirigente', 'proprietario'],
+    numero: 5, nato: null, provenienza: null, gol: 6, presenze: 8, stato: 'da-confermare',
+    verificato: 'ruoli confermati da Alessio Urbinati, 08/09/2026',
+    nota: 'Ha fondato la società nel 2016 e la porta avanti: proprietario, dirigente e allenatore. In pista è il miglior marcatore della stagione.',
+  },
+  {
+    nome: 'Jordan', cognome: 'Boniolo', ruoli: ['movimento'], numero: 6, nato: null, provenienza: 'Pesaro',
+    gol: 4, presenze: 10, stato: 'da-confermare', minore: true,
+    nota: 'Fra i dieci migliori Under 17 di Emilia-Romagna e Marche alle selezioni Promote.',
+  },
+  { nome: 'Filippo', cognome: 'Roberti', ruoli: ['movimento'], numero: 9, nato: null, provenienza: 'Pesaro', gol: 4, presenze: 6, stato: 'da-confermare' },
+  { nome: 'Alessio', cognome: 'Urbinati', ruoli: ['movimento'], numero: 7, nato: null, provenienza: 'Pesaro', gol: 4, presenze: 9, stato: 'da-confermare' },
+  { nome: 'Alberto', cognome: 'Pascucci', ruoli: ['movimento'], numero: 11, nato: null, provenienza: null, gol: 3, presenze: 8, stato: 'da-confermare' },
+  { nome: 'Nicholas', cognome: 'Ridolfi', ruoli: ['movimento'], numero: 4, nato: null, provenienza: 'Pesaro', gol: 3, presenze: 7, stato: 'da-confermare' },
+  {
+    nome: 'Juan Camilo', cognome: 'Giraldo Bueno', ruoli: ['portiere'], numero: 81, nato: null, provenienza: 'Colombia',
+    gol: 0, presenze: 5, stato: 'uscito', verificato: 'Alessio Urbinati, 08/09/2026',
+    nota: 'Portiere colombiano, anche preparatore dei portieri della società. Non fa più parte della squadra.',
+  },
+  { nome: 'Gianluca', cognome: 'Gasparini', ruoli: ['movimento'], numero: null, nato: 2010, provenienza: 'Pesaro', gol: 0, presenze: 9, stato: 'da-confermare', minore: true },
+  { nome: 'Chiara', cognome: 'Galli', ruoli: ['movimento', 'allenatore'], numero: null, nato: null, provenienza: 'Pesaro', gol: 0, presenze: 4, stato: 'da-confermare', nota: 'Allena il settore giovanile e gioca in prima squadra.' },
+  { nome: 'Alex', cognome: 'Giusti', ruoli: ['movimento'], numero: null, nato: null, provenienza: null, gol: 0, presenze: 5, stato: 'da-confermare' },
+  { nome: 'Pierluigi', cognome: 'Morri', ruoli: ['movimento'], numero: null, nato: null, provenienza: null, gol: 0, presenze: 6, stato: 'da-confermare' },
+  { nome: 'Alessandro', cognome: 'Tomassini', ruoli: ['portiere'], numero: null, nato: 2009, provenienza: null, gol: 0, presenze: 6, stato: 'da-confermare', minore: true },
+  { nome: 'Lorenzo Mikhael', cognome: 'La Ferla', ruoli: ['movimento'], numero: null, nato: null, provenienza: null, gol: 0, presenze: 4, stato: 'da-confermare' },
+  { nome: 'Jason Ray', cognome: 'Jamerson', ruoli: ['movimento'], numero: null, nato: null, provenienza: null, gol: 0, presenze: 2, stato: 'da-confermare' },
+  { nome: 'Samuel', cognome: 'Boniolo', ruoli: ['portiere'], numero: null, nato: null, provenienza: 'Pesaro', gol: 0, presenze: 0, stato: 'da-confermare', minore: true },
+  { nome: 'Jonathan', cognome: 'Dal Santo', ruoli: ['movimento'], numero: null, nato: null, provenienza: 'Vicenza', gol: 0, presenze: 0, stato: 'da-confermare' },
+  { nome: 'Simone', cognome: 'Carnevali', ruoli: ['movimento', 'allenatore'], numero: null, nato: null, provenienza: 'Modena', gol: 0, presenze: 0, stato: 'da-confermare', nota: 'Da giocatore ha militato in Serie A con Modena, Vercelli e Scandiano; ha allenato a Bassano e Scandiano.' },
 ] as const
 
-/** STAFF — dalle stesse fonti. */
+/**
+ * LO STAFF depositato per il 2025/26. Il capo allenatore è **Escardilla**:
+ * Carnevali, che nel 2024/25 guidava la prima squadra, risulta allenatore di
+ * terzo livello. È un cambio che il sito attuale non racconta.
+ */
 export const STAFF: readonly Persona[] = [
-  { nome: 'Simone', cognome: 'Carnevali', ruolo: 'allenatore', numero: null, nato: null, provenienza: 'Modena', stagione: '2024/25', fonte: CARLINO_INIZIO, stato: 'da-confermare', nota: 'Allenatore di prima squadra e Under 19; da giocatore ha militato in Serie A con Modena, Vercelli e Scandiano, poi allenatore a Bassano e Scandiano.' },
-  { nome: 'Edgar Vincent', cognome: 'Barberi', ruolo: 'dirigente', numero: null, nato: null, provenienza: null, stagione: '2016→', fonte: 'https://www.coni.it/it/registro-societa-sportive/', stato: 'da-confermare', nota: 'Presidente e legale rappresentante nel registro CONI; fondatore della società nel 2016 e allenatore delle giovanili.' },
-  { nome: 'Chiara', cognome: 'Galli', ruolo: 'allenatore', numero: null, nato: null, provenienza: null, stagione: '2022→', fonte: VIVERE_2022, stato: 'da-confermare', nota: 'Allenatrice del settore giovanile.' },
-  { nome: 'Attilio', cognome: 'Benoffi', ruolo: 'dirigente', numero: null, nato: null, provenienza: null, stagione: '2024', fonte: CARLINO_INIZIO, stato: 'da-confermare' },
+  { nome: 'Edoardo Rubien', cognome: 'Escardilla', ruoli: ['allenatore'], numero: null, nato: null, provenienza: null, gol: null, presenze: null, stato: 'da-confermare', nota: 'Allenatore di 1° livello: il capo allenatore depositato in federazione.' },
+  { nome: 'Edgar Vincent', cognome: 'Barberi', ruoli: ['allenatore', 'dirigente', 'proprietario'], numero: null, nato: null, provenienza: null, gol: null, presenze: null, stato: 'da-confermare', verificato: 'Alessio Urbinati, 08/09/2026' },
+  { nome: 'Simone', cognome: 'Carnevali', ruoli: ['allenatore'], numero: null, nato: null, provenienza: null, gol: null, presenze: null, stato: 'da-confermare', nota: 'Allenatore di 3° livello nel 2025/26.' },
+  { nome: 'Andrea Eliseo', cognome: 'Boniolo', ruoli: ['dirigente'], numero: null, nato: null, provenienza: null, gol: null, presenze: null, stato: 'da-confermare' },
 ] as const
 
-/**
- * LE VECCHIE GLORIE — chi ha fatto la storia recente, dal PDF della società.
- * Vanno nella pagina STORIA, non nella rosa: sono un racconto, e come tale
- * non hanno bisogno di conferma stagionale.
- */
-export const STORIA_GIOCATORI: readonly Persona[] = [
-  { nome: 'Daniele', cognome: 'Uva', ruolo: 'movimento', numero: null, nato: null, provenienza: 'Molfetta', stagione: '2020/21', fonte: PDF_STORIA, stato: 'da-confermare', nota: 'Nella squadra della finale di Coppa Nazionale.' },
-  { nome: 'Andrea', cognome: 'Lucchi', ruolo: 'movimento', numero: null, nato: null, provenienza: 'Modena', stagione: '2020/21', fonte: PDF_STORIA, stato: 'da-confermare', nota: 'Nella squadra della finale di Coppa Nazionale.' },
-  { nome: 'Davide', cognome: 'Ferri', ruolo: 'movimento', numero: null, nato: null, provenienza: 'Modena', stagione: '2020/21', fonte: PDF_STORIA, stato: 'da-confermare', nota: 'Nella squadra della finale di Coppa Nazionale.' },
-  { nome: 'Antonino', cognome: 'Barberi', ruolo: 'movimento', numero: null, nato: null, provenienza: null, stagione: '2023/24', fonte: PDF_STORIA, stato: 'da-confermare' },
-  { nome: 'Alessandro', cognome: 'Zanazzo', ruolo: 'movimento', numero: null, nato: null, provenienza: 'Vicenza', stagione: '2023/24', fonte: PDF_STORIA, stato: 'da-confermare' },
-  { nome: 'Jonathan', cognome: 'Dal Santo', ruolo: 'movimento', numero: null, nato: null, provenienza: 'Vicenza', stagione: '2023/24', fonte: PDF_STORIA, stato: 'da-confermare' },
-  { nome: 'Mirko', cognome: 'Campana', ruolo: 'movimento', numero: null, nato: null, provenienza: null, stagione: '2021/22', fonte: 'https://www.ilrestodelcarlino.it/pesaro/sport/amatori-netta-affermazione-42d66011', stato: 'da-confermare' },
-] as const
+/* ---------------------------------------------------------------------------
+ * Le funzioni che usa la pagina. Nessun componente filtra a mano l'elenco
+ * grezzo: un nome uscito non deve poter tornare in pagina per distrazione.
+ * ------------------------------------------------------------------------- */
 
-/**
- * CHI VA IN PAGINA, e chi no. La pagina «giocatori» non legge mai l'elenco
- * grezzo: legge questa. Così un nome uscito non torna in pagina per
- * distrazione, e un nome mai verificato non ci finisce affatto.
- */
-export const inRosaOggi = (p: Persona): boolean => p.stato === 'in-rosa'
+export const inRosa = (p: Persona): boolean => p.stato !== 'uscito'
+export const usciti = (persone: readonly Persona[]): readonly Persona[] => persone.filter((p) => p.stato === 'uscito')
 
-/** Chi ha lasciato: serve alla pagina della storia, non alla rosa. */
-export const usciti = (persone: readonly Persona[]): readonly Persona[] =>
-  persone.filter((p) => p.stato === 'uscito')
+/** Le iniziali, per il riquadro quando la fotografia non c'è. */
+export const iniziali = (p: Persona): string => `${p.nome[0] ?? ''}${p.cognome[0] ?? ''}`.toUpperCase()
 
-/** Quanti nomi aspettano ancora una parola dalla società. */
-export const DA_CONFERMARE = [...PRIMA_SQUADRA_2024_25, ...STAFF].filter(
-  (p) => p.stato === 'da-confermare',
-).length
+/** Come si scrive un ruolo in pagina. */
+export const ETICHETTA_RUOLO: Record<Ruolo, string> = {
+  portiere: 'portiere',
+  movimento: 'giocatore',
+  allenatore: 'allenatore',
+  dirigente: 'dirigente',
+  proprietario: 'proprietario',
+}
+
+/** Il miglior marcatore, calcolato: mai scritto a mano. */
+export const capocannoniere = (persone: readonly Persona[]): Persona | null =>
+  persone.filter(inRosa).reduce<Persona | null>((m, p) => ((p.gol ?? 0) > (m?.gol ?? -1) ? p : m), null)
+
+/** I gol della squadra, sommati dai singoli: nessun totale scritto a mano. */
+export const golSquadra = (persone: readonly Persona[]): number =>
+  persone.reduce((s, p) => s + (p.gol ?? 0), 0)
