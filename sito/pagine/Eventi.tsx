@@ -179,22 +179,17 @@ export function Eventi() {
           <h2 id="titolo-pista-mare" className="titolo mt-1 text-[clamp(2rem,9vw,3.5rem)]">
             La pista al mare
           </h2>
-          <ul className="mt-6 grid gap-3 sm:grid-cols-2 sm:gap-4">
-            <li className="aspect-[4/3] overflow-hidden">
-              <Foto
-                nome="pista-mare-gioco"
-                alt="In campo sulla pista di Viale Trieste, con il lungomare alle spalle."
-                quantoLargaLargo="50vw"
-              />
-            </li>
-            <li className="aspect-[4/3] overflow-hidden">
-              <Foto
-                nome="premiazione-mare"
-                alt="Una premiazione al tramonto sulla pista di Viale Trieste."
-                quantoLargaLargo="50vw"
-              />
-            </li>
-          </ul>
+          {/* UNA SOLA, e larga. Erano due: la seconda — il campo visto da
+              lontano — è passata alla home, dove regge la fascia panoramica di
+              «dove giochiamo». Ripeterla qui sarebbe la stessa fotografia in
+              due pagine, che è il difetto da cui siamo partiti. */}
+          <div className="mt-6 aspect-[3/2] overflow-hidden">
+            <Foto
+              nome="premiazione-mare"
+              alt="Una premiazione al tramonto sulla pista di Viale Trieste."
+              quantoLargaLargo="100vw"
+            />
+          </div>
         </div>
       </section>
 

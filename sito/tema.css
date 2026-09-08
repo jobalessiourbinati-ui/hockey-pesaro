@@ -203,6 +203,102 @@ body {
 }
 
 /* ---------------------------------------------------------------------------
+ * LE RIVELAZIONI — l'unica animazione del sito, e non pesa un byte
+ * ---------------------------------------------------------------------------
+ * Lo stato nascosto qui sotto è pericoloso per definizione: se l'animazione
+ * non parte, il testo non compare più. Per questo NON è il CSS a decidere chi
+ * è nascosto — lo decide `componenti/Rivela.tsx`, che parte da «visibile» e
+ * passa a «nascosto» solo quando ha in mano un `IntersectionObserver` e il
+ * permesso di muoversi. Il selettore `[data-rivela]` esiste solo sugli
+ * elementi che quel componente ha già preso in carico.
+ *
+ * La curva è un `ease-out` lungo e piatto: le cose entrano in fretta e si
+ * posano piano, che è il contrario dell'effetto «scatto» da presentazione.
+ * ------------------------------------------------------------------------- */
+[data-rivela] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 700ms cubic-bezier(0.16, 1, 0.3, 1) var(--ritardo, 0ms),
+    transform 700ms cubic-bezier(0.16, 1, 0.3, 1) var(--ritardo, 0ms);
+}
+
+[data-rivela][data-visibile] {
+  opacity: 1;
+  transform: none;
+}
+
+/* L'ENTRATA DELL'EROE. La fotografia parte appena più grande e si posa: dura
+ * una volta sola, al caricamento, e dà alla prima schermata il respiro che le
+ * mancava. Solo per chi non ha chiesto meno movimento. */
+@media (prefers-reduced-motion: no-preference) {
+  .eroe-foto {
+    animation: eroe-entra 1600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
+@keyframes eroe-entra {
+  from {
+    transform: scale(1.07);
+  }
+  to {
+    transform: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * IL FILETTO — la firma che ricorre
+ * Era scritto a mano in due pagine con misure diverse. Un segno che si ripete
+ * deve ripetersi UGUALE, altrimenti non è una firma: è una svista.
+ * ------------------------------------------------------------------------- */
+.filetto {
+  display: block;
+  width: 4.5rem;
+  height: 0.3125rem;
+  background: var(--color-rosso);
+}
+
+/* ---------------------------------------------------------------------------
+ * LA MISURA DEL TESTO — nessuna riga più lunga di quanto l'occhio regga
+ * Sopra i 75 caratteri si perde il capo della riga successiva. È la ragione
+ * per cui i paragrafi qui hanno un tetto in `ch` e non in pixel: il tetto
+ * segue il corpo del carattere, non lo schermo.
+ * ------------------------------------------------------------------------- */
+.misura {
+  max-width: 62ch;
+}
+
+/* ---------------------------------------------------------------------------
+ * LE MICRO-INTERAZIONI — si sentono, non si guardano
+ * ------------------------------------------------------------------------- */
+
+/* Il collegamento nel testo: la sottolineatura si ispessisce invece di
+ * accendersi di un altro colore. Il colore lo abbiamo già misurato una volta;
+ * cambiarlo all'hover vorrebbe dire misurarlo due. */
+.legame {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+  transition: text-decoration-thickness 150ms ease, text-underline-offset 150ms ease;
+}
+.legame:hover {
+  text-decoration-thickness: 3px;
+  text-underline-offset: 0.2em;
+}
+
+/* La scheda che si solleva di un pelo: due pixel, non dieci. Su un sito
+ * sportivo il movimento deve sembrare un riflesso, non un'animazione. */
+.scheda-viva {
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), border-color 200ms ease;
+}
+@media (hover: hover) {
+  .scheda-viva:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-rosso);
+  }
+}
+
+/* ---------------------------------------------------------------------------
  * IL MOVIMENTO — poco, e revocabile.
  * Chi ha chiesto al sistema operativo di ridurre le animazioni le vede
  * sparire tutte, comprese quelle che qui non ci sono ancora ma ci saranno.

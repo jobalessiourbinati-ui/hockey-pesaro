@@ -38,8 +38,17 @@ const SORGENTE = 'public/media/squadra'
 const USCITA = 'public/media/squadra/generate'
 
 /** I due tagli, con le larghezze che ha senso generare. */
+/* IL TAGLIO ORIZZONTALE È 3:2, NON 16:9, E LA RAGIONE È MISURATA.
+ * `pista-tramonto` è una squadra su due file dentro un quadrato di 1080: le
+ * persone occupano dal 40% al 100% dell'altezza, cioè 648 px. Un 16:9 ricavato
+ * da 1080 di larghezza è alto 607 px — quaranta pixel in meno di quanto serve,
+ * e infatti tagliava le teste: in alto la fila davanti, in basso quella
+ * dietro. Nessuna gravità poteva salvarlo, perché il problema non era DOVE si
+ * ritaglia ma QUANTO. A 3:2 lo stesso quadrato dà 720 px e la squadra ci sta
+ * intera. È anche il rapporto delle macchine fotografiche, quindi le foto vere
+ * ci cadono dentro senza forzature. */
 const TAGLI = [
-  { nome: 'largo', rapporto: 16 / 9, larghezze: [1600, 1200, 800] },
+  { nome: 'largo', rapporto: 3 / 2, larghezze: [1600, 1200, 800] },
   { nome: 'alto', rapporto: 4 / 5, larghezze: [900, 600, 400] },
 ]
 
@@ -62,12 +71,29 @@ const FOTO = [
   'azione-3',
 ]
 
-/** Da dove ritagliare, quando la foto non è panoramica. `hero-urbinati` è un
- *  ritratto quasi quadrato: il ritaglio 16:9 di scrivania, preso dal centro,
- *  taglierebbe la testa; preso dall'alto (`top`) tiene testa, numero e stecca.
- *  Le foto d'azione sono panoramiche e restano al centro. */
-const GRAVITA = { 'hero-urbinati': 'top' }
-const gravita = (nome) => GRAVITA[nome] ?? 'centre'
+/**
+ * DA DOVE SI RITAGLIA — e la ragione per cui il default NON è il centro.
+ *
+ * `cover` prende il rettangolo che serve e butta via il resto. Con la gravità
+ * al centro, un 16:9 ricavato da una fotografia quadrata toglie una fascia
+ * sopra e una sotto: nelle foto di squadra e nei ritratti **le teste stanno
+ * proprio nella fascia di sopra**, e vengono tagliate senza che niente
+ * protesti — il ritaglio "riesce", ed è sbagliato. È successo davvero, sulla
+ * fascia della pista di Viale Trieste.
+ *
+ * In questo sito ogni fotografia ha delle persone dentro. Quindi il default è
+ * `top`: si perde semmai un pezzo di pavimento in basso, che non guarda
+ * nessuno. Il centro resta possibile, ma va chiesto per nome.
+ */
+/* Le eccezioni: fotografie in cui le persone NON stanno in alto. Sono le foto
+ * di gruppo con molto cielo sopra — lì «alto» terrebbe l'aria e taglierebbe la
+ * fila davanti, che è esattamente il difetto che stiamo evitando. */
+const GRAVITA = {
+  'pista-tramonto': 'bottom', // la squadra è in basso, sopra c'è il tramonto
+  'premiazione-mare': 'centre', // le persone stanno in mezzo: sopra il cielo, sotto la pista
+  'pista-mare-gioco': 'centre', // il campo visto da lontano: i giocatori sono a metà quadro
+}
+const gravita = (nome) => GRAVITA[nome] ?? 'top'
 
 async function main() {
   await mkdir(USCITA, { recursive: true })

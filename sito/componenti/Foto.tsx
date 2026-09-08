@@ -78,6 +78,16 @@ export interface ProprietaFoto {
   readonly primaCosa?: boolean
   /** `object-position`, quando il centro del ritaglio non è il centro. */
   readonly posizione?: string
+  /**
+   * QUALE RITAGLIO SERVIRE.
+   * `auto` è la regola normale: verticale sotto i 640 px, orizzontale sopra —
+   * giusta finché la fotografia è a fondo pieno, cioè larga quanto lo schermo.
+   * **Non è più giusta quando la fotografia sta in una colonna**: un blocco
+   * editoriale con l'immagine a sinistra è VERTICALE anche su una scrivania, e
+   * `auto` gli servirebbe il 16:9, che poi va tagliato ai fianchi — più byte
+   * per un'inquadratura peggiore. In quel caso si impone `alto`.
+   */
+  readonly taglio?: 'auto' | 'alto' | 'largo'
 }
 
 export function Foto({
@@ -88,9 +98,14 @@ export function Foto({
   quantoLargaLargo = '100vw',
   primaCosa = false,
   posizione,
+  taglio = 'auto',
 }: ProprietaFoto) {
   const tagli = FOTO[nome]
-  const alto = piuGrande(tagli.alto)
+  /* Con `largo` imposto, anche l'`<img>` di ripiego porta le misure
+     orizzontali; con `alto` imposto la `<source>` non si genera affatto, e
+     resta solo l'immagine verticale per tutte le larghezze. */
+  const base = taglio === 'largo' ? tagli.largo : tagli.alto
+  const principale = piuGrande(base)
   const largo = piuGrande(tagli.largo)
 
   return (
@@ -100,20 +115,22 @@ export function Foto({
      * `absolute inset-0` non si vedeva; la prima volta che una foto è finita
      * in una cella di griglia con un rapporto d'aspetto, è sparita. */
     <picture className="block h-full w-full">
-      <source
-        media="(min-width: 640px)"
-        type="image/webp"
-        srcSet={srcset(tagli.largo)}
-        sizes={quantoLargaLargo}
-        width={largo.larghezza}
-        height={largo.altezza}
-      />
+      {taglio === 'auto' && (
+        <source
+          media="(min-width: 640px)"
+          type="image/webp"
+          srcSet={srcset(tagli.largo)}
+          sizes={quantoLargaLargo}
+          width={largo.larghezza}
+          height={largo.altezza}
+        />
+      )}
       <img
-        src={link(CARTELLA_FOTO + alto.file)}
-        srcSet={srcset(tagli.alto)}
-        sizes={quantoLargaAlto}
-        width={alto.larghezza}
-        height={alto.altezza}
+        src={link(CARTELLA_FOTO + principale.file)}
+        srcSet={srcset(base)}
+        sizes={taglio === 'largo' ? quantoLargaLargo : quantoLargaAlto}
+        width={principale.larghezza}
+        height={principale.altezza}
         alt={alt}
         loading={primaCosa ? 'eager' : 'lazy'}
         fetchPriority={primaCosa ? 'high' : 'auto'}

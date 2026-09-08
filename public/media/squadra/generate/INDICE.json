@@ -2,14 +2,14 @@
   {
     "file": "hero-urbinati-largo-960.webp",
     "larghezza": 960,
-    "altezza": 540,
-    "byte": 22406
+    "altezza": 640,
+    "byte": 29540
   },
   {
     "file": "hero-urbinati-largo-800.webp",
     "larghezza": 800,
-    "altezza": 450,
-    "byte": 17466
+    "altezza": 533,
+    "byte": 22894
   },
   {
     "file": "hero-urbinati-alto-741.webp",
@@ -38,20 +38,20 @@
   {
     "file": "azione-contrasto-largo-1440.webp",
     "larghezza": 1440,
-    "altezza": 810,
-    "byte": 81742
+    "altezza": 960,
+    "byte": 86144
   },
   {
     "file": "azione-contrasto-largo-1200.webp",
     "larghezza": 1200,
-    "altezza": 675,
-    "byte": 63752
+    "altezza": 800,
+    "byte": 67296
   },
   {
     "file": "azione-contrasto-largo-800.webp",
     "larghezza": 800,
-    "altezza": 450,
-    "byte": 38332
+    "altezza": 533,
+    "byte": 41120
   },
   {
     "file": "azione-contrasto-alto-900.webp",
@@ -80,20 +80,20 @@
   {
     "file": "azione-corsa-largo-1600.webp",
     "larghezza": 1600,
-    "altezza": 900,
-    "byte": 281102
+    "altezza": 1067,
+    "byte": 222812
   },
   {
     "file": "azione-corsa-largo-1200.webp",
     "larghezza": 1200,
-    "altezza": 675,
-    "byte": 138778
+    "altezza": 800,
+    "byte": 108510
   },
   {
     "file": "azione-corsa-largo-800.webp",
     "larghezza": 800,
-    "altezza": 450,
-    "byte": 45038
+    "altezza": 533,
+    "byte": 38088
   },
   {
     "file": "azione-corsa-alto-900.webp",
@@ -122,20 +122,20 @@
   {
     "file": "portiere-largo-1440.webp",
     "larghezza": 1440,
-    "altezza": 810,
-    "byte": 169138
+    "altezza": 960,
+    "byte": 192558
   },
   {
     "file": "portiere-largo-1200.webp",
     "larghezza": 1200,
-    "altezza": 675,
-    "byte": 127386
+    "altezza": 800,
+    "byte": 152258
   },
   {
     "file": "portiere-largo-800.webp",
     "larghezza": 800,
-    "altezza": 450,
-    "byte": 68694
+    "altezza": 533,
+    "byte": 83596
   },
   {
     "file": "portiere-alto-900.webp",
@@ -164,20 +164,20 @@
   {
     "file": "giovanili-squadra-largo-1600.webp",
     "larghezza": 1600,
-    "altezza": 900,
-    "byte": 241478
+    "altezza": 1067,
+    "byte": 215646
   },
   {
     "file": "giovanili-squadra-largo-1200.webp",
     "larghezza": 1200,
-    "altezza": 675,
-    "byte": 142180
+    "altezza": 800,
+    "byte": 126068
   },
   {
     "file": "giovanili-squadra-largo-800.webp",
     "larghezza": 800,
-    "altezza": 450,
-    "byte": 71626
+    "altezza": 533,
+    "byte": 66658
   },
   {
     "file": "giovanili-squadra-alto-900.webp",
@@ -206,14 +206,14 @@
   {
     "file": "pista-tramonto-largo-1080.webp",
     "larghezza": 1080,
-    "altezza": 608,
-    "byte": 113790
+    "altezza": 720,
+    "byte": 153294
   },
   {
     "file": "pista-tramonto-largo-800.webp",
     "larghezza": 800,
-    "altezza": 450,
-    "byte": 76286
+    "altezza": 533,
+    "byte": 100560
   },
   {
     "file": "pista-tramonto-alto-864.webp",
@@ -242,20 +242,20 @@
   {
     "file": "torneo-mare-largo-1440.webp",
     "larghezza": 1440,
-    "altezza": 810,
-    "byte": 275308
+    "altezza": 960,
+    "byte": 191846
   },
   {
     "file": "torneo-mare-largo-1200.webp",
     "larghezza": 1200,
-    "altezza": 675,
-    "byte": 203918
+    "altezza": 800,
+    "byte": 147822
   },
   {
     "file": "torneo-mare-largo-800.webp",
     "larghezza": 800,
-    "altezza": 450,
-    "byte": 105588
+    "altezza": 533,
+    "byte": 80994
   },
   {
     "file": "torneo-mare-alto-900.webp",
@@ -284,14 +284,14 @@
   {
     "file": "premiazione-mare-largo-1080.webp",
     "larghezza": 1080,
-    "altezza": 608,
-    "byte": 47668
+    "altezza": 720,
+    "byte": 53998
   },
   {
     "file": "premiazione-mare-largo-800.webp",
     "larghezza": 800,
-    "altezza": 450,
-    "byte": 34924
+    "altezza": 533,
+    "byte": 38688
   },
   {
     "file": "premiazione-mare-alto-864.webp",
@@ -320,14 +320,14 @@
   {
     "file": "pista-mare-gioco-largo-1080.webp",
     "larghezza": 1080,
-    "altezza": 608,
-    "byte": 118750
+    "altezza": 720,
+    "byte": 136388
   },
   {
     "file": "pista-mare-gioco-largo-800.webp",
     "larghezza": 800,
-    "altezza": 450,
-    "byte": 67716
+    "altezza": 533,
+    "byte": 76706
   },
   {
     "file": "pista-mare-gioco-alto-864.webp",
@@ -356,20 +356,20 @@
   {
     "file": "azione-1-largo-1600.webp",
     "larghezza": 1600,
-    "altezza": 900,
-    "byte": 248626
+    "altezza": 1067,
+    "byte": 285104
   },
   {
     "file": "azione-1-largo-1200.webp",
     "larghezza": 1200,
-    "altezza": 675,
-    "byte": 119830
+    "altezza": 800,
+    "byte": 135166
   },
   {
     "file": "azione-1-largo-800.webp",
     "larghezza": 800,
-    "altezza": 450,
-    "byte": 47324
+    "altezza": 533,
+    "byte": 53344
   },
   {
     "file": "azione-1-alto-900.webp",
@@ -398,20 +398,20 @@
   {
     "file": "azione-2-largo-1600.webp",
     "larghezza": 1600,
-    "altezza": 900,
-    "byte": 217202
+    "altezza": 1067,
+    "byte": 248528
   },
   {
     "file": "azione-2-largo-1200.webp",
     "larghezza": 1200,
-    "altezza": 675,
-    "byte": 100378
+    "altezza": 800,
+    "byte": 111798
   },
   {
     "file": "azione-2-largo-800.webp",
     "larghezza": 800,
-    "altezza": 450,
-    "byte": 39390
+    "altezza": 533,
+    "byte": 44506
   },
   {
     "file": "azione-2-alto-900.webp",
@@ -438,16 +438,16 @@
     "byte": 2664838
   },
   {
-    "file": "azione-3-largo-1027.webp",
-    "larghezza": 1027,
+    "file": "azione-3-largo-867.webp",
+    "larghezza": 867,
     "altezza": 578,
-    "byte": 91656
+    "byte": 80594
   },
   {
     "file": "azione-3-largo-800.webp",
     "larghezza": 800,
-    "altezza": 450,
-    "byte": 52322
+    "altezza": 533,
+    "byte": 63348
   },
   {
     "file": "azione-3-alto-462.webp",

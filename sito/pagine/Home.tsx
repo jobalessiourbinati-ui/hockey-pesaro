@@ -27,6 +27,7 @@ import { COPPA_ITALIA_2026_27, GIRONE_COPPA, prossimaPartita } from '../../dati/
 import { Carosello } from '../componenti/Carosello.tsx'
 import { FasciaNotizie } from '../componenti/FasciaNotizie.tsx'
 import { Foto, Velatura } from '../componenti/Foto.tsx'
+import { Rivela } from '../componenti/Rivela.tsx'
 import { BastoniIncrociati, MotivoBastoni } from '../componenti/Scudetto.tsx'
 import { pezziData } from '../date.ts'
 import { link } from '../rotte.ts'
@@ -74,26 +75,35 @@ export function Home() {
 function Eroe() {
   return (
     <section className="su-nero relative isolate flex min-h-[64vh] flex-col justify-end overflow-hidden bg-nero-fondo text-white sm:min-h-[72vh] lg:min-h-[78vh]">
+      {/* La fotografia sta in un suo involucro perché l'entrata scala LEI e
+          non la velatura: scalare anche il velo gli farebbe scoprire i bordi. */}
       <div className="absolute inset-0 -z-10">
-        <Foto
-          nome="hero-urbinati"
+        <div className="eroe-foto h-full w-full">
+          <Foto
+            nome="hero-urbinati"
           /* Decorativa: il nome della società è scritto sopra a caratteri
              alti quattro centimetri, e ridirlo qui è rumore per chi ascolta.
              La persona non si nomina — ed è comunque il capitano, che ha dato
              la fotografia per questo. */
-          alt=""
-          primaCosa
-          /* Il soggetto — testa, numero, palla sulla stecca — sta in alto;
-             il testo dell'eroe sta in basso, sopra i pantaloni grigi e non
-             sopra la maglia bianca, dove sparirebbe. `center 28%` tiene la
-             testa in quadro e porta il grigio dietro le parole. */
-          posizione="center 28%"
-        />
+            alt=""
+            primaCosa
+            /* Il soggetto — testa, numero, palla sulla stecca — sta in alto;
+               il testo dell'eroe sta in basso, sopra i pantaloni grigi e non
+               sopra la maglia bianca, dove sparirebbe. `center 28%` tiene la
+               testa in quadro e porta il grigio dietro le parole. */
+            posizione="center 28%"
+          />
+        </div>
         <Velatura />
       </div>
 
+      {/* L'EROE ENTRA IN SEQUENZA, non tutto insieme: occhiello, titolo,
+          riga, bottoni, a centoventi millisecondi l'uno dall'altro. È la
+          differenza fra una pagina che si accende e una che si apre. */}
       <div className="mx-auto w-full max-w-[1240px] px-4 pt-24 pb-10 sm:px-6 sm:pt-32 sm:pb-14" data-sopra-foto>
-        <p className="occhiello text-white">hockey su pista · Serie B · Pesaro</p>
+        <Rivela come="p" className="occhiello text-white">
+          hockey su pista · Serie B · Pesaro
+        </Rivela>
 
         {/* Il titolo cresce con la finestra ma si ferma: 19vw a 320 px fa
             60 px e ci sta, a 1440 farebbe 273 px e sfonderebbe la colonna.
@@ -108,17 +118,19 @@ function Eroe() {
             misurato in `tema.css` e indipendente da cosa c'è sotto. In più è
             più forte da vedere: è il rosso della maglia, non una parola
             colorata. */}
-        <h1 className="titolo mt-3 text-[clamp(3.4rem,19vw,10.5rem)]">
-          <span className="block">Amatori</span>{' '}
-          <span className="mt-1 inline-block bg-rosso-cupo px-3 pt-1 pb-2 text-white">Hockey</span>{' '}
-          <span className="mt-1 block">Pesaro</span>
-        </h1>
+        <Rivela ritardo={120}>
+          <h1 className="titolo mt-3 text-[clamp(3.4rem,19vw,10.5rem)]">
+            <span className="block">Amatori</span>{' '}
+            <span className="mt-1 inline-block bg-rosso-cupo px-3 pt-1 pb-2 text-white">Hockey</span>{' '}
+            <span className="mt-1 block">Pesaro</span>
+          </h1>
+        </Rivela>
 
-        <p className="mt-5 max-w-md text-[17px] leading-snug text-white sm:text-xl">
+        <Rivela come="p" ritardo={260} className="mt-5 max-w-md text-[17px] leading-snug text-white sm:text-xl">
           L'unica società di hockey su pista delle Marche.
-        </p>
+        </Rivela>
 
-        <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+        <Rivela ritardo={380} className="mt-7 flex flex-col gap-3 sm:flex-row">
           <a href={link('/squadra/')} className="bottone bottone-pieno">
             La squadra
           </a>
@@ -128,7 +140,7 @@ function Eroe() {
           >
             Calendario e risultati
           </a>
-        </div>
+        </Rivela>
       </div>
     </section>
   )
@@ -152,18 +164,18 @@ function DueDate() {
         <h2 id="titolo-date" className="sr-only">
           Dallo Skating Club del 1946 all'Amatori Hockey Pesaro del 2016
         </h2>
-        <div className="flex flex-wrap items-end gap-x-8 gap-y-6 sm:gap-x-14">
+        <Rivela className="flex flex-wrap items-end gap-x-8 gap-y-6 sm:gap-x-14">
           <Data anno="1946" cosa="Skating Club Pesaro" />
           <BastoniIncrociati className="hidden w-12 shrink-0 pb-3 text-rosso sm:block" spessore={13} />
           <Data anno="2016" cosa="Amatori Hockey Pesaro" />
           <p className="max-w-[15rem] pb-1 text-[15px] leading-snug text-grigio">
             Stessa città, stessa pista.{' '}
-            <a href={link('/storia/')} className="text-rosso-cupo underline underline-offset-4">
+            <a href={link('/storia/')} className="legame text-rosso-cupo">
               Ottant'anni di storia
             </a>
             .
           </p>
-        </div>
+        </Rivela>
       </div>
     </section>
   )
@@ -199,7 +211,7 @@ function ProssimaPartita() {
         <h2 id="titolo-prossima" className="occhiello text-rosso-chiaro">
           {partita ? 'La prossima partita' : 'Il calendario'}
         </h2>
-        {partita ? <SchedaPartita partita={partita} /> : <NessunaPartita />}
+        <Rivela>{partita ? <SchedaPartita partita={partita} /> : <NessunaPartita />}</Rivela>
       </div>
     </section>
   )
@@ -286,9 +298,9 @@ function UltimeNotizie() {
           </a>
         </div>
 
-        <div className="mt-7">
+        <Rivela className="mt-7">
           <FasciaNotizie />
-        </div>
+        </Rivela>
       </div>
     </section>
   )
@@ -313,12 +325,15 @@ function TreNumeri() {
           La stagione {STAGIONE_ROSA}
         </h2>
 
+        {/* I tre numeri entrano uno dopo l'altro: in blocco sarebbero un
+            lampo, in sequenza si leggono come tre cose distinte. */}
         <dl className="mt-8 grid gap-px border-2 border-nero bg-nero sm:grid-cols-3">
           <Numero valore={String(tesserati)} etichetta="tesserati in rosa" />
-          <Numero valore={String(gol)} etichetta="gol segnati" />
+          <Numero valore={String(gol)} etichetta="gol segnati" ritardo={110} />
           <Numero
             valore={String(migliore?.gol ?? 0)}
             etichetta={migliore ? `gol di ${migliore.nome} ${migliore.cognome}` : 'gol del capocannoniere'}
+            ritardo={220}
           />
         </dl>
 
@@ -331,15 +346,23 @@ function TreNumeri() {
   )
 }
 
-function Numero({ valore, etichetta }: { readonly valore: string; readonly etichetta: string }) {
+function Numero({
+  valore,
+  etichetta,
+  ritardo = 0,
+}: {
+  readonly valore: string
+  readonly etichetta: string
+  readonly ritardo?: number
+}) {
   return (
-    <div className="bg-panna px-5 py-7 sm:px-6">
+    <Rivela ritardo={ritardo} className="bg-panna px-5 py-7 sm:px-6">
       <dt className="sr-only">{etichetta}</dt>
       <dd>
         <span className="cifra block text-[clamp(4.5rem,19vw,7rem)] text-rosso">{valore}</span>
         <span className="titolo mt-3 block text-xl text-nero sm:text-2xl">{etichetta}</span>
       </dd>
-    </div>
+    </Rivela>
   )
 }
 
@@ -418,40 +441,79 @@ function DoveGiochiamo() {
     <>
       <section
         aria-labelledby="titolo-pista"
-        className="su-nero relative isolate flex min-h-[52vh] items-end overflow-hidden bg-nero-fondo text-white sm:min-h-[58vh]"
+        /* PIÙ ALTA DI PRIMA, e non per gusto: a 1280 px una fascia da 52vh ha
+           un rapporto di 3,08 — più del doppio di una fotografia 3:2 — e
+           `object-cover` si mangiava metà dell'immagine in altezza, teste
+           comprese. Alzandola il ritaglio in pagina si dimezza. */
+        className="su-nero relative isolate flex min-h-[64vh] items-end overflow-hidden bg-nero-fondo text-white sm:min-h-[74vh]"
       >
         <div className="absolute inset-0 -z-10">
-          <Foto nome="pista-tramonto" alt="La pista di Viale Trieste al tramonto, con la squadra in maglia da gara." />
+          {/* UNA FOTOGRAFIA DAVVERO PANORAMICA, per una fascia panoramica: il
+              campo ripreso da lontano, con le figure piccole e a metà quadro.
+              Qui `cover` può togliere cielo sopra e asfalto sotto senza
+              tagliare nessuno — che è l'unica cosa che una fascia larga sa
+              fare. E per «dove giochiamo» mostrare l'impianto intero è anche
+              più giusto della squadra in posa. */}
+          <Foto
+            nome="pista-mare-gioco"
+            alt="La pista di Viale Trieste vista dal fondo, con il lungomare alle spalle."
+          />
           <Velatura />
         </div>
 
-        <div className="mx-auto w-full max-w-[1240px] px-4 py-10 sm:px-6 sm:py-14" data-sopra-foto>
-          <p className="occhiello text-white">Dove giochiamo</p>
-          <h2 id="titolo-pista" className="titolo mt-2 max-w-2xl text-[clamp(2.5rem,11vw,4.5rem)]">
-            La pista di Viale Trieste
-          </h2>
-          <p className="mt-4 max-w-lg text-[17px] leading-snug text-white">
-            Comunale e scoperta, sul lungomare: si gioca da maggio a settembre. L'ha costruita Enzo Boiani, fra i
-            fondatori dello Skating Club.
-          </p>
-        </div>
+        <Rivela className="mx-auto w-full max-w-[1240px] px-4 py-10 sm:px-6 sm:py-14">
+          <div data-sopra-foto>
+            <span aria-hidden="true" className="filetto mb-3" />
+            <p className="occhiello text-white">Dove giochiamo</p>
+            <h2 id="titolo-pista" className="titolo mt-2 max-w-2xl text-[clamp(2.5rem,11vw,4.5rem)]">
+              La pista di Viale Trieste
+            </h2>
+            <p className="misura mt-4 text-[17px] leading-snug text-white">
+              Comunale e scoperta, sul lungomare: si gioca da maggio a settembre. L'ha costruita Enzo Boiani, fra i
+              fondatori dello Skating Club.
+            </p>
+          </div>
+        </Rivela>
       </section>
 
+      {/* FOTOGRAFIA A SINISTRA, TESTO A DESTRA. È l'impaginato che rompe la
+          fila: fin qui la home è tutta fasce a tutta larghezza, una sopra
+          l'altra, e sette blocchi uguali si leggono come un elenco. Qui la
+          pagina cambia respiro — e la fotografia entra in colonna invece che
+          a fondo pieno, che è la seconda cosa che mancava. */}
       <section className="bg-white">
         <div className="mx-auto max-w-[1240px] px-4 py-12 sm:px-6 sm:py-16">
-          <div className="grid gap-6 lg:grid-cols-[auto_1fr] lg:items-center lg:gap-14">
-            <p className="cifra text-[clamp(6rem,26vw,11rem)] text-rosso">1</p>
-            <div>
-              <p className="titolo max-w-2xl text-[clamp(1.9rem,8vw,3.25rem)] text-nero">
+          <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
+            <Rivela>
+              <div className="aspect-[4/5] overflow-hidden sm:aspect-[16/10] lg:aspect-[4/5]">
+                <Foto
+                  nome="pista-tramonto"
+                  alt="La prima squadra dell'Amatori Hockey Pesaro sulla pista di Viale Trieste, al tramonto."
+                  /* QUI, E NON IN UNA FASCIA PANORAMICA. Questa squadra occupa
+                     780 px di altezza su 1080: in un taglio orizzontale — 720
+                     px anche a 3:2 — una delle due file resta sempre fuori.
+                     Nel taglio verticale ci sta intera, e una foto di squadra
+                     sotto la frase «l'unica società delle Marche» dice la cosa
+                     giusta meglio di un giocatore solo. */
+                  taglio="alto"
+                  quantoLargaAlto="(min-width: 1024px) 50vw, 100vw"
+                />
+              </div>
+            </Rivela>
+
+            <Rivela ritardo={140}>
+              <span aria-hidden="true" className="filetto" />
+              <p className="cifra mt-5 text-[clamp(5rem,20vw,9rem)] text-rosso">1</p>
+              <p className="titolo mt-2 text-[clamp(1.9rem,8vw,3.25rem)] text-nero">
                 L'unica società di hockey su pista delle Marche
               </p>
-              <p className="mt-4 max-w-xl text-[17px] leading-relaxed text-nero">
+              <p className="misura mt-4 text-[17px] leading-relaxed text-nero">
                 Le altre del girone sono tutte in Emilia: Modena, Correggio, Mirandola, Scandiano. Chi da queste parti
                 vuole giocare a hockey su pista, gioca qui.
               </p>
               {/* Le fonti stanno nelle pagine di dentro, non in vetrina: la
                   home di una squadra si guarda, non si legge. */}
-            </div>
+            </Rivela>
           </div>
         </div>
       </section>
