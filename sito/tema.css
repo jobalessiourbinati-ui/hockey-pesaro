@@ -157,6 +157,47 @@ body {
 }
 
 /* ---------------------------------------------------------------------------
+ * IL CAROSELLO — scorrimento laterale, e lo fa il browser
+ * Il committente ha chiesto «caroselli a scorrimento laterale»: qui c'è tutto
+ * quello che serve, e non è JavaScript. `scroll-snap` aggancia le schede una a
+ * una, l'inerzia è quella del sistema operativo, non c'è niente da scaricare.
+ * Le frecce (solo da 1024 px in su) chiamano `scrollBy` su questo stesso
+ * contenitore: vedi `componenti/Carosello.tsx`.
+ *
+ * `overscroll-behavior-x: contain` è la riga che impedisce alla PAGINA di
+ * muoversi di lato quando il dito arriva in fondo alla fila: senza, il gesto
+ * passa al documento — e su iOS fa anche tornare indietro nella cronologia.
+ * ------------------------------------------------------------------------- */
+.carosello {
+  display: flex;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  /* La barra si nasconde perché sotto le schede c'è già l'indicatore rosso,
+   * che si vede meglio ed è dello stesso disegno del sito. Nascosta la barra,
+   * non lo scorrimento: dito, rotella, tastiera e frecce restano tutti. */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.carosello::-webkit-scrollbar {
+  display: none;
+}
+.carosello > * {
+  scroll-snap-align: start;
+  /* Le schede non si stringono per starci tutte: è una fila che scorre, non
+   * una griglia che si comprime. */
+  flex: 0 0 auto;
+}
+
+/* Lo scorrimento morbido vale per il dito, per le frecce e per la tastiera —
+ * e solo per chi non ha chiesto di ridurre il movimento. */
+@media (prefers-reduced-motion: no-preference) {
+  .carosello {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ---------------------------------------------------------------------------
  * IL MOVIMENTO — poco, e revocabile.
  * Chi ha chiesto al sistema operativo di ridurre le animazioni le vede
  * sparire tutte, comprese quelle che qui non ci sono ancora ma ci saranno.

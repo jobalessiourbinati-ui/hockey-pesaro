@@ -67,13 +67,25 @@ export interface ProprietaTabellone {
   /** I filtri per categoria: servono quando le partite sono più di una decina. */
   readonly filtri?: boolean
   /**
+   * QUANTE SE NE VEDONO SUBITO.
+   * Il calendario 2024/25 ha quarantadue partite: sul telefono, dove ogni
+   * riga diventa una scheda, sono quasi quattromila pixel di scorrimento per
+   * arrivare in fondo alla pagina — ed era metà dell'altezza di /notizie/.
+   * Con questa proprietà se ne vedono le prime, e le altre si aprono con un
+   * bottone. Nessuna sparisce e niente è nascosto: il bottone dice quante ce
+   * ne sono, e chi le vuole tutte fa un colpo solo.
+   * Senza la proprietà si vedono tutte, che è il comportamento di prima.
+   */
+  readonly quanteSubito?: number
+  /**
    * Il giorno rispetto al quale una partita è «da giocare». Si passa dal di
    * fuori così i controlli e gli scatti di prova sono ripetibili.
    */
   readonly oggi?: Date
 }
 
-export function Tabellone({ partite, fonte, filtri = false, oggi }: ProprietaTabellone) {
+export function Tabellone({ partite, fonte, filtri = false, quanteSubito, oggi }: ProprietaTabellone) {
+  const [tutte, setTutte] = useState(false)
   const isoOggi = useMemo(() => {
     const d = oggi ?? new Date()
     // Data locale, non UTC: `toISOString` di sera in Italia torna il giorno dopo.
@@ -88,7 +100,13 @@ export function Tabellone({ partite, fonte, filtri = false, oggi }: ProprietaTab
   )
 
   const [scelta, setScelta] = useState<Categoria | 'tutte'>('tutte')
-  const visibili = scelta === 'tutte' ? partite : partite.filter((p) => p.categoria === scelta)
+  const scelte = scelta === 'tutte' ? partite : partite.filter((p) => p.categoria === scelta)
+
+  /* Il taglio si applica dopo il filtro: chi sceglie «Under 13» vede le prime
+   * Under 13, non le prime otto di tutte fra cui zero Under 13. */
+  const limite = quanteSubito ?? scelte.length
+  const tagliato = !tutte && scelte.length > limite
+  const visibili = tagliato ? scelte.slice(0, limite) : scelte
 
   const mostraFiltri = filtri && categorie.length > 1
 
@@ -244,8 +262,19 @@ export function Tabellone({ partite, fonte, filtri = false, oggi }: ProprietaTab
         </p>
       )}
 
+      {/* Il bottone dice quante ne restano: «mostra tutte» senza un numero
+          non fa capire se ne restano tre o trentaquattro. */}
+      {tagliato && (
+        <p className="pt-4">
+          <button type="button" onClick={() => setTutte(true)} className="bottone bottone-vuoto">
+            Mostra tutte le {scelte.length} partite
+          </button>
+        </p>
+      )}
+
       <p aria-hidden="true" className="pt-4 text-xs leading-relaxed text-grigio">
-        {visibili.length} {visibili.length === 1 ? 'partita' : 'partite'} · {fonte}
+        {visibili.length}
+        {tagliato ? ` di ${scelte.length}` : ''} {scelte.length === 1 ? 'partita' : 'partite'} · {fonte}
       </p>
     </div>
   )

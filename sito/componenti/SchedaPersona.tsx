@@ -31,6 +31,7 @@
 
 import type { Persona, Ruolo } from '../../dati/rosa.ts'
 import { ETICHETTA_RUOLO, iniziali } from '../../dati/rosa.ts'
+import { indirizzoMedia } from './Foto.tsx'
 import { BastoniIncrociati } from './Scudetto.tsx'
 
 /* ---------------------------------------------------------------------------
@@ -102,7 +103,13 @@ export function SchedaPersona({ persona, formato = 'compatta', tono = 'chiaro' }
         className={[
           'relative shrink-0 overflow-hidden',
           scuro ? 'bg-white/10' : 'bg-panna',
-          estesa ? 'h-22 w-22 sm:h-32 sm:w-32' : 'aspect-square w-full',
+          /* Il riquadro compatto era quadrato: a 390 px, in due colonne, sono
+           * 169 px di altezza per sedici schede — quasi mille pixel di pagina
+           * spesi in riquadri che oggi contengono due iniziali, perché le
+           * fotografie dei giocatori non ci sono ancora. In 4:3 la scheda
+           * resta la stessa e la pagina si accorcia; quando le foto
+           * arriveranno, un ritratto in 4:3 è un ritratto uguale. */
+          estesa ? 'h-22 w-22 sm:h-32 sm:w-32' : 'aspect-[4/3] w-full',
         ].join(' ')}
       >
         {/* La filigrana esce dal riquadro e viene tagliata dal bordo: così il
@@ -118,7 +125,7 @@ export function SchedaPersona({ persona, formato = 'compatta', tono = 'chiaro' }
 
         {mostraFoto ? (
           <img
-            src={`/media/rosa/${persona.foto}`}
+            src={indirizzoMedia(`/media/rosa/${persona.foto}`)}
             alt={`${persona.nome} ${persona.cognome}`}
             loading="lazy"
             decoding="async"
@@ -132,7 +139,7 @@ export function SchedaPersona({ persona, formato = 'compatta', tono = 'chiaro' }
             aria-hidden="true"
             className={[
               'cifra absolute inset-0 flex items-center justify-center',
-              estesa ? 'text-[2rem] sm:text-5xl' : 'text-[2.5rem] sm:text-5xl',
+              estesa ? 'text-[2rem] sm:text-5xl' : 'text-[2rem] sm:text-5xl',
               titolo,
             ].join(' ')}
           >
@@ -148,7 +155,7 @@ export function SchedaPersona({ persona, formato = 'compatta', tono = 'chiaro' }
           <span
             className={[
               'cifra absolute top-0 right-0 grid place-items-center bg-rosso-cupo text-white',
-              estesa ? 'h-9 w-9 text-lg sm:h-12 sm:w-12 sm:text-2xl' : 'h-11 w-11 text-xl sm:h-13 sm:w-13 sm:text-2xl',
+              estesa ? 'h-9 w-9 text-lg sm:h-12 sm:w-12 sm:text-2xl' : 'h-9 w-9 text-lg sm:h-13 sm:w-13 sm:text-2xl',
             ].join(' ')}
           >
             <span className="sr-only">maglia numero </span>
@@ -158,15 +165,28 @@ export function SchedaPersona({ persona, formato = 'compatta', tono = 'chiaro' }
       </div>
 
       {/* ---------- IL TESTO ---------- */}
-      <div className={estesa ? 'min-w-0 flex-1' : 'flex flex-1 flex-col p-3 sm:p-4'}>
+      <div className={estesa ? 'min-w-0 flex-1' : 'flex min-w-0 flex-1 flex-col p-2.5 sm:p-4'}>
         <h3>
-          <span className={`occhiello block ${secondario}`}>{persona.nome}</span>
-          <span className={`titolo mt-0.5 block text-2xl sm:text-3xl ${titolo}`}>{persona.cognome}</span>
+          {/* IL NOME NON SI TRONCA. In tre colonne su un telefono «Alessandro»
+              e «Lorenzo Mikhael» non ci stavano, e la scheda li tagliava con
+              i puntini: il sito di una società vera non mostra il nome di una
+              persona a metà. Nella scheda compatta il nome è più piccolo e
+              più stretto, e se ancora non basta va a capo. */}
+          <span
+            className={`occhiello block ${secondario} ${estesa ? '' : 'text-[0.6875rem] tracking-[0.09em]'}`}
+          >
+            {persona.nome}
+          </span>
+          {/* Il cognome può essere lungo — «Giraldo Bueno», «Jamerson» — e la
+              colonna del telefono è di 111 px. Anton è condensato e ce li fa
+              stare tutti; le due parole vanno a capo invece di uscire dalla
+              scheda, che è l'unico modo di sbagliare qui. */}
+          <span className={`titolo mt-0.5 block text-xl break-words sm:text-3xl ${titolo}`}>{persona.cognome}</span>
         </h3>
 
         {/* I ruoli come elenco di etichette: con quattro ruoli si dispongono
             su due righe e continuano a sembrare voluti. */}
-        <ul className="mt-2.5 flex flex-wrap gap-1">
+        <ul className={`flex flex-wrap gap-1 ${estesa ? 'mt-2.5' : 'mt-2'}`}>
           {ruoli.map((r) => (
             <li
               key={r}
@@ -181,17 +201,17 @@ export function SchedaPersona({ persona, formato = 'compatta', tono = 'chiaro' }
         </ul>
 
         {haNumeri && (
-          <dl className={`flex gap-5 ${estesa ? 'mt-3' : 'mt-auto pt-3'}`}>
+          <dl className={`flex gap-4 sm:gap-5 ${estesa ? 'mt-3' : 'mt-auto pt-2.5'}`}>
             {persona.gol !== null && (
               <div>
-                <dd className={`cifra text-2xl ${persona.gol > 0 ? accento : secondario}`}>{persona.gol}</dd>
-                <dt className={`mt-1 text-[0.625rem] tracking-[0.12em] uppercase ${secondario}`}>gol</dt>
+                <dd className={`cifra text-xl sm:text-2xl ${persona.gol > 0 ? accento : secondario}`}>{persona.gol}</dd>
+                <dt className={`mt-0.5 text-[0.625rem] tracking-[0.12em] uppercase ${secondario}`}>gol</dt>
               </div>
             )}
             {persona.presenze !== null && (
               <div>
-                <dd className={`cifra text-2xl ${titolo}`}>{persona.presenze}</dd>
-                <dt className={`mt-1 text-[0.625rem] tracking-[0.12em] uppercase ${secondario}`}>presenze</dt>
+                <dd className={`cifra text-xl sm:text-2xl ${titolo}`}>{persona.presenze}</dd>
+                <dt className={`mt-0.5 text-[0.625rem] tracking-[0.12em] uppercase ${secondario}`}>presenze</dt>
               </div>
             )}
           </dl>

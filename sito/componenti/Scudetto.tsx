@@ -25,6 +25,7 @@
  */
 
 import { useId } from 'react'
+import { indirizzoMedia } from './Foto.tsx'
 
 /* La geometria dei due bastoni, scritta una volta sola. Il bastone sale da
  * in alto a sinistra, scende oltre il centro e finisce con l'uncino della
@@ -135,7 +136,7 @@ export function Scudetto({ className }: { readonly className?: string }) {
  * `width`/`height` dichiarati per non far ballare la pagina al caricamento.
  */
 export function Stemma({ className, alt = 'Amatori Hockey Pesaro' }: { readonly className?: string; readonly alt?: string }) {
-  return <img src="/media/stemma.png" width={415} height={415} alt={alt} className={className} decoding="async" />
+  return <img src={indirizzoMedia('/media/stemma.png')} width={415} height={415} alt={alt} className={className} decoding="async" />
 }
 
 /**

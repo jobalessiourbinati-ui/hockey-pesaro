@@ -407,6 +407,32 @@ telefono pesa un terzo di un JPEG.
 
 ---
 
+## Le fotografie della società — `npm run immagini`
+
+Le foto che arrivano dai social le prepara lo script qui sopra. Quelle che ci
+dà la società a mano — le azioni di gioco, e un domani i ritratti della rosa —
+si mettono in `public/media/squadra/` e si preparano con un comando solo:
+
+```
+npm run immagini
+```
+
+Prende ogni fotografia e ne scrive più versioni in
+`public/media/squadra/generate/`: due tagli (16:9 per la scrivania, 4:5 per il
+telefono) in tre misure, `.webp` a qualità 82. Poi riscrive `dati/foto.ts`, che
+è l'elenco da cui il sito sa quali misure esistono davvero.
+
+**Serve davvero**: gli originali usciti dalla macchina fotografica pesano
+2,6 MB l'uno. Con i ritagli, il telefono che apre la home ne scarica **85 KB**
+in tutto. È lo stesso sito, con le stesse fotografie.
+
+Per aggiungerne una: si copia il `.jpg` in `public/media/squadra/`, si scrive
+il suo nome nell'elenco `FOTO` in cima a `scripts/immagini.mjs`, e si lancia il
+comando. Il testo alternativo lo scrive chi scrive la pagina, non lo script:
+dipende da come quella fotografia viene usata.
+
+---
+
 ## Una nota sul repository
 
 Il file `.gitignore` del progetto esclude tutto quello che comincia per

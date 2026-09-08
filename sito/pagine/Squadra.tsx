@@ -3,28 +3,26 @@
  * /squadra/ — LA PRIMA SQUADRA
  * ===========================================================================
  * È la pagina che il committente ha chiesto per prima: «la sezione giocatori
- * divisa per squadra per la Serie B». Oggi sul sito esiste ma è vuota —
- * staff «Da inserire», riquadri Atleti e Campionato senza numeri, galleria
- * con «Foto 1 … Foto 6» al posto delle foto (CONTESTO §3.2). Qui dentro non
- * c'è un solo segnaposto: tutto quello che si legge viene da `dati/rosa.ts`,
- * cioè dal portale federale FISR.
+ * divisa per squadra per la Serie B». Non c'è un solo segnaposto: tutto quello
+ * che si legge viene da `dati/rosa.ts`, cioè dal portale federale FISR.
  *
- * DI QUALE STAGIONE PARLIAMO, DETTO IN CHIARO.
+ * DI QUALE STAGIONE PARLIAMO, DETTO IN CHIARO E DETTO CORTO.
  * La rosa depositata è quella del 2025/26. Mostrarla senza scrivere l'anno
- * sarebbe la bugia più facile da fare e più difficile da scoprire: chi apre
- * la pagina a campionato iniziato darebbe per scontato che sia quella di
- * oggi. Perciò la stagione è scritta nell'occhiello, nel titolo della rosa e
- * nella riga di avvertenza — tre volte, così in qualunque punto uno si fermi
- * a leggere la trova.
+ * sarebbe la bugia più facile da fare e più difficile da scoprire. Prima era
+ * scritto tre volte in tre paragrafi; adesso sta nell'occhiello sopra il
+ * titolo, nel titolo della rosa e in una riga sola — le stesse tre volte, un
+ * terzo delle parole.
  *
- * I NUMERI NON SI SCRIVONO A MANO. Tesserati, gol di squadra e miglior
- * marcatore si calcolano dai dati (`golSquadra`, `capocannoniere`): un totale
+ * LE FOTOGRAFIE DEI GIOCATORI NON CI SONO, e la pagina non le sta aspettando
+ * in silenzio: le tre foto che abbiamo sono azioni di gioco della società, e
+ * quella in testa alla pagina è una di quelle. I ritratti li deve dare la
+ * società; finché non arrivano, le schede portano le iniziali e il segno del
+ * club. Vedi la nota in testa a `componenti/SchedaPersona.tsx`, dove sta anche
+ * il divieto — scritto in codice, non solo in commento — di pubblicare la foto
+ * di un minore senza liberatoria.
+ *
+ * I NUMERI NON SI SCRIVONO A MANO: `golSquadra`, `capocannoniere`. Un totale
  * battuto a mano è un totale che fra due mesi non torna più.
- *
- * LE FOTOGRAFIE NON CI SONO, e la pagina non le sta aspettando: vedi la nota
- * in testa a `componenti/SchedaPersona.tsx`, dove sta anche il divieto —
- * scritto in codice, non solo in commento — di pubblicare la foto di un
- * minore senza liberatoria.
  * ===========================================================================
  */
 
@@ -39,22 +37,21 @@ import {
   usciti,
 } from '../../dati/rosa.ts'
 import type { Persona } from '../../dati/rosa.ts'
+import { Foto, Velatura } from '../componenti/Foto.tsx'
 import { SchedaPersona } from '../componenti/SchedaPersona.tsx'
-import { SeparatoreBastoni } from '../componenti/Scudetto.tsx'
 
 /* ---------------------------------------------------------------------------
  * Chi ha una nota da leggere o più di due ruoli non ci sta in mezza colonna a
  * 390 px: la sua scheda prende tutta la riga. Non è una classifica, è una
- * misura — Edgar Barberi ha quattro ruoli, Simone Carnevali una carriera in
- * Serie A alle spalle, e quel testo dentro 169 px diventa una colonna di
- * parole spezzate.
+ * misura — Edgar Barberi ha quattro ruoli, e quel testo dentro 169 px diventa
+ * una colonna di parole spezzate.
  * ------------------------------------------------------------------------- */
 const vuoleTuttaLaRiga = (p: Persona): boolean => Boolean(p.nota) || p.ruoli.length > 2
 
-/* Le schede larghe vanno tutte in testa. Se restassero sparse fra le altre,
- * ognuna lascerebbe mezzo buco nella griglia a due colonne del telefono.
- * `sort` in JavaScript è stabile, quindi dentro i due gruppi l'ordine resta
- * quello di `dati/rosa.ts` — prima chi ha segnato, per gol. */
+/* Le schede larghe vanno tutte in testa: sparse fra le altre, ognuna
+ * lascerebbe mezzo buco nella griglia a due colonne del telefono. `sort` in
+ * JavaScript è stabile, quindi dentro i due gruppi l'ordine resta quello di
+ * `dati/rosa.ts` — prima chi ha segnato, per gol. */
 const perLaGriglia = (persone: readonly Persona[]): readonly Persona[] =>
   [...persone].sort((a, b) => Number(vuoleTuttaLaRiga(b)) - Number(vuoleTuttaLaRiga(a)))
 
@@ -66,82 +63,87 @@ export function Squadra() {
 
   return (
     <>
-      {/* ================= INTESTAZIONE ================= */}
-      <section className="bg-white">
-        <div className="mx-auto max-w-[1240px] px-4 pt-12 pb-10 sm:px-6 sm:pt-20 sm:pb-14">
-          <p className="occhiello text-rosso-cupo">Serie B · stagione {STAGIONE_ROSA}</p>
-          <h1 className="titolo mt-3 text-[clamp(2.75rem,13vw,6rem)]">
+      {/* ============ INTESTAZIONE — con la fotografia ============ */}
+      <section className="su-nero relative isolate flex min-h-[46vh] items-end overflow-hidden bg-nero-fondo text-white sm:min-h-[56vh]">
+        <div className="absolute inset-0 -z-10">
+          <Foto
+            nome="azione-1"
+            alt="Due giocatori dell'Amatori Hockey Pesaro in azione sulla pista."
+            primaCosa
+          />
+          <Velatura />
+        </div>
+
+        <div className="mx-auto w-full max-w-[1240px] px-4 py-10 sm:px-6 sm:py-14" data-sopra-foto>
+          <p className="occhiello text-white">Serie B · stagione {STAGIONE_ROSA}</p>
+          <h1 className="titolo mt-2 text-[clamp(2.75rem,13vw,6rem)]">
             La prima
             <br />
             squadra
           </h1>
-          <p className="mt-6 max-w-2xl text-[17px] leading-relaxed text-nero sm:text-lg">
-            La rosa depositata in federazione per la Serie B {STAGIONE_ROSA}, con le presenze e i gol del portale
-            FISR: non una stima, non un elenco di memoria. Nelle Marche l'Amatori Pesaro è l'unica società di hockey
-            su pista.
-          </p>
-
-          {/* L'avvertenza sulla stagione, con il filetto rosso a sinistra come
-              le note della home: si deve leggere come una precisazione della
-              società, non come un messaggio d'errore del sito. */}
-          <p className="mt-8 max-w-2xl border-l-4 border-rosso pl-4 text-[15px] leading-relaxed text-grigio">
-            Questa è l'ultima rosa depositata. Quella 2026/27 non lo è ancora — il campionato di Serie B comincia il
-            10 gennaio 2027 — e finché non arriva, la pagina mostra la precedente dicendo di quale stagione è. Nessun
-            nome viene aggiunto o tolto prima del deposito.
+          <p className="mt-4 max-w-lg text-[17px] leading-snug text-white">
+            La rosa depositata in federazione, con le presenze e i gol del portale FISR.
           </p>
         </div>
       </section>
 
       {/* ================= I NUMERI, CALCOLATI ================= */}
-      <section aria-labelledby="titolo-numeri-b" className="border-y-4 border-nero bg-panna">
-        <div className="mx-auto max-w-[1240px] px-4 py-10 sm:px-6 sm:py-14">
+      <section aria-labelledby="titolo-numeri-b" className="border-b-4 border-nero bg-panna">
+        <div className="mx-auto max-w-[1240px] px-4 py-10 sm:px-6 sm:py-12">
           <h2 id="titolo-numeri-b" className="occhiello text-rosso-cupo">
             La stagione {STAGIONE_ROSA}, contata
           </h2>
-          <dl className="mt-6 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4">
+          <dl className="mt-5 grid grid-cols-2 gap-x-6 gap-y-7 sm:grid-cols-4">
             <Numero cifra={rosa.length} etichetta="in rosa" dettaglio="tesserati per la Serie B" />
-            <Numero cifra={gol} etichetta="gol" dettaglio="somma dei marcatori della stagione" />
+            <Numero cifra={gol} etichetta="gol" dettaglio="somma dei marcatori" />
             {migliore && (
               <Numero
                 cifra={migliore.gol ?? 0}
                 etichetta="il migliore"
-                dettaglio={`${migliore.nome} ${migliore.cognome}, miglior marcatore`}
+                dettaglio={`${migliore.nome} ${migliore.cognome}`}
               />
             )}
-            <Numero cifra={STAFF.length} etichetta="nello staff" dettaglio="allenatori e dirigenti tesserati" />
+            <Numero cifra={STAFF.length} etichetta="nello staff" dettaglio="allenatori e dirigenti" />
           </dl>
         </div>
       </section>
 
       {/* ================= LA ROSA ================= */}
       <section aria-labelledby="titolo-rosa" className="bg-white">
-        <div className="mx-auto max-w-[1240px] px-4 py-12 sm:px-6 sm:py-20">
+        <div className="mx-auto max-w-[1240px] px-4 py-12 sm:px-6 sm:py-16">
           <p className="occhiello text-rosso-cupo">Chi scende in pista</p>
-          <h2 id="titolo-rosa" className="titolo mt-2 text-[clamp(2rem,9vw,3.5rem)]">
+          <h2 id="titolo-rosa" className="titolo mt-1 text-[clamp(2rem,9vw,3.5rem)]">
             La rosa {STAGIONE_ROSA}
           </h2>
-          <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-grigio">
-            Le fotografie della squadra non ci sono ancora: al loro posto ci sono le iniziali e il segno della
-            società. Quando arriveranno prenderanno lo stesso riquadro, e non cambierà nient'altro.
+          {/* Le due cose vere da dire, in due righe invece che in due
+              paragrafi: di quale stagione è questa rosa, e perché al posto
+              delle facce ci sono le iniziali. */}
+          <p className="mt-4 max-w-2xl border-l-4 border-rosso pl-4 text-[15px] leading-relaxed text-grigio">
+            È l'ultima rosa depositata: quella 2026/27 non lo è ancora, il campionato comincia il 10 gennaio 2027.
+            <br />
+            Le fotografie dei giocatori non ci sono ancora: al loro posto, le iniziali e il segno della società.
           </p>
 
-          {/* Due colonne a 390 px, tre da 640, quattro da 1024. Le schede
-              larghe occupano due colonne a ogni misura: sul telefono vuol dire
-              tutta la riga. */}
-          <ul className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
+          {/* TRE COLONNE GIÀ SUL TELEFONO, e non è una scelta di gusto.
+              Con due colonne le dodici schede compatte facevano sei righe,
+              quasi millecinquecento pixel per una rosa che si legge in un
+              colpo d'occhio. Con tre ne fanno quattro. La scheda regge: il
+              cognome è in Anton, che è un condensato, e a 111 px di colonna
+              «Tomassini» ci sta intero.
+              Le schede larghe — chi ha una nota o più di due ruoli — prendono
+              tutta la riga fino a 1024 px, dove tornano a occuparne due. */}
+          <ul className="mt-7 grid grid-cols-3 gap-2.5 sm:gap-4 lg:grid-cols-4">
             {rosa.map((p) => {
               const larga = vuoleTuttaLaRiga(p)
               return (
-                <li key={`${p.cognome}-${p.nome}`} className={larga ? 'col-span-2' : undefined}>
+                <li key={`${p.cognome}-${p.nome}`} className={larga ? 'col-span-3 lg:col-span-2' : undefined}>
                   <SchedaPersona persona={p} formato={larga ? 'estesa' : 'compatta'} />
                 </li>
               )
             })}
           </ul>
 
-          {/* La fonte è un indirizzo: si scrive come un collegamento, così chi
-              vuole controllare i numeri ci arriva invece di ricopiarli. */}
-          <p className="mt-6 max-w-3xl text-[13px] leading-relaxed text-grigio">
+          <p className="mt-5 max-w-3xl text-[13px] leading-relaxed text-grigio">
             Fonte:{' '}
             <a
               href={FONTE_FEDERALE}
@@ -150,28 +152,26 @@ export function Squadra() {
               className="text-rosso-cupo underline underline-offset-2"
             >
               portale dei risultati FISR
-            </a>{' '}
-            — rose depositate, presenze e gol della Serie B {STAGIONE_ROSA}. I numeri di maglia vengono dai tabellini
-            delle singole partite: chi in un tabellino non è mai comparso non ha un numero da mostrare, e la scheda
-            lascia l'angolo pulito invece di inventarlo.
+            </a>
+            , Serie B {STAGIONE_ROSA}. I numeri di maglia vengono dai tabellini: chi non è mai comparso in un
+            tabellino non ne ha uno, e la scheda lascia l'angolo pulito invece di inventarlo.
           </p>
         </div>
       </section>
 
-      {/* ========= LO STAFF — l'unica fascia scura di questa pagina ========= */}
+      {/* ========= LO STAFF — l'unica fascia scura della pagina ========= */}
       <section aria-labelledby="titolo-staff" className="su-nero bg-nero text-white">
-        <div className="mx-auto max-w-[1240px] px-4 py-12 sm:px-6 sm:py-20">
+        <div className="mx-auto max-w-[1240px] px-4 py-12 sm:px-6 sm:py-16">
           <p className="occhiello text-rosso-chiaro">Chi la guida</p>
-          <h2 id="titolo-staff" className="titolo mt-2 text-[clamp(2rem,9vw,3.5rem)]">
+          <h2 id="titolo-staff" className="titolo mt-1 text-[clamp(2rem,9vw,3.5rem)]">
             Lo staff
           </h2>
           <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-grigio-chiaro">
-            Qualche nome torna anche nella rosa qui sopra, e non è una svista: in una società di questa dimensione la
-            stessa persona allena, gioca e firma i documenti. Edgar Barberi ne è l'esempio — ha fondato l'Amatori nel
-            2016 ed è proprietario, dirigente, allenatore e giocatore.
+            Qualche nome torna anche nella rosa: in una società di questa dimensione la stessa persona allena, gioca e
+            firma i documenti.
           </p>
 
-          <ul className="mt-8 grid gap-4 sm:grid-cols-2">
+          <ul className="mt-7 grid gap-4 sm:grid-cols-2">
             {STAFF.map((p) => (
               <li key={`staff-${p.cognome}-${p.nome}`}>
                 <SchedaPersona persona={p} formato="estesa" tono="scuro" />
@@ -179,10 +179,9 @@ export function Squadra() {
             ))}
           </ul>
 
-          <p className="mt-6 max-w-3xl text-[13px] leading-relaxed text-grigio-chiaro">
+          <p className="mt-5 max-w-3xl text-[13px] leading-relaxed text-grigio-chiaro">
             Fonte: staff tesserato per la Serie B {STAGIONE_ROSA} sul portale FISR. Il capo allenatore depositato è
-            Edoardo Rubien Escardilla; Simone Carnevali, che nel 2024/25 guidava la prima squadra, nel {STAGIONE_ROSA}{' '}
-            risulta allenatore di terzo livello.
+            Edoardo Rubien Escardilla.
           </p>
         </div>
       </section>
@@ -190,21 +189,20 @@ export function Squadra() {
       {/* ================= CHI HA LASCIATO ================= */}
       {chiHaLasciato.length > 0 && (
         <section aria-labelledby="titolo-usciti" className="bg-white">
-          <div className="mx-auto max-w-[1240px] px-4 py-12 sm:px-6 sm:py-16">
-            <SeparatoreBastoni className="mb-10" />
+          <div className="mx-auto max-w-[1240px] px-4 py-10 sm:px-6 sm:py-14">
             <h2 id="titolo-usciti" className="titolo text-[clamp(1.5rem,6vw,2.25rem)]">
               Hanno giocato con noi
             </h2>
 
-            {/* Una riga sobria: né una lapide né un buco. Chi ha smesso di
+            {/* Una riga a testa: né una lapide né un buco. Chi ha smesso di
                 giocare qui ha comunque giocato qui, e il portale federale lo
                 dice. `usciti()` è l'unica strada per finire in questo elenco,
                 come `inRosa()` è l'unica per stare in quello sopra: nessuna
                 pagina filtra la rosa a mano, così un nome uscito non può
                 ricomparire fra i convocati per distrazione. */}
-            <ul className="mt-6 max-w-3xl divide-y divide-riga border-t border-riga">
+            <ul className="mt-4 max-w-3xl divide-y divide-riga border-y border-riga">
               {chiHaLasciato.map((p) => (
-                <li key={`uscito-${p.cognome}`} className="flex flex-wrap items-baseline gap-x-3 gap-y-1 py-4">
+                <li key={`uscito-${p.cognome}`} className="flex flex-wrap items-baseline gap-x-3 py-3">
                   <span className="titolo text-xl text-nero">
                     {p.nome} {p.cognome}
                   </span>
@@ -213,7 +211,6 @@ export function Squadra() {
                       {p.presenze} {p.presenze === 1 ? 'presenza' : 'presenze'} nel {STAGIONE_ROSA}
                     </span>
                   )}
-                  {p.nota && <span className="w-full text-[15px] leading-relaxed text-grigio">{p.nota}</span>}
                 </li>
               ))}
             </ul>
@@ -241,11 +238,11 @@ function Numero({
      per l'HTML, `order` sistema quello visivo. */
   return (
     <div className="flex flex-col">
-      <dt className="order-2 mt-2">
+      <dt className="order-2 mt-1.5">
         <span className="titolo block text-lg text-nero">{etichetta}</span>
-        <span className="mt-1 block text-[13px] leading-snug text-grigio">{dettaglio}</span>
+        <span className="mt-0.5 block text-[13px] leading-snug text-grigio">{dettaglio}</span>
       </dt>
-      <dd className="cifra order-1 text-[clamp(3rem,12vw,4.5rem)] text-rosso-cupo">{cifra}</dd>
+      <dd className="cifra order-1 text-[clamp(3.25rem,13vw,5rem)] text-rosso-cupo">{cifra}</dd>
     </div>
   )
 }

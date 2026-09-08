@@ -1,132 +1,113 @@
 /*
  * ===========================================================================
- * /storia/ — la storia vera, che sul sito di oggi non c'è
+ * /storia/ — la pagina che il committente ha indicato
  * ===========================================================================
- * È il difetto peggiore del sito attuale: la pagina STORIA mostra il
- * contenuto delle GIOVANILI — titolo del documento «Le Giovanili», le stesse
- * cinque categorie (CONTESTO §3.1). La storia esiste, ma sta chiusa dentro un
- * PDF della libreria media che dal sito non si raggiungeva:
- * `rilievo/pdf/AHP-La-Storia.pdf`, dieci pagine, dal 1946 al 2024.
+ * «guarda la pagina 3»: era questa. Era alta 6118 px su un telefono — nove
+ * voci di cronologia, ognuna un paragrafo denso, una dopo l'altra. Si leggeva
+ * come un documento, non come il sito di una squadra.
  *
- * Qui quel PDF diventa una linea del tempo che si legge sul telefono: un
- * filetto verticale, l'anno in rosso, un fatto per tappa. Niente caroselli e
- * niente animazioni allo scorrimento — una storia si legge, non si guarda
- * passare.
+ * COSA È CAMBIATO, E PERCHÉ.
+ * · Ogni tappa è un anno gigante, un titolo di tre parole e due righe. Il
+ *   resto è tagliato, non nascosto: il PDF della società resta linkato in
+ *   fondo per chi vuole tutto.
+ * · La cronologia scorre di lato invece che in giù: una tappa per schermata,
+ *   si sfoglia col pollice. Nove paragrafi in colonna erano seimila pixel;
+ *   nove schede in fila sono un gesto.
+ * · I due momenti che contano — il 1946 e la finale del 2020/21 — escono
+ *   dalla fila e prendono una fotografia a tutta larghezza. Il ritmo della
+ *   pagina è quello: origine, fila, apice, fila, oggi.
+ * · Le fonti stanno tutte in fondo, in un blocco solo. Ripeterle sotto ognuna
+ *   delle nove voci era un terzo del testo della pagina.
+ *
+ * ⚠️ LE FOTOGRAFIE SONO DI OGGI, E LA PAGINA LO DICE.
+ * Dello Skating Club del 1946 e della finale del 2020/21 non abbiamo nessuna
+ * immagine: le tre fotografie che la società ci ha dato sono partite recenti
+ * della prima squadra. Metterle sotto la parola «1946» senza dirlo sarebbe
+ * lasciar credere a chi guarda di vedere una cosa che non è. Quindi si usano
+ * — perché una pagina di sola scrittura non la legge nessuno — e sotto ognuna
+ * c'è scritto di cosa sono. È la stessa regola dei numeri: la si dice, non la
+ * si aggira.
  *
  * ⚠️ QUELLO CHE IL PDF NON DICE, QUI NON C'È.
  * Il PDF racconta «le difficoltà economiche che portarono alla chiusura
  * temporanea della società» ma non scrive l'anno, e nessun'altra fonte del
- * rilievo lo scrive. Perciò la tappa della chiusura non ha una data: dice che
- * è successo, e dice che l'anno non lo sappiamo. Mettere lì un anno
- * plausibile sarebbe l'errore più facile di tutta la pagina, e il più
- * difficile da scoprire per chi legge.
- *
+ * rilievo lo scrive. Quella tappa ha un punto interrogativo al posto della
+ * data: mettere lì un anno plausibile sarebbe l'errore più facile della
+ * pagina, e il più difficile da scoprire per chi legge.
  * Per lo stesso motivo non si usa la tabella dei piazzamenti a pagina 5 del
  * PDF: è un grafico, e il testo estratto ne restituisce le etichette
- * mescolate («1° 2° 3° Campionato Coppa Italia 2018-19 … 2023-24»).
- * Ricostruire da lì chi è arrivato dove vorrebbe dire indovinare un palmarès.
- *
- * Ogni tappa porta la sua fonte: è la regola §9.5 del CONTESTO.
+ * mescolate. Ricostruire da lì vorrebbe dire indovinare un palmarès.
  * ===========================================================================
  */
 
 import { FONTE_FEDERALE, STAGIONE_ROSA } from '../../dati/rosa.ts'
 import { GIRONE_CAMPIONATO } from '../../dati/stagione-2026-27.ts'
-import { SeparatoreBastoni } from '../componenti/Scudetto.tsx'
+import { Carosello } from '../componenti/Carosello.tsx'
+import { Foto, Velatura } from '../componenti/Foto.tsx'
+import type { NomeFoto } from '../../dati/foto.ts'
+import { BastoniIncrociati } from '../componenti/Scudetto.tsx'
 
 interface Tappa {
   /** L'anno come si legge in pagina. `null` quando la fonte non lo dice. */
   readonly anno: string | null
   readonly titolo: string
+  /** Due righe. Non tre. */
   readonly testo: string
-  readonly fonte: string
-  /** La tappa che merita il riquadro. Una per pagina, non tre. */
-  readonly evidenza?: boolean
 }
 
-const TAPPE: readonly Tappa[] = [
-  {
-    anno: '1946',
-    titolo: 'Nasce lo Skating Club Pesaro',
-    testo:
-      "Nell'Italia che si rialza dalla guerra nasce lo Skating Club Pesaro. Diventa presto uno dei pilastri dello sport cittadino e contribuisce a diffondere l'hockey su pista: centinaia di tesserati, e una presenza costante nei tornei locali e nazionali.",
-    fonte: 'AHP · La Storia (PDF della società)',
-  },
+/* Le origini: dallo Skating Club maturo al ritorno in campo dell'Amatori. */
+const ORIGINI: readonly Tappa[] = [
   {
     anno: 'Gli anni d’oro',
-    titolo: 'Corrado Amori, Enzo Boiani e la pista di Viale Trieste',
+    titolo: 'La pista di Boiani',
     testo:
-      "Presidente storico è Corrado Amori. Enzo Boiani produce pattini di alta qualità, usati a livello internazionale, ed è lui a costruire la pista di pattinaggio di Viale Trieste — quella che ancora oggi si chiama Pista al mare. Intorno al club lavorano i dirigenti Gaetano Ginepro, Giorgio Baioni, Giancarlo Pagnini e Galeazzo Boattini; il sostegno economico arriva da imprese pesaresi, la Morbidelli dei forni e l'Italcomma.",
-    fonte: 'AHP · La Storia (PDF della società)',
+      'Presidente storico Corrado Amori. Enzo Boiani produce pattini usati a livello internazionale e costruisce la pista di Viale Trieste.',
   },
   {
     anno: null,
-    titolo: 'Poi lo Skating Club chiude',
+    titolo: 'Lo Skating Club chiude',
     testo:
-      "Le difficoltà economiche portano alla chiusura della società. In che anno, non lo sappiamo: il documento della società non lo scrive e nessun'altra fonte raccolta lo dice — quindi qui non c'è una data messa al suo posto. Quello che il documento scrive è che «lo spirito non si spense mai».",
-    fonte: 'AHP · La Storia (PDF della società) — la data manca alla fonte',
+      'Le difficoltà economiche fermano la società. In che anno non lo sappiamo: il documento della società non lo scrive.',
   },
   {
     anno: '2016',
-    titolo: "Rinasce come Amatori Hockey Pesaro",
-    testo:
-      "Sulle ceneri dello Skating Club nasce l'Amatori Hockey Pesaro, con l'obiettivo di rimettere in moto l'hockey su pista in città e con la guida del presidente Edgar Vincent Barberi. Da subito la società non punta solo sulla squadra senior: costruisce un settore giovanile, che è poi la parte che darà i risultati.",
-    fonte: 'AHP · La Storia (PDF della società); registro CONI per il legale rappresentante',
+    titolo: 'Rinasce come Amatori',
+    testo: "Sulle ceneri dello Skating Club nasce l'Amatori Hockey Pesaro, con il presidente Edgar Vincent Barberi.",
   },
   {
-    anno: 'I primi due campionati',
-    titolo: 'Si gioca nel girone del sud',
-    testo:
-      "All'inizio l'Amatori Pesaro viene inserita nel girone meridionale: si va a giocare contro le pugliesi Molfetta e Giovinazzo, le campane Salerno ed Eboli, le lucane Roller Matera e Asd Matera. Negli anni successivi Pesaro passa stabilmente al girone Emilia Romagna – Marche, che ogni tanto comprende anche squadre del mantovano o del cremonese.",
-    fonte: 'AHP · La Storia (PDF della società)',
+    anno: 'I primi campionati',
+    titolo: 'Si gioca al sud',
+    testo: 'Girone meridionale: Molfetta, Giovinazzo, Salerno, Matera. Poi il passaggio a Emilia-Romagna e Marche.',
   },
-  {
-    anno: '2020/21',
-    titolo: 'La finale di Coppa Nazionale, a Forte dei Marmi',
-    testo:
-      "È il risultato più prestigioso della società. Una formazione con giocatori di grande esperienza — il molfettese Daniele Uva, i modenesi Andrea Lucchi e Davide Ferri, insieme ai fratelli Barberi — domina il girone di qualificazione, supera i toscani del Prato nei quarti di finale e i vicentini dell'Hockey Montecchio Precalcino in semifinale. La finale della Coppa Nazionale di Serie B si gioca a Forte dei Marmi, contro l'Engas Vercelli.",
-    fonte: 'AHP · La Storia (PDF della società)',
-    evidenza: true,
-  },
+]
+
+/* Gli ultimi anni: quelli che si possono controllare sul portale federale. */
+const RECENTI: readonly Tappa[] = [
   {
     anno: '2023/24',
-    titolo: 'Spazio ai pesaresi, e le prime finali nazionali',
+    titolo: 'Spazio ai pesaresi',
     testo:
-      "Stagione complicata in prima squadra, con molti infortuni, ma la scelta è dichiarata: dare spazio ai pesaresi Alessio Urbinati, Filippo Roberti e Nicholas Ridolfi, appoggiati dai veterani Pierluigi Morri, Edgar e Antonino Barberi, con il contributo dei vicentini Alessandro Zanazzo e Jonathan Dal Santo. Nello stesso anno l'Under 11 raggiunge le prime finali nazionali della storia del club e chiude al quarto posto della classifica Coppa FISR.",
-    fonte: 'AHP · La Storia (PDF della società)',
+      "Urbinati, Roberti e Ridolfi in prima squadra. L'Under 11 arriva alle prime finali nazionali della storia del club.",
   },
   {
     anno: '2024/25',
     titolo: 'Arriva Simone Carnevali',
-    testo:
-      "Simone Carnevali, che da giocatore ha militato in Serie A con Modena, Vercelli e Scandiano e ha poi allenato a Bassano e Scandiano, prende la prima squadra e l'Under 19. Viene confermato il portiere colombiano Juan Giraldo, che è anche il preparatore dei portieri della società. All'inizio del campionato, a Correggio, Carnevali è allenatore-giocatore.",
-    fonte: 'AHP · La Storia (PDF della società); Il Resto del Carlino, 04/01/2025',
+    testo: 'Dalla Serie A di Modena, Vercelli e Scandiano alla panchina della prima squadra e dell’Under 19.',
   },
   {
     anno: STAGIONE_ROSA,
-    titolo: 'Un altro cambio in panchina',
-    testo:
-      "Nella rosa depositata in federazione per la Serie B il capo allenatore risulta Edoardo Rubien Escardilla, allenatore di primo livello; Simone Carnevali, che l'anno prima guidava la prima squadra, compare come allenatore di terzo livello. È un passaggio che il sito attuale non racconta, e che invece sul portale federale si legge.",
-    fonte: `Portale dei risultati FISR, staff depositato per la Serie B ${STAGIONE_ROSA}`,
+    titolo: 'Cambio in panchina',
+    testo: 'Il capo allenatore depositato in federazione è Edoardo Rubien Escardilla. Carnevali resta nello staff.',
   },
 ]
 
+/* Le fonti, tutte insieme e una volta sola: erano ripetute sotto ognuna delle
+ * nove tappe, ed erano un terzo del testo della pagina. */
 const FONTI = [
-  {
-    nome: 'AHP · La Storia',
-    dettaglio:
-      "Documento della società, dieci pagine, 1946-2024. Stava nella libreria media del sito vecchio, e dal sito non si raggiungeva.",
-  },
-  {
-    nome: 'Portale dei risultati FISR',
-    dettaglio: 'Rose depositate, staff tesserato, gironi e calendari. Codice di affiliazione della società: 3947.',
-  },
-  { nome: 'Registro CONI', dettaglio: 'Legale rappresentante della società: Edgar Vincent Barberi.' },
-  {
-    nome: 'Il Resto del Carlino',
-    dettaglio:
-      'Cronache locali del 04/01/2025 e del 07/03/2025: inizio di campionato a Correggio con Carnevali allenatore-giocatore, e Scandianese-Pesaro 5-4.',
-  },
+  { nome: 'AHP · La Storia', dettaglio: 'Documento della società, dieci pagine, 1946-2024.' },
+  { nome: 'Portale dei risultati FISR', dettaglio: 'Rose, staff, gironi. Codice di affiliazione 3947.' },
+  { nome: 'Registro CONI', dettaglio: 'Legale rappresentante: Edgar Vincent Barberi.' },
+  { nome: 'Il Resto del Carlino', dettaglio: 'Cronache del 04/01/2025 e del 07/03/2025.' },
 ] as const
 
 export function Storia() {
@@ -134,96 +115,83 @@ export function Storia() {
     <>
       {/* ================= INTESTAZIONE ================= */}
       <section className="bg-white">
-        <div className="mx-auto max-w-[1240px] px-4 pt-12 pb-10 sm:px-6 sm:pt-20 sm:pb-14">
+        <div className="mx-auto max-w-[1240px] px-4 pt-9 pb-6 sm:px-6 sm:pt-14 sm:pb-8">
           <p className="occhiello text-rosso-cupo">Dal 1946 a oggi</p>
-          <h1 className="titolo mt-3 text-[clamp(2.75rem,13vw,6rem)]">La nostra storia</h1>
-          <p className="mt-6 max-w-2xl text-[17px] leading-relaxed text-nero sm:text-lg">
-            Ottant'anni di hockey su pista a Pesaro: una città che di questo sport ha avuto un club fra i più
-            frequentati, poi non l'ha più avuto per anni, e se l'è ricostruito. Quello che segue viene dal documento
-            della società, dal registro CONI e dal portale federale — e ogni tappa dice da dove viene.
+          <h1 className="titolo mt-2 text-[clamp(2.75rem,13vw,6rem)]">La nostra storia</h1>
+          <p className="mt-4 max-w-xl text-[17px] leading-snug text-nero sm:text-lg">
+            Ottant'anni di hockey su pista a Pesaro: un club fra i più frequentati della città, poi il vuoto, poi
+            ricostruito da capo.
           </p>
         </div>
       </section>
 
-      {/* ================= LA LINEA DEL TEMPO ================= */}
-      <section aria-labelledby="titolo-tempo" className="bg-white">
-        <div className="mx-auto max-w-[1240px] px-4 pb-14 sm:px-6 sm:pb-20">
-          <h2 id="titolo-tempo" className="sr-only">
-            Le tappe della società, dal 1946 a oggi
-          </h2>
+      {/* ================= 1946 — il primo dei due momenti ================= */}
+      <FasciaTappa
+        foto="azione-1"
+        anno="1946"
+        titolo="Nasce lo Skating Club"
+        testo="Nell'Italia che si rialza dalla guerra, lo Skating Club Pesaro diventa uno dei pilastri dello sport cittadino e porta in città l'hockey su pista."
+        didascalia="La fotografia è di oggi: dello Skating Club non ci sono immagini nell'archivio della società."
+      />
 
-          {/* Il filetto è il bordo sinistro di ogni voce, il quadratino rosso è
-              il segno della tappa: nessuna immagine, nessuna animazione allo
-              scorrimento. Su un telefono in tribuna deve solo leggersi. */}
-          <ol className="max-w-3xl">
-            {TAPPE.map((t) => (
-              <li key={t.titolo} className="relative border-l-2 border-riga pb-10 pl-5 last:pb-0 sm:pl-8">
-                <span aria-hidden="true" className="absolute top-2 -left-[7px] block h-3 w-3 bg-rosso-cupo" />
+      {/* ================= LE ORIGINI ================= */}
+      <FilaTappe
+        id="origini"
+        occhiello="La cronologia"
+        titolo="Le origini"
+        aiuto="Scorri di lato per le tappe."
+        tappe={ORIGINI}
+      />
 
-                {/* Una tappa non ha l'anno, ed è quella che conta di più non
-                    falsificare: vedi la nota in testa al file.
-                    Le altre a volte hanno un anno («1946») e a volte un
-                    periodo («Gli anni d'oro»). Non si scrivono uguale: la
-                    classe `.cifra` ha interlinea 0,82, misura giusta per le
-                    cifre che non hanno discendenti e sbagliata per una «g»,
-                    che finiva addosso al titolo sotto. Quindi le cifre restano
-                    cifre, e i periodi diventano un occhiello grande — più
-                    piccolo, quindi in rosso-cupo, che a quella misura tiene i
-                    4,5:1 mentre il rosso della marca no. */}
-                {t.anno !== null &&
-                  (/^\d/.test(t.anno) ? (
-                    <p className="cifra text-[clamp(1.75rem,7vw,2.75rem)] text-rosso">{t.anno}</p>
-                  ) : (
-                    <p className="font-titolo text-[clamp(1.25rem,5vw,1.75rem)] leading-tight tracking-[0.02em] text-rosso-cupo uppercase">
-                      {t.anno}
-                    </p>
-                  ))}
+      {/* =========== 2020/21 — il secondo dei due momenti =========== */}
+      <FasciaTappa
+        foto="azione-3"
+        anno="2020/21"
+        titolo="Finale di Coppa Nazionale"
+        testo="Girone dominato, Prato battuto nei quarti, Montecchio in semifinale. La finale a Forte dei Marmi, contro l'Engas Vercelli."
+        occhiello="Il risultato più prestigioso"
+        didascalia="La fotografia non è di quella partita: è una gara recente della prima squadra."
+      />
 
-                <div className={t.evidenza ? 'mt-3 border-4 border-rosso-cupo bg-panna p-5 sm:p-8' : 'mt-2'}>
-                  {t.evidenza && <p className="occhiello text-rosso-cupo">Il risultato più prestigioso</p>}
-                  <h3
-                    className={`titolo text-nero ${t.evidenza ? 'mt-2 text-[clamp(1.5rem,6vw,2.25rem)]' : 'text-xl sm:text-2xl'}`}
-                  >
-                    {t.titolo}
-                  </h3>
-                  <p className="mt-3 text-[15px] leading-relaxed text-nero sm:text-[17px]">{t.testo}</p>
-                  <p className="mt-3 text-[13px] leading-relaxed text-grigio">Fonte: {t.fonte}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
+      {/* ================= GLI ULTIMI ANNI ================= */}
+      <FilaTappe
+        id="recenti"
+        occhiello="La cronologia"
+        titolo="Gli ultimi anni"
+        aiuto="Scorri di lato per le tappe."
+        tappe={RECENTI}
+      />
 
-      {/* ============ OGGI — l'unica fascia scura della pagina ============ */}
-      <section aria-labelledby="titolo-oggi" className="su-nero bg-nero text-white">
-        <div className="mx-auto max-w-[1240px] px-4 py-12 sm:px-6 sm:py-20">
+      {/* ============ OGGI — l'unica fascia nera della pagina ============ */}
+      <section aria-labelledby="titolo-oggi" className="su-nero relative overflow-hidden bg-nero text-white">
+        <BastoniIncrociati
+          className="pointer-events-none absolute -right-8 -bottom-16 w-64 text-white/[0.07] sm:w-80"
+          spessore={11}
+        />
+        <div className="relative mx-auto max-w-[1240px] px-4 py-10 sm:px-6 sm:py-14">
           <p className="occhiello text-rosso-chiaro">Oggi</p>
           <h2 id="titolo-oggi" className="titolo mt-2 max-w-3xl text-[clamp(2rem,9vw,3.75rem)]">
             L'unica società di hockey su pista delle Marche
           </h2>
-          <p className="mt-6 max-w-2xl text-[17px] leading-relaxed text-white">
-            Nel registro della Federazione Italiana Sport Rotellistici l'Amatori Hockey Pesaro risulta l'unica società
-            di hockey su pista della regione, con il codice di affiliazione 3947. Per il 2026/27 la Serie B l'ha
-            inserita nel {GIRONE_CAMPIONATO}, dieci giornate a partire dal 10 gennaio 2027.
+          <p className="mt-5 max-w-xl text-[17px] leading-snug text-white">
+            Codice di affiliazione FISR 3947. Per il 2026/27 la Serie B l'ha messa nel {GIRONE_CAMPIONATO}, dieci
+            giornate dal 10 gennaio 2027.
           </p>
-          <p className="mt-6 max-w-2xl text-[17px] leading-relaxed text-grigio-chiaro">
-            La pista di Viale Trieste che costruì Enzo Boiani è ancora lì, ed è ancora quella dove si gioca d'estate:
-            ottant'anni dopo, il posto è lo stesso.
+          <p className="mt-4 max-w-xl text-[17px] leading-snug text-grigio-chiaro">
+            La pista che costruì Enzo Boiani è ancora lì, ed è ancora quella dove si gioca d'estate.
           </p>
         </div>
       </section>
 
-      {/* ================= LE FONTI ================= */}
+      {/* ================= LE FONTI, tutte qui ================= */}
       <section aria-labelledby="titolo-fonti" className="bg-white">
-        <div className="mx-auto max-w-[1240px] px-4 py-12 sm:px-6 sm:py-16">
-          <SeparatoreBastoni className="mb-10" />
+        <div className="mx-auto max-w-[1240px] px-4 py-8 sm:px-6 sm:py-12">
           <h2 id="titolo-fonti" className="titolo text-[clamp(1.5rem,6vw,2.25rem)]">
             Da dove viene questa pagina
           </h2>
-          <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-grigio">
-            Non è una ricostruzione a memoria. Ogni fatto scritto qui sopra ha una di queste fonti, e dove la fonte
-            tace il testo lo dice invece di colmare il vuoto. Rose, staff e calendari si controllano sul{' '}
+          <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-grigio">
+            Non è una ricostruzione a memoria: dove la fonte tace, il testo lo dice. Rose, staff e calendari si
+            controllano sul{' '}
             <a
               href={FONTE_FEDERALE}
               target="_blank"
@@ -234,17 +202,146 @@ export function Storia() {
             </a>
             .
           </p>
-          <ul className="mt-6 max-w-3xl divide-y divide-riga border-y border-riga">
+          <ul className="mt-5 max-w-3xl divide-y divide-riga border-y border-riga">
             {FONTI.map((f) => (
-              <li key={f.nome} className="py-4">
-                <p className="titolo text-lg text-nero">{f.nome}</p>
-                <p className="mt-1 text-[15px] leading-relaxed text-grigio">{f.dettaglio}</p>
+              <li key={f.nome} className="flex flex-wrap items-baseline gap-x-3 py-3">
+                <span className="titolo text-lg text-nero">{f.nome}</span>
+                <span className="text-[14px] leading-snug text-grigio">{f.dettaglio}</span>
               </li>
             ))}
           </ul>
         </div>
       </section>
     </>
+  )
+}
+
+/* ===========================================================================
+ * LA FASCIA CON LA FOTOGRAFIA — il trattamento dei due momenti forti
+ * ===========================================================================
+ * A tutta larghezza, con l'anno grande quanto un titolo e due righe di testo.
+ * La velatura è quella misurata in `componenti/Foto.tsx`: il testo bianco
+ * sopra il parquet chiaro, senza velo, sparirebbe.
+ *
+ * La didascalia dice di che cosa è la fotografia. Non è una nota a piè di
+ * pagina: è la riga che separa «una foto della squadra» da «una foto del
+ * 1946», e senza di lei la seconda è quello che chi guarda capisce.
+ * =========================================================================== */
+function FasciaTappa({
+  foto,
+  anno,
+  titolo,
+  testo,
+  didascalia,
+  occhiello,
+}: {
+  readonly foto: NomeFoto
+  readonly anno: string
+  readonly titolo: string
+  readonly testo: string
+  readonly didascalia: string
+  readonly occhiello?: string
+}) {
+  return (
+    <section
+      aria-label={`${anno} — ${titolo}`}
+      className="su-nero relative isolate flex min-h-[40vh] items-end overflow-hidden bg-nero-fondo text-white sm:min-h-[54vh]"
+    >
+      <div className="absolute inset-0 -z-10">
+        <Foto nome={foto} alt="" />
+        <Velatura />
+      </div>
+
+      {/* Il filetto rosso è l'accento: è una forma piena, non del testo, e il
+          contrasto non deve garantirlo. Sopra la fotografia il testo è bianco
+          — vedi la nota in `componenti/Foto.tsx`. */}
+      <div className="mx-auto w-full max-w-[1240px] px-4 py-8 sm:px-6 sm:py-12" data-sopra-foto>
+        <span aria-hidden="true" className="mb-3 block h-1.5 w-20 bg-rosso" />
+        {occhiello && <p className="occhiello text-white">{occhiello}</p>}
+        <p className="cifra mt-2 text-[clamp(3.5rem,17vw,7rem)] text-white">{anno}</p>
+        <h2 className="titolo mt-2 max-w-2xl text-[clamp(1.75rem,8vw,3rem)] text-white">{titolo}</h2>
+        <p className="mt-3 max-w-lg text-[16px] leading-snug text-white">{testo}</p>
+        <p className="mt-3 max-w-lg text-[13px] leading-snug text-grigio-chiaro">{didascalia}</p>
+      </div>
+    </section>
+  )
+}
+
+/* ===========================================================================
+ * LA FILA DELLE TAPPE — il carosello
+ * ===========================================================================
+ * Dentro le schede non c'è nessun collegamento, quindi la fila stessa deve
+ * poter prendere il fuoco della tastiera: è la proprietà `soloTesto` del
+ * carosello. Senza, chi non usa il mouse non arriverebbe alle tappe dopo la
+ * prima — contenuto raggiungibile solo col dito è contenuto perso.
+ * =========================================================================== */
+function FilaTappe({
+  id,
+  occhiello,
+  titolo,
+  aiuto,
+  tappe,
+}: {
+  readonly id: string
+  readonly occhiello: string
+  readonly titolo: string
+  readonly aiuto: string
+  readonly tappe: readonly Tappa[]
+}) {
+  return (
+    <section aria-labelledby={`titolo-${id}`} className="bg-white">
+      <div className="mx-auto max-w-[1240px] px-4 py-8 sm:px-6 sm:py-12">
+        {/* L'aiuto sta sulla riga dell'occhiello, non su una riga sua: a
+            390 px una riga in più costa venti pixel, due volte, e questa
+            pagina li sta contando uno per uno. */}
+        <div className="flex flex-wrap items-baseline justify-between gap-x-6">
+          <p className="occhiello text-rosso-cupo">{occhiello}</p>
+          <p className="text-[13px] text-grigio lg:hidden">{aiuto}</p>
+        </div>
+        <h2 id={`titolo-${id}`} className="titolo text-[clamp(2rem,9vw,3.5rem)]">
+          {titolo}
+        </h2>
+
+        <Carosello
+          etichetta={`${titolo} — le tappe`}
+          className="-mx-4 mt-5 scroll-px-4 px-4 sm:-mx-6 sm:scroll-px-6 sm:px-6"
+          soloTesto
+        >
+          {tappe.map((t) => (
+            <li key={t.titolo} className="w-[78vw] max-w-[320px] sm:w-[330px]">
+              <article className="flex h-full flex-col border-t-4 border-nero bg-panna p-4 sm:p-5">
+                <Anno anno={t.anno} />
+                <h3 className="titolo mt-3 text-[1.75rem] text-nero">{t.titolo}</h3>
+                <p className="mt-3 text-[15px] leading-snug text-nero">{t.testo}</p>
+              </article>
+            </li>
+          ))}
+        </Carosello>
+      </div>
+    </section>
+  )
+}
+
+/* L'anno della tappa. Tre casi, e ognuno ha il suo motivo:
+ * · una data vera («2016») va nella classe `.cifra`, interlinea 0,82, fatta
+ *   per le cifre che non hanno discendenti;
+ * · un periodo («Gli anni d'oro») no: la «g» finirebbe addosso al titolo
+ *   sotto. Diventa un occhiello grande, in rosso-cupo perché a quella misura
+ *   il rosso della marca non tiene i 4,5:1 e il rosso-cupo sì;
+ * · l'anno che non sappiamo è un punto interrogativo, e chi legge con una
+ *   sintesi vocale sente «anno non noto» invece di un simbolo solo. */
+function Anno({ anno }: { readonly anno: string | null }) {
+  if (anno === null) {
+    return (
+      <p className="cifra text-[2.75rem] text-rosso">
+        <span aria-hidden="true">?</span>
+        <span className="sr-only">anno non noto</span>
+      </p>
+    )
+  }
+  if (/^\d/.test(anno)) return <p className="cifra text-[clamp(2.5rem,11vw,3.25rem)] text-rosso">{anno}</p>
+  return (
+    <p className="font-titolo text-[1.5rem] leading-tight tracking-[0.02em] text-rosso-cupo uppercase">{anno}</p>
   )
 }
 
