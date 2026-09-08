@@ -30,19 +30,17 @@ news automatiche dai social; mobile.
 
 ## 2 · ⚠️ Le credenziali — la prima cosa da fare, e non la faccio io
 
-Il committente ha mandato in chat lo **screenshot di un foglio con le
-password vere**: pannello WordPress, due caselle di posta, PayPal, Google,
-Flyeralarm, Instagram, più IBAN, P.IVA e codice fiscale della società.
+All'avvio del cantiere gli accessi della società sono passati in chat come
+immagine. **Non li uso, non li trascrivo qui e non li userò**: gli accessi li
+fa il committente, sempre, anche quando sarebbe più comodo il contrario.
 
-**Io non le uso e non le trascrivo da nessuna parte.** Gli accessi li fa il
-committente, sempre, anche quando sarebbe più comodo il contrario.
+**Da fare, appena possibile:** cambiare tutte le password che stavano su quel
+foglio e accendere la verifica in due passaggi dove esiste. Una password che
+ha viaggiato in un'immagine è una password da cambiare, punto.
 
-**Da fare, appena possibile:** cambiare tutte quelle password — a partire da
-posta e PayPal, che sono le due che aprono le altre — e accendere la verifica
-in due passaggi dove esiste. Un'immagine passata in chat è una password che
-ha già viaggiato.
-
----
+Questo repository è pubblico perché ospita un sito pubblico: **nessuna chiave
+ci finisce dentro**. I token dell'aggiornamento automatico stanno nei Secrets
+di GitHub, `.env` è escluso, e `.env.example` contiene solo i nomi.
 
 ## 3 · Il sito di oggi, misurato
 

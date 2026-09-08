@@ -27,6 +27,7 @@ import {
   prossimaPartita,
 } from '../../dati/stagione-2026-27.ts'
 import { BastoniIncrociati, MotivoBastoni, Scudetto, SeparatoreBastoni } from '../componenti/Scudetto.tsx'
+import { link } from '../rotte.ts'
 
 /* ---------------------------------------------------------------------------
  * Le date, in italiano e senza fusi orari di mezzo.
@@ -108,10 +109,10 @@ function Eroe() {
         <Fonte>AHP-La-Storia.pdf, documento della società</Fonte>
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <a href="/squadra/" className="bottone bottone-pieno">
+          <a href={link('/squadra/')} className="bottone bottone-pieno">
             La squadra
           </a>
-          <a href="/eventi/" className="bottone bottone-vuoto">
+          <a href={link('/eventi/')} className="bottone bottone-vuoto">
             I risultati
           </a>
         </div>
@@ -292,7 +293,7 @@ function UltimeNotizie() {
               Ultime notizie
             </h2>
           </div>
-          <a href="/notizie/" className="bottone bottone-vuoto">
+          <a href={link('/notizie/')} className="bottone bottone-vuoto">
             Tutte le notizie
           </a>
         </div>
@@ -454,7 +455,7 @@ function Giovanili() {
         </p>
 
         <div className="mt-8">
-          <a href="/giovanili/" className="bottone border-white bg-white text-rosso-cupo hover:bg-nero hover:text-white">
+          <a href={link('/giovanili/')} className="bottone border-white bg-white text-rosso-cupo hover:bg-nero hover:text-white">
             Le giovanili
           </a>
         </div>

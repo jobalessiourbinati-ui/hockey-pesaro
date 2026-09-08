@@ -83,3 +83,20 @@ export const rottaDi = (percorso: string): Rotta | undefined => ROTTE.find((r) =
 /** Le voci del menu senza la home: in testata la home è il logo, e ripeterla
  *  nel menu è una voce in più da leggere per niente. */
 export const VOCI_MENU: readonly Rotta[] = ROTTE.filter((r) => r.percorso !== '/')
+
+/**
+ * IL COLLEGAMENTO A UNA PAGINA — e perché non basta scrivere `/squadra/`.
+ *
+ * Su GitHub Pages il sito vive dentro un sottopercorso
+ * (`/hockey-pesaro/`) finché non gli si punta contro `hockeypesaro.it`: un
+ * `href="/squadra/"` cercherebbe la radice del dominio e darebbe «pagina non
+ * trovata». Vite mette il percorso di base in `import.meta.env.BASE_URL`;
+ * questa funzione lo antepone, una volta sola, per tutto il sito.
+ *
+ * Nessun componente scrive più un percorso a mano: si passa da qui.
+ */
+export const link = (percorso: string): string => {
+  const base = import.meta.env.BASE_URL
+  if (percorso === '/') return base
+  return `${base.replace(/\/$/, '')}${percorso}`
+}

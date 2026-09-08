@@ -14,7 +14,9 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
     "resolveJsonModule": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    /* `process.env` in vite.config.ts: il percorso di base arriva da lì. */
+    "types": ["node", "vite/client"]
   },
   "include": ["sito", "dati", "vite.config.ts"]
 }

@@ -20,7 +20,7 @@
 
 import { useEffect, useId, useRef, useState } from 'react'
 import type { KeyboardEvent as EventoTastiera } from 'react'
-import { VOCI_MENU } from '../rotte.ts'
+import { VOCI_MENU, link } from '../rotte.ts'
 import { BastoniIncrociati, Stemma } from './Scudetto.tsx'
 
 export function Testata({ percorso }: { readonly percorso: string }) {
@@ -76,7 +76,7 @@ export function Testata({ percorso }: { readonly percorso: string }) {
   return (
     <header className="su-nero sticky top-0 z-50 border-b-2 border-rosso bg-nero text-white">
       <div className="mx-auto flex h-16 max-w-[1240px] items-center justify-between gap-3 px-4 sm:px-6">
-        <a href="/" className="flex min-w-0 items-center gap-2.5" aria-label="Amatori Hockey Pesaro, vai alla home">
+        <a href={link('/')} className="flex min-w-0 items-center gap-2.5" aria-label="Amatori Hockey Pesaro, vai alla home">
           <Stemma className="h-10 w-10 shrink-0" alt="" />
           <span className="titolo truncate text-[17px] leading-none sm:text-xl">Amatori Hockey Pesaro</span>
         </a>
@@ -90,7 +90,7 @@ export function Testata({ percorso }: { readonly percorso: string }) {
               return (
                 <li key={r.percorso}>
                   <a
-                    href={r.percorso}
+                    href={link(r.percorso)}
                     aria-current={attiva ? 'page' : undefined}
                     className={`titolo flex h-12 items-center px-3 text-lg transition-colors ${
                       attiva ? 'text-rosso-chiaro' : 'text-white hover:text-rosso-chiaro'
@@ -155,7 +155,7 @@ export function Testata({ percorso }: { readonly percorso: string }) {
             <ul>
               <li>
                 <a
-                  href="/"
+                  href={link('/')}
                   aria-current={percorso === '/' ? 'page' : undefined}
                   className="titolo flex min-h-[56px] items-center border-b border-white/12 py-3 text-3xl text-white"
                 >
@@ -165,7 +165,7 @@ export function Testata({ percorso }: { readonly percorso: string }) {
               {VOCI_MENU.map((r) => (
                 <li key={r.percorso}>
                   <a
-                    href={r.percorso}
+                    href={link(r.percorso)}
                     aria-current={r.percorso === percorso ? 'page' : undefined}
                     className="block min-h-[56px] border-b border-white/12 py-3"
                   >

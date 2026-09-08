@@ -1,0 +1,69 @@
+# ---------------------------------------------------------------------------
+# PUBBLICA IL SITO su GitHub Pages, a ogni push su `main`.
+#
+# Perché GitHub Pages e non un altro servizio: il sito è statico, non ha un
+# server e non ha un database — è la ragione per cui siamo usciti da
+# WordPress. Pages lo serve gratis, sugli stessi server dove gira già
+# l'aggiornamento automatico dei risultati (`aggiorna.yml`), e non aggiunge
+# un altro account da gestire a una società di volontari.
+#
+# ⚠️ Quando il dominio `hockeypesaro.it` verrà spostato qui, si aggiunge il
+# file `public/CNAME` con dentro il dominio e si imposta il DNS: finché non
+# succede, il sito vive su `<utente>.github.io/hockey-pesaro/`, ed è per
+# questo che il build riceve `--base`.
+# ---------------------------------------------------------------------------
+name: Pubblica il sito
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Il permesso minimo che serve a Pages, e niente di più.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Una pubblicazione alla volta: se ne arrivano due, la seconda aspetta invece
+# di sovrascrivere a metà. `cancel-in-progress: false` perché interrompere un
+# rilascio a metà è peggio che aspettarlo.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  costruisci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - run: npm ci
+
+      # Il controllo dei tipi PRIMA del build: se non compila, non si
+      # pubblica. È il cancello che su WordPress non esisteva.
+      - name: Tipi e build
+        run: npm run build
+        env:
+          # Il sottopercorso di GitHub Pages. Con un dominio proprio diventa '/'.
+          BASE_URL: /hockey-pesaro/
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  pubblica:
+    needs: costruisci
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.rilascio.outputs.page_url }}
+    steps:
+      - id: rilascio
+        uses: actions/deploy-pages@v4

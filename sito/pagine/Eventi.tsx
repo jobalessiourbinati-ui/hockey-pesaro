@@ -35,6 +35,7 @@
  */
 
 import { SeparatoreBastoni } from '../componenti/Scudetto.tsx'
+import { link } from '../rotte.ts'
 
 interface Evento {
   readonly nome: string
@@ -207,7 +208,7 @@ export function Eventi() {
             in un tabellone solo che si aggiorna con la federazione.
           </p>
           <p className="mt-6">
-            <a href="/notizie/" className="bottone bottone-vuoto">
+            <a href={link('/notizie/')} className="bottone bottone-vuoto">
               Calendario e risultati
             </a>
           </p>

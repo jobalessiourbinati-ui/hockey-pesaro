@@ -27,6 +27,15 @@ import { ROTTE } from './sito/rotte.ts'
 const nomeIngresso = (percorso: string): string => percorso.replaceAll('/', '') || 'home'
 
 export default defineConfig({
+  /*
+   * IL PERCORSO DI BASE. Su GitHub Pages il sito vive dentro un
+   * sottopercorso (`/hockey-pesaro/`) finché non gli si punta contro il
+   * dominio vero: senza questa riga tutti i collegamenti e i file
+   * andrebbero a cercare la radice del dominio e la pagina uscirebbe nuda,
+   * senza stile. Con `hockeypesaro.it` collegato, la variabile diventa `/`
+   * e non si tocca altro.
+   */
+  base: process.env.BASE_URL ?? '/',
   plugins: [react(), tailwindcss()],
   build: {
     // Il traguardo è il browser che c'è oggi in tribuna, non quello del 2018.

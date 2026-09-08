@@ -24,7 +24,7 @@
  * ===========================================================================
  */
 
-import { ROTTE, SOCIETA } from '../rotte.ts'
+import { ROTTE, SOCIETA, link } from '../rotte.ts'
 import { BastoniIncrociati, Stemma } from './Scudetto.tsx'
 
 const SOCIAL = [
@@ -107,7 +107,7 @@ export function Piede() {
             <ul className="mt-3 space-y-2 text-[15px] text-grigio-chiaro">
               {ROTTE.map((r) => (
                 <li key={r.percorso}>
-                  <a className="underline underline-offset-4 hover:text-white" href={r.percorso}>
+                  <a className="underline underline-offset-4 hover:text-white" href={link(r.percorso)}>
                     {r.etichetta}
                   </a>
                 </li>
@@ -128,7 +128,7 @@ export function Piede() {
             perché è stata dimenticata.
           */}
           <p>
-            <a className="underline underline-offset-4 hover:text-white" href="/notizie/">
+            <a className="underline underline-offset-4 hover:text-white" href={link('/notizie/')}>
               Aggiornamenti
             </a>
           </p>
