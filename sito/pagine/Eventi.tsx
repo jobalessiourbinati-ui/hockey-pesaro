@@ -29,9 +29,12 @@
  * maggio a settembre, e un torneo di luglio si gioca lì. Se il committente dice
  * altro, si cambia una riga in `EVENTI`.
  *
- * ⚠️ LA FOTOGRAFIA IN TESTA NON È DEL TORNEO. È una gara della prima squadra:
- * del Torneo Città di Pesaro non abbiamo nessuna immagine, e la didascalia lo
- * dice invece di lasciarlo credere.
+ * ⚠️ LE FOTOGRAFIE SONO IL LUOGO, NON L'EDIZIONE. Del Torneo Città di Pesaro
+ * non abbiamo un'immagine certificata; abbiamo però la pista al mare di Viale
+ * Trieste — dove il torneo si gioca — in tre momenti veri: le squadre riunite,
+ * la premiazione al tramonto, il gioco col lungomare alle spalle. È il luogo
+ * giusto sotto il testo giusto, e la didascalia dice esattamente questo invece
+ * di lasciar credere che siano scatti di quel torneo.
  * ===========================================================================
  */
 
@@ -117,7 +120,11 @@ export function Eventi() {
           className="su-nero relative isolate flex min-h-[50vh] items-end overflow-hidden bg-nero-fondo text-white sm:min-h-[58vh]"
         >
           <div className="absolute inset-0 -z-10">
-            <Foto nome="gruppo" alt="Il gruppo dell'Amatori Hockey Pesaro riunito a bordo pista." primaCosa />
+            <Foto
+              nome="torneo-mare"
+              alt="Squadre riunite sulla pista al mare di Viale Trieste, con gli stabilimenti sul fondo."
+              primaCosa
+            />
             <Velatura />
           </div>
 
@@ -158,11 +165,38 @@ export function Eventi() {
             )}
 
             <p className="mt-5 max-w-lg text-[13px] leading-snug text-grigio-chiaro">
-              Fonte: sito della società, pagina Eventi. La fotografia è una gara della prima squadra, non del torneo.
+              Fonte: sito della società, pagina Eventi. La fotografia è la pista al mare, dove il torneo si gioca: non
+              è detto che sia di questa edizione.
             </p>
           </div>
         </section>
       )}
+
+      {/* ====== LA PISTA AL MARE — il luogo del torneo, in due scatti veri ====== */}
+      <section aria-labelledby="titolo-pista-mare" className="bg-white">
+        <div className="mx-auto max-w-[1240px] px-4 pt-12 sm:px-6 sm:pt-16">
+          <p className="occhiello text-rosso-cupo">Dove si gioca</p>
+          <h2 id="titolo-pista-mare" className="titolo mt-1 text-[clamp(2rem,9vw,3.5rem)]">
+            La pista al mare
+          </h2>
+          <ul className="mt-6 grid gap-3 sm:grid-cols-2 sm:gap-4">
+            <li className="aspect-[4/3] overflow-hidden">
+              <Foto
+                nome="pista-mare-gioco"
+                alt="In campo sulla pista di Viale Trieste, con il lungomare alle spalle."
+                quantoLargaLargo="50vw"
+              />
+            </li>
+            <li className="aspect-[4/3] overflow-hidden">
+              <Foto
+                nome="premiazione-mare"
+                alt="Una premiazione al tramonto sulla pista di Viale Trieste."
+                quantoLargaLargo="50vw"
+              />
+            </li>
+          </ul>
+        </div>
+      </section>
 
       {/* ================= I DUE TORNEI PREVISTI ================= */}
       <section aria-labelledby="titolo-previsti" className="bg-white">

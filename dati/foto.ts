@@ -89,18 +89,6 @@ export const FOTO = {
       { file: 'giovanili-squadra-alto-900.webp', larghezza: 900, altezza: 1125 },
     ],
   },
-  'gruppo': {
-    largo: [
-      { file: 'gruppo-largo-800.webp', larghezza: 800, altezza: 450 },
-      { file: 'gruppo-largo-1200.webp', larghezza: 1200, altezza: 675 },
-      { file: 'gruppo-largo-1440.webp', larghezza: 1440, altezza: 810 },
-    ],
-    alto: [
-      { file: 'gruppo-alto-400.webp', larghezza: 400, altezza: 500 },
-      { file: 'gruppo-alto-600.webp', larghezza: 600, altezza: 750 },
-      { file: 'gruppo-alto-900.webp', larghezza: 900, altezza: 1125 },
-    ],
-  },
   'pista-tramonto': {
     largo: [
       { file: 'pista-tramonto-largo-800.webp', larghezza: 800, altezza: 450 },
@@ -110,6 +98,40 @@ export const FOTO = {
       { file: 'pista-tramonto-alto-400.webp', larghezza: 400, altezza: 500 },
       { file: 'pista-tramonto-alto-600.webp', larghezza: 600, altezza: 750 },
       { file: 'pista-tramonto-alto-864.webp', larghezza: 864, altezza: 1080 },
+    ],
+  },
+  'torneo-mare': {
+    largo: [
+      { file: 'torneo-mare-largo-800.webp', larghezza: 800, altezza: 450 },
+      { file: 'torneo-mare-largo-1200.webp', larghezza: 1200, altezza: 675 },
+      { file: 'torneo-mare-largo-1440.webp', larghezza: 1440, altezza: 810 },
+    ],
+    alto: [
+      { file: 'torneo-mare-alto-400.webp', larghezza: 400, altezza: 500 },
+      { file: 'torneo-mare-alto-600.webp', larghezza: 600, altezza: 750 },
+      { file: 'torneo-mare-alto-900.webp', larghezza: 900, altezza: 1125 },
+    ],
+  },
+  'premiazione-mare': {
+    largo: [
+      { file: 'premiazione-mare-largo-800.webp', larghezza: 800, altezza: 450 },
+      { file: 'premiazione-mare-largo-1080.webp', larghezza: 1080, altezza: 608 },
+    ],
+    alto: [
+      { file: 'premiazione-mare-alto-400.webp', larghezza: 400, altezza: 500 },
+      { file: 'premiazione-mare-alto-600.webp', larghezza: 600, altezza: 750 },
+      { file: 'premiazione-mare-alto-864.webp', larghezza: 864, altezza: 1080 },
+    ],
+  },
+  'pista-mare-gioco': {
+    largo: [
+      { file: 'pista-mare-gioco-largo-800.webp', larghezza: 800, altezza: 450 },
+      { file: 'pista-mare-gioco-largo-1080.webp', larghezza: 1080, altezza: 608 },
+    ],
+    alto: [
+      { file: 'pista-mare-gioco-alto-400.webp', larghezza: 400, altezza: 500 },
+      { file: 'pista-mare-gioco-alto-600.webp', larghezza: 600, altezza: 750 },
+      { file: 'pista-mare-gioco-alto-864.webp', larghezza: 864, altezza: 1080 },
     ],
   },
   'azione-1': {

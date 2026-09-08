@@ -204,48 +204,6 @@
     "byte": 1066255
   },
   {
-    "file": "gruppo-largo-1440.webp",
-    "larghezza": 1440,
-    "altezza": 810,
-    "byte": 73668
-  },
-  {
-    "file": "gruppo-largo-1200.webp",
-    "larghezza": 1200,
-    "altezza": 675,
-    "byte": 59818
-  },
-  {
-    "file": "gruppo-largo-800.webp",
-    "larghezza": 800,
-    "altezza": 450,
-    "byte": 37904
-  },
-  {
-    "file": "gruppo-alto-900.webp",
-    "larghezza": 900,
-    "altezza": 1125,
-    "byte": 93700
-  },
-  {
-    "file": "gruppo-alto-600.webp",
-    "larghezza": 600,
-    "altezza": 750,
-    "byte": 60072
-  },
-  {
-    "file": "gruppo-alto-400.webp",
-    "larghezza": 400,
-    "altezza": 500,
-    "byte": 37168
-  },
-  {
-    "file": "gruppo.jpg (originale)",
-    "larghezza": 1440,
-    "altezza": 1799,
-    "byte": 274866
-  },
-  {
     "file": "pista-tramonto-largo-1080.webp",
     "larghezza": 1080,
     "altezza": 608,
@@ -280,6 +238,120 @@
     "larghezza": 1080,
     "altezza": 1080,
     "byte": 328392
+  },
+  {
+    "file": "torneo-mare-largo-1440.webp",
+    "larghezza": 1440,
+    "altezza": 810,
+    "byte": 275308
+  },
+  {
+    "file": "torneo-mare-largo-1200.webp",
+    "larghezza": 1200,
+    "altezza": 675,
+    "byte": 203918
+  },
+  {
+    "file": "torneo-mare-largo-800.webp",
+    "larghezza": 800,
+    "altezza": 450,
+    "byte": 105588
+  },
+  {
+    "file": "torneo-mare-alto-900.webp",
+    "larghezza": 900,
+    "altezza": 1125,
+    "byte": 228666
+  },
+  {
+    "file": "torneo-mare-alto-600.webp",
+    "larghezza": 600,
+    "altezza": 750,
+    "byte": 110740
+  },
+  {
+    "file": "torneo-mare-alto-400.webp",
+    "larghezza": 400,
+    "altezza": 500,
+    "byte": 51060
+  },
+  {
+    "file": "torneo-mare.jpg (originale)",
+    "larghezza": 1440,
+    "altezza": 1405,
+    "byte": 553246
+  },
+  {
+    "file": "premiazione-mare-largo-1080.webp",
+    "larghezza": 1080,
+    "altezza": 608,
+    "byte": 47668
+  },
+  {
+    "file": "premiazione-mare-largo-800.webp",
+    "larghezza": 800,
+    "altezza": 450,
+    "byte": 34924
+  },
+  {
+    "file": "premiazione-mare-alto-864.webp",
+    "larghezza": 864,
+    "altezza": 1080,
+    "byte": 56772
+  },
+  {
+    "file": "premiazione-mare-alto-600.webp",
+    "larghezza": 600,
+    "altezza": 750,
+    "byte": 36704
+  },
+  {
+    "file": "premiazione-mare-alto-400.webp",
+    "larghezza": 400,
+    "altezza": 500,
+    "byte": 23428
+  },
+  {
+    "file": "premiazione-mare.jpg (originale)",
+    "larghezza": 1080,
+    "altezza": 1080,
+    "byte": 193807
+  },
+  {
+    "file": "pista-mare-gioco-largo-1080.webp",
+    "larghezza": 1080,
+    "altezza": 608,
+    "byte": 118750
+  },
+  {
+    "file": "pista-mare-gioco-largo-800.webp",
+    "larghezza": 800,
+    "altezza": 450,
+    "byte": 67716
+  },
+  {
+    "file": "pista-mare-gioco-alto-864.webp",
+    "larghezza": 864,
+    "altezza": 1080,
+    "byte": 161948
+  },
+  {
+    "file": "pista-mare-gioco-alto-600.webp",
+    "larghezza": 600,
+    "altezza": 750,
+    "byte": 77746
+  },
+  {
+    "file": "pista-mare-gioco-alto-400.webp",
+    "larghezza": 400,
+    "altezza": 500,
+    "byte": 33614
+  },
+  {
+    "file": "pista-mare-gioco.jpg (originale)",
+    "larghezza": 1080,
+    "altezza": 1080,
+    "byte": 352402
   },
   {
     "file": "azione-1-largo-1600.webp",

@@ -94,7 +94,12 @@ export function Foto({
   const largo = piuGrande(tagli.largo)
 
   return (
-    <picture>
+    /* `block h-full w-full`: `<picture>` è inline di suo, cioè senza altezza,
+     * e l'`<img>` dentro con `h-full` non ha niente contro cui calcolarsi —
+     * risultato, l'immagine non si disegna. Finché ogni foto stava dentro un
+     * `absolute inset-0` non si vedeva; la prima volta che una foto è finita
+     * in una cella di griglia con un rapporto d'aspetto, è sparita. */
+    <picture className="block h-full w-full">
       <source
         media="(min-width: 640px)"
         type="image/webp"
