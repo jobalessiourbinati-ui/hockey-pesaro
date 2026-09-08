@@ -4,6 +4,18 @@ dist/
 .env.*
 .vercel/
 
+# La raccolta grezza dai social è un magazzino DI LAVORO, non va pubblicata:
+# è pesante (decine di MB) e soprattutto contiene volti di minori. Un repository
+# pubblico rende pubblico ogni file, anche quelli che il sito non mostra. Le
+# foto che finiscono davvero online si preparano e si versionano una per una in
+# `public/media/squadra/`, dopo aver tolto i minori (CONTESTO §9.2).
+public/media/social/
+
+# Script usa-e-getta di questa sessione (provino a contatto, ritagli dell'eroe):
+# tengono percorsi della macchina e servono la cartella `social/` qui sopra, che
+# non è versionata. Il vero sorgente dell'eroe è `hero-urbinati.jpg`, versionato.
+scripts/_*.mjs
+
 # ma il modello dei nomi delle chiavi (senza valori) deve stare nel repository
 !.env.example
 *.tsbuildinfo

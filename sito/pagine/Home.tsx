@@ -76,12 +76,18 @@ function Eroe() {
     <section className="su-nero relative isolate flex min-h-[64vh] flex-col justify-end overflow-hidden bg-nero-fondo text-white sm:min-h-[72vh] lg:min-h-[78vh]">
       <div className="absolute inset-0 -z-10">
         <Foto
-          nome="azione-2"
+          nome="hero-urbinati"
           /* Decorativa: il nome della società è scritto sopra a caratteri
              alti quattro centimetri, e ridirlo qui è rumore per chi ascolta.
-             Le persone nella fotografia non si nominano. */
+             La persona non si nomina — ed è comunque il capitano, che ha dato
+             la fotografia per questo. */
           alt=""
           primaCosa
+          /* Il soggetto — testa, numero, palla sulla stecca — sta in alto;
+             il testo dell'eroe sta in basso, sopra i pantaloni grigi e non
+             sopra la maglia bianca, dove sparirebbe. `center 28%` tiene la
+             testa in quadro e porta il grigio dietro le parole. */
+          posizione="center 28%"
         />
         <Velatura />
       </div>

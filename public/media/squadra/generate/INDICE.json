@@ -1,5 +1,41 @@
 [
   {
+    "file": "hero-urbinati-largo-960.webp",
+    "larghezza": 960,
+    "altezza": 540,
+    "byte": 22406
+  },
+  {
+    "file": "hero-urbinati-largo-800.webp",
+    "larghezza": 800,
+    "altezza": 450,
+    "byte": 17466
+  },
+  {
+    "file": "hero-urbinati-alto-741.webp",
+    "larghezza": 741,
+    "altezza": 926,
+    "byte": 31888
+  },
+  {
+    "file": "hero-urbinati-alto-600.webp",
+    "larghezza": 600,
+    "altezza": 750,
+    "byte": 24874
+  },
+  {
+    "file": "hero-urbinati-alto-400.webp",
+    "larghezza": 400,
+    "altezza": 500,
+    "byte": 14968
+  },
+  {
+    "file": "hero-urbinati.jpg (originale)",
+    "larghezza": 960,
+    "altezza": 927,
+    "byte": 103390
+  },
+  {
     "file": "azione-1-largo-1600.webp",
     "larghezza": 1600,
     "altezza": 900,

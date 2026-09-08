@@ -30,6 +30,17 @@ export interface TagliFoto {
 export const CARTELLA_FOTO = '/media/squadra/generate/'
 
 export const FOTO = {
+  'hero-urbinati': {
+    largo: [
+      { file: 'hero-urbinati-largo-800.webp', larghezza: 800, altezza: 450 },
+      { file: 'hero-urbinati-largo-960.webp', larghezza: 960, altezza: 540 },
+    ],
+    alto: [
+      { file: 'hero-urbinati-alto-400.webp', larghezza: 400, altezza: 500 },
+      { file: 'hero-urbinati-alto-600.webp', larghezza: 600, altezza: 750 },
+      { file: 'hero-urbinati-alto-741.webp', larghezza: 741, altezza: 926 },
+    ],
+  },
   'azione-1': {
     largo: [
       { file: 'azione-1-largo-800.webp', larghezza: 800, altezza: 450 },

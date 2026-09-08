@@ -47,7 +47,14 @@ const QUALITA = 82
 
 /** Le fotografie di gioco. `maglia.jpg` non è qui dentro: vedi la nota in
  *  fondo al file. */
-const FOTO = ['azione-1', 'azione-2', 'azione-3']
+const FOTO = ['hero-urbinati', 'azione-1', 'azione-2', 'azione-3']
+
+/** Da dove ritagliare, quando la foto non è panoramica. `hero-urbinati` è un
+ *  ritratto quasi quadrato: il ritaglio 16:9 di scrivania, preso dal centro,
+ *  taglierebbe la testa; preso dall'alto (`top`) tiene testa, numero e stecca.
+ *  Le foto d'azione sono panoramiche e restano al centro. */
+const GRAVITA = { 'hero-urbinati': 'top' }
+const gravita = (nome) => GRAVITA[nome] ?? 'centre'
 
 async function main() {
   await mkdir(USCITA, { recursive: true })
@@ -80,7 +87,7 @@ async function main() {
         const altezza = Math.round(larghezza / taglio.rapporto)
         const file = `${nome}-${taglio.nome}-${larghezza}.webp`
         const info = await sharp(ingresso)
-          .resize(larghezza, altezza, { fit: 'cover', position: 'centre' })
+          .resize(larghezza, altezza, { fit: 'cover', position: gravita(nome) })
           .webp({ quality: QUALITA })
           .toFile(join(USCITA, file))
 
