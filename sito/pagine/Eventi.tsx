@@ -39,6 +39,7 @@
  */
 
 import { Foto, Velatura } from '../componenti/Foto.tsx'
+import { Rivela } from '../componenti/Rivela.tsx'
 import { link } from '../rotte.ts'
 
 interface Evento {
@@ -117,15 +118,31 @@ export function Eventi() {
       {principale && (
         <section
           aria-labelledby="titolo-torneo"
-          className="su-nero relative isolate flex min-h-[50vh] items-end overflow-hidden bg-nero-fondo text-white sm:min-h-[58vh]"
+          className="su-nero relative isolate flex min-h-[54vh] items-end overflow-hidden bg-nero-fondo text-white sm:min-h-[70vh]"
         >
           <div className="absolute inset-0 -z-10">
+            {/* NIENTE `center top` QUI, ed è una misura non un gusto: in
+                questa fotografia il gruppo sta in basso e il cielo in alto.
+                Ancorando in cima le teste erano salve lo stesso — lo sono
+                anche al centro, con la fascia alzata — ma il cielo chiaro
+                finiva dietro l'occhiello e il contrasto scendeva a 4,55:1,
+                cioè al pelo della soglia, mentre il resto del sito sta sopra
+                10:1. Al centro il testo torna sul gruppo, che è scuro. */}
             <Foto
               nome="torneo-mare"
               alt="Squadre riunite sulla pista al mare di Viale Trieste, con gli stabilimenti sul fondo."
               primaCosa
             />
             <Velatura />
+            {/* UN VELO IN PIÙ, SOLO QUI, E LA QUANTITÀ È CALCOLATA.
+                È l'unica fotografia del sito con il cielo aperto dietro il
+                testo: misurando i rettangoli VERI delle lettere (non il
+                blocco, che è largo quanto la colonna e pesa cielo dove non
+                c'è nessuna lettera) il pixel peggiore dell'occhiello faceva
+                **4,48:1**, cioè sotto soglia, mentre le altre fasce stanno
+                sopra 10:1. Da L=0,184 servono 0,30 di nero per scendere a
+                L=0,131, che è ~5,8:1 — margine vero senza spegnere la foto. */}
+            <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-nero-fondo/30" />
           </div>
 
           <div className="mx-auto w-full max-w-[1240px] px-4 py-10 sm:px-6 sm:py-14" data-sopra-foto>
@@ -183,13 +200,13 @@ export function Eventi() {
               lontano — è passata alla home, dove regge la fascia panoramica di
               «dove giochiamo». Ripeterla qui sarebbe la stessa fotografia in
               due pagine, che è il difetto da cui siamo partiti. */}
-          <div className="mt-6 aspect-[3/2] overflow-hidden">
+          <Rivela className="mt-6 aspect-[3/2] overflow-hidden">
             <Foto
               nome="premiazione-mare"
               alt="Una premiazione al tramonto sulla pista di Viale Trieste."
               quantoLargaLargo="100vw"
             />
-          </div>
+          </Rivela>
         </div>
       </section>
 
@@ -202,17 +219,22 @@ export function Eventi() {
           </h2>
 
           <ul className="mt-7 grid gap-4 sm:grid-cols-2 sm:gap-6">
-            {previsti.map((e) => (
-              <li key={e.nome} className="border-2 border-dashed border-riga p-5 sm:p-8">
+            {previsti.map((e, i) => (
+              <Rivela
+                come="li"
+                ritardo={i * 110}
+                key={e.nome}
+                className="scheda-viva border-2 border-dashed border-riga p-5 sm:p-8"
+              >
                 <p className="occhiello text-grigio">Previsto dal progetto</p>
                 <h3 className="titolo mt-2 text-2xl text-nero sm:text-3xl">{e.nome}</h3>
-                <p className="mt-3 text-[15px] leading-snug text-nero">{e.sommario}</p>
+                <p className="misura mt-3 text-[15px] leading-snug text-nero">{e.sommario}</p>
                 <p className="occhiello mt-3 text-grigio">{e.dove}</p>
-              </li>
+              </Rivela>
             ))}
           </ul>
 
-          <p className="mt-5 max-w-3xl text-[13px] leading-relaxed text-grigio">
+          <p className="misura mt-5 text-[13px] leading-relaxed text-grigio">
             Fonte: Pesaro in pista 2024-27 (PDF della società); AHP · La Storia per Galeazzo Boattini. Sono intenzioni
             scritte dalla società: finché restano tali, il bordo resta tratteggiato.
           </p>

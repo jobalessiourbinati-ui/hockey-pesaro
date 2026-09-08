@@ -31,6 +31,7 @@ import { STAGIONE_2024_25 } from '../../dati/stagione-2024-25.ts'
 import { CAMPIONATO_2026_27_USCITO, COPPA_ITALIA_2026_27, GIRONE_CAMPIONATO, GIRONE_COPPA } from '../../dati/stagione-2026-27.ts'
 import { FasciaNotizie } from '../componenti/FasciaNotizie.tsx'
 import { indirizzoMedia } from '../componenti/Foto.tsx'
+import { Rivela } from '../componenti/Rivela.tsx'
 import { SeparatoreBastoni } from '../componenti/Scudetto.tsx'
 import { Tabellone } from '../componenti/Tabellone.tsx'
 import { inItaliano } from '../date.ts'
@@ -86,8 +87,16 @@ export function Notizie() {
               Prima ancora
             </h2>
             <ul className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {archivio.map((v) => (
-                <li key={v.id} className="flex flex-col border border-riga">
+              {archivio.map((v, i) => (
+                <Rivela
+                  come="li"
+                  /* Il ritardo si azzera ogni tre schede: in una griglia a tre
+                     colonne è la RIGA che deve entrare insieme, non la
+                     ventesima scheda con due secondi di ritardo. */
+                  ritardo={(i % 3) * 90}
+                  key={v.id}
+                  className="scheda-viva flex flex-col border border-riga"
+                >
                   {v.immagine !== undefined && (
                     /* Il testo della notizia dice già tutto: l'immagine è
                        decorativa e non si inventa una didascalia che nessuno
@@ -110,7 +119,7 @@ export function Notizie() {
                       </a>
                     </h3>
                   </div>
-                </li>
+                </Rivela>
               ))}
             </ul>
           </div>

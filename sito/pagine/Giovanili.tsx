@@ -43,6 +43,7 @@ import { PRIMA_SQUADRA, inRosa } from '../../dati/rosa.ts'
 import { STAGIONE_2024_25 } from '../../dati/stagione-2024-25.ts'
 import type { Categoria } from '../../dati/stagione-2024-25.ts'
 import { Foto, Velatura } from '../componenti/Foto.tsx'
+import { Rivela } from '../componenti/Rivela.tsx'
 import { link } from '../rotte.ts'
 
 /* --- quello che si conta dal calendario, invece di ricordarselo ----------- */
@@ -135,10 +136,18 @@ export function Giovanili() {
       {/* ====== IL DATO CHE CONTA, sopra la fotografia della prima squadra ====== */}
       <section
         aria-labelledby="titolo-minori"
-        className="su-nero relative isolate flex min-h-[46vh] items-end overflow-hidden bg-nero-fondo text-white sm:min-h-[54vh]"
+        className="su-nero relative isolate flex min-h-[54vh] items-end overflow-hidden bg-nero-fondo text-white sm:min-h-[70vh]"
       >
         <div className="absolute inset-0 -z-10">
-          <Foto nome="giovanili-squadra" alt="Il gruppo delle giovanili dell'Amatori Hockey Pesaro sulla pista." primaCosa />
+          {/* Fascia alta e inquadratura a filo superiore: è una foto di
+              GRUPPO, e in una fascia panoramica presa dal centro le teste
+              della fila in piedi finiscono fuori. */}
+          <Foto
+            nome="giovanili-squadra"
+            alt="Il gruppo delle giovanili dell'Amatori Hockey Pesaro sulla pista."
+            primaCosa
+            posizione="center top"
+          />
           <Velatura />
         </div>
 
@@ -191,8 +200,10 @@ export function Giovanili() {
               hanno un risultato da raccontare occupano più spazio delle altre,
               ed è giusto che si veda quale ha una storia e quale non ancora. */}
           <ol className="mt-7 border-t-2 border-nero">
-            {CATEGORIE.map((c) => (
-              <li
+            {CATEGORIE.map((c, i) => (
+              <Rivela
+                come="li"
+                ritardo={i * 80}
                 key={c.numero}
                 className="grid grid-cols-[auto_1fr] items-start gap-x-4 border-b border-riga py-5 sm:gap-x-8 sm:py-7"
               >
@@ -204,9 +215,9 @@ export function Giovanili() {
                 <div className="min-w-0">
                   <h3 className="titolo text-2xl text-nero sm:text-3xl">{c.nome}</h3>
                   <p className="occhiello mt-1 text-grigio">allena {c.guida}</p>
-                  <p className="mt-2 max-w-2xl text-[15px] leading-snug text-nero sm:text-[17px]">{c.racconto}</p>
+                  <p className="misura mt-2 text-[15px] leading-snug text-nero sm:text-[17px]">{c.racconto}</p>
                 </div>
-              </li>
+              </Rivela>
             ))}
           </ol>
 
@@ -220,7 +231,8 @@ export function Giovanili() {
       {/* ================= VIENI A PROVARE ================= */}
       <section aria-labelledby="titolo-prova" className="bg-white">
         <div className="mx-auto max-w-[1240px] px-4 pb-14 sm:px-6 sm:pb-20">
-          <div className="border-4 border-rosso-cupo p-6 sm:p-10">
+          <Rivela className="border-4 border-rosso-cupo p-6 sm:p-10">
+            <span aria-hidden="true" className="filetto mb-4" />
             <p className="occhiello text-rosso-cupo">Si comincia così</p>
             <h2 id="titolo-prova" className="titolo mt-2 max-w-2xl text-[clamp(1.9rem,8vw,3.25rem)]">
               Vieni a provare
@@ -239,11 +251,11 @@ export function Giovanili() {
               </a>
             </p>
             <p className="mt-4">
-              <a href={link('/squadra/')} className="text-[15px] text-rosso-cupo underline underline-offset-4">
+              <a href={link('/squadra/')} className="legame text-[15px] text-rosso-cupo">
                 Da qui si arriva in prima squadra
               </a>
             </p>
-          </div>
+          </Rivela>
         </div>
       </section>
     </>

@@ -92,7 +92,11 @@ export function SchedaPersona({ persona, formato = 'compatta', tono = 'chiaro' }
   return (
     <article
       className={[
-        'flex border',
+        /* `scheda-viva`: due pixel di sollevamento e il bordo che si accende
+           al passaggio del mouse. Su un dito non succede niente — la regola
+           sta dietro `@media (hover: hover)` — ed è giusto così: sul telefono
+           un effetto di hover resta acceso dopo il tocco e sembra un difetto. */
+        'scheda-viva flex border',
         bordo,
         estesa ? 'flex-row items-start gap-4 p-4 sm:gap-6 sm:p-6' : 'flex-col',
         scuro ? 'bg-white/5' : 'bg-white',

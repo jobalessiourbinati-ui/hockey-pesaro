@@ -44,6 +44,7 @@ import { FONTE_FEDERALE, STAGIONE_ROSA } from '../../dati/rosa.ts'
 import { GIRONE_CAMPIONATO } from '../../dati/stagione-2026-27.ts'
 import { Carosello } from '../componenti/Carosello.tsx'
 import { Foto, Velatura } from '../componenti/Foto.tsx'
+import { Rivela } from '../componenti/Rivela.tsx'
 import type { NomeFoto } from '../../dati/foto.ts'
 import { BastoniIncrociati } from '../componenti/Scudetto.tsx'
 
@@ -241,24 +242,28 @@ function FasciaTappa({
   return (
     <section
       aria-label={`${anno} — ${titolo}`}
-      className="su-nero relative isolate flex min-h-[40vh] items-end overflow-hidden bg-nero-fondo text-white sm:min-h-[54vh]"
+      className="su-nero relative isolate flex min-h-[50vh] items-end overflow-hidden bg-nero-fondo text-white sm:min-h-[64vh]"
     >
       <div className="absolute inset-0 -z-10">
-        <Foto nome={foto} alt="" />
+        {/* `center top` per la stessa ragione di tutte le altre fasce: presa
+            dal centro, una fascia panoramica taglia le teste dei giocatori. */}
+        <Foto nome={foto} alt="" posizione="center top" />
         <Velatura />
       </div>
 
       {/* Il filetto rosso è l'accento: è una forma piena, non del testo, e il
           contrasto non deve garantirlo. Sopra la fotografia il testo è bianco
           — vedi la nota in `componenti/Foto.tsx`. */}
-      <div className="mx-auto w-full max-w-[1240px] px-4 py-8 sm:px-6 sm:py-12" data-sopra-foto>
-        <span aria-hidden="true" className="mb-3 block h-1.5 w-20 bg-rosso" />
-        {occhiello && <p className="occhiello text-white">{occhiello}</p>}
-        <p className="cifra mt-2 text-[clamp(3.5rem,17vw,7rem)] text-white">{anno}</p>
-        <h2 className="titolo mt-2 max-w-2xl text-[clamp(1.75rem,8vw,3rem)] text-white">{titolo}</h2>
-        <p className="mt-3 max-w-lg text-[16px] leading-snug text-white">{testo}</p>
-        <p className="mt-3 max-w-lg text-[13px] leading-snug text-grigio-chiaro">{didascalia}</p>
-      </div>
+      <Rivela className="mx-auto w-full max-w-[1240px] px-4 py-8 sm:px-6 sm:py-12">
+        <div data-sopra-foto>
+          <span aria-hidden="true" className="filetto mb-3" />
+          {occhiello && <p className="occhiello text-white">{occhiello}</p>}
+          <p className="cifra mt-2 text-[clamp(3.5rem,17vw,7rem)] text-white">{anno}</p>
+          <h2 className="titolo mt-2 max-w-2xl text-[clamp(1.75rem,8vw,3rem)] text-white">{titolo}</h2>
+          <p className="misura mt-3 text-[16px] leading-snug text-white">{testo}</p>
+          <p className="misura mt-3 text-[13px] leading-snug text-grigio-chiaro">{didascalia}</p>
+        </div>
+      </Rivela>
     </section>
   )
 }
@@ -305,7 +310,11 @@ function FilaTappe({
         >
           {tappe.map((t) => (
             <li key={t.titolo} className="w-[78vw] max-w-[320px] sm:w-[330px]">
-              <article className="flex h-full flex-col border-t-4 border-nero bg-panna p-4 sm:p-5">
+              {/* Niente `Rivela` dentro il carosello: le schede stanno fuori
+                  schermo DI LATO, non sotto, e l'osservatore le farebbe
+                  comparire tutte insieme al primo sguardo. Qui il movimento è
+                  quello del dito, che è già il migliore che ci sia. */}
+              <article className="scheda-viva flex h-full flex-col border-t-4 border-nero bg-panna p-4 sm:p-5">
                 <Anno anno={t.anno} />
                 <h3 className="titolo mt-3 text-[1.75rem] text-nero">{t.titolo}</h3>
                 <p className="mt-3 text-[15px] leading-snug text-nero">{t.testo}</p>
