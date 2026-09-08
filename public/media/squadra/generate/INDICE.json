@@ -36,6 +36,252 @@
     "byte": 103390
   },
   {
+    "file": "azione-contrasto-largo-1440.webp",
+    "larghezza": 1440,
+    "altezza": 810,
+    "byte": 81742
+  },
+  {
+    "file": "azione-contrasto-largo-1200.webp",
+    "larghezza": 1200,
+    "altezza": 675,
+    "byte": 63752
+  },
+  {
+    "file": "azione-contrasto-largo-800.webp",
+    "larghezza": 800,
+    "altezza": 450,
+    "byte": 38332
+  },
+  {
+    "file": "azione-contrasto-alto-900.webp",
+    "larghezza": 900,
+    "altezza": 1125,
+    "byte": 95694
+  },
+  {
+    "file": "azione-contrasto-alto-600.webp",
+    "larghezza": 600,
+    "altezza": 750,
+    "byte": 57008
+  },
+  {
+    "file": "azione-contrasto-alto-400.webp",
+    "larghezza": 400,
+    "altezza": 500,
+    "byte": 33912
+  },
+  {
+    "file": "azione-contrasto.jpg (originale)",
+    "larghezza": 1440,
+    "altezza": 1440,
+    "byte": 232618
+  },
+  {
+    "file": "azione-corsa-largo-1600.webp",
+    "larghezza": 1600,
+    "altezza": 900,
+    "byte": 281102
+  },
+  {
+    "file": "azione-corsa-largo-1200.webp",
+    "larghezza": 1200,
+    "altezza": 675,
+    "byte": 138778
+  },
+  {
+    "file": "azione-corsa-largo-800.webp",
+    "larghezza": 800,
+    "altezza": 450,
+    "byte": 45038
+  },
+  {
+    "file": "azione-corsa-alto-900.webp",
+    "larghezza": 900,
+    "altezza": 1125,
+    "byte": 152294
+  },
+  {
+    "file": "azione-corsa-alto-600.webp",
+    "larghezza": 600,
+    "altezza": 750,
+    "byte": 51822
+  },
+  {
+    "file": "azione-corsa-alto-400.webp",
+    "larghezza": 400,
+    "altezza": 500,
+    "byte": 22466
+  },
+  {
+    "file": "azione-corsa.jpg (originale)",
+    "larghezza": 2000,
+    "altezza": 2000,
+    "byte": 878578
+  },
+  {
+    "file": "portiere-largo-1440.webp",
+    "larghezza": 1440,
+    "altezza": 810,
+    "byte": 169138
+  },
+  {
+    "file": "portiere-largo-1200.webp",
+    "larghezza": 1200,
+    "altezza": 675,
+    "byte": 127386
+  },
+  {
+    "file": "portiere-largo-800.webp",
+    "larghezza": 800,
+    "altezza": 450,
+    "byte": 68694
+  },
+  {
+    "file": "portiere-alto-900.webp",
+    "larghezza": 900,
+    "altezza": 1125,
+    "byte": 135646
+  },
+  {
+    "file": "portiere-alto-600.webp",
+    "larghezza": 600,
+    "altezza": 750,
+    "byte": 75984
+  },
+  {
+    "file": "portiere-alto-400.webp",
+    "larghezza": 400,
+    "altezza": 500,
+    "byte": 39892
+  },
+  {
+    "file": "portiere.jpg (originale)",
+    "larghezza": 1440,
+    "altezza": 1440,
+    "byte": 303869
+  },
+  {
+    "file": "giovanili-squadra-largo-1600.webp",
+    "larghezza": 1600,
+    "altezza": 900,
+    "byte": 241478
+  },
+  {
+    "file": "giovanili-squadra-largo-1200.webp",
+    "larghezza": 1200,
+    "altezza": 675,
+    "byte": 142180
+  },
+  {
+    "file": "giovanili-squadra-largo-800.webp",
+    "larghezza": 800,
+    "altezza": 450,
+    "byte": 71626
+  },
+  {
+    "file": "giovanili-squadra-alto-900.webp",
+    "larghezza": 900,
+    "altezza": 1125,
+    "byte": 136438
+  },
+  {
+    "file": "giovanili-squadra-alto-600.webp",
+    "larghezza": 600,
+    "altezza": 750,
+    "byte": 70040
+  },
+  {
+    "file": "giovanili-squadra-alto-400.webp",
+    "larghezza": 400,
+    "altezza": 500,
+    "byte": 38050
+  },
+  {
+    "file": "giovanili-squadra.jpg (originale)",
+    "larghezza": 2048,
+    "altezza": 2048,
+    "byte": 1066255
+  },
+  {
+    "file": "gruppo-largo-1440.webp",
+    "larghezza": 1440,
+    "altezza": 810,
+    "byte": 73668
+  },
+  {
+    "file": "gruppo-largo-1200.webp",
+    "larghezza": 1200,
+    "altezza": 675,
+    "byte": 59818
+  },
+  {
+    "file": "gruppo-largo-800.webp",
+    "larghezza": 800,
+    "altezza": 450,
+    "byte": 37904
+  },
+  {
+    "file": "gruppo-alto-900.webp",
+    "larghezza": 900,
+    "altezza": 1125,
+    "byte": 93700
+  },
+  {
+    "file": "gruppo-alto-600.webp",
+    "larghezza": 600,
+    "altezza": 750,
+    "byte": 60072
+  },
+  {
+    "file": "gruppo-alto-400.webp",
+    "larghezza": 400,
+    "altezza": 500,
+    "byte": 37168
+  },
+  {
+    "file": "gruppo.jpg (originale)",
+    "larghezza": 1440,
+    "altezza": 1799,
+    "byte": 274866
+  },
+  {
+    "file": "pista-tramonto-largo-1080.webp",
+    "larghezza": 1080,
+    "altezza": 608,
+    "byte": 113790
+  },
+  {
+    "file": "pista-tramonto-largo-800.webp",
+    "larghezza": 800,
+    "altezza": 450,
+    "byte": 76286
+  },
+  {
+    "file": "pista-tramonto-alto-864.webp",
+    "larghezza": 864,
+    "altezza": 1080,
+    "byte": 133992
+  },
+  {
+    "file": "pista-tramonto-alto-600.webp",
+    "larghezza": 600,
+    "altezza": 750,
+    "byte": 81532
+  },
+  {
+    "file": "pista-tramonto-alto-400.webp",
+    "larghezza": 400,
+    "altezza": 500,
+    "byte": 43720
+  },
+  {
+    "file": "pista-tramonto.jpg (originale)",
+    "larghezza": 1080,
+    "altezza": 1080,
+    "byte": 328392
+  },
+  {
     "file": "azione-1-largo-1600.webp",
     "larghezza": 1600,
     "altezza": 900,

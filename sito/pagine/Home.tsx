@@ -421,7 +421,7 @@ function DoveGiochiamo() {
         className="su-nero relative isolate flex min-h-[52vh] items-end overflow-hidden bg-nero-fondo text-white sm:min-h-[58vh]"
       >
         <div className="absolute inset-0 -z-10">
-          <Foto nome="azione-3" alt="Un'azione di gioco dell'Amatori Hockey Pesaro vista dal fondo campo." />
+          <Foto nome="pista-tramonto" alt="La pista di Viale Trieste al tramonto, con la squadra in maglia da gara." />
           <Velatura />
         </div>
 

@@ -117,7 +117,7 @@ export function Eventi() {
           className="su-nero relative isolate flex min-h-[50vh] items-end overflow-hidden bg-nero-fondo text-white sm:min-h-[58vh]"
         >
           <div className="absolute inset-0 -z-10">
-            <Foto nome="azione-3" alt="Un'azione di gioco dell'Amatori Hockey Pesaro." primaCosa />
+            <Foto nome="gruppo" alt="Il gruppo dell'Amatori Hockey Pesaro riunito a bordo pista." primaCosa />
             <Velatura />
           </div>
 

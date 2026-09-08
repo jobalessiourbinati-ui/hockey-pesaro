@@ -47,7 +47,18 @@ const QUALITA = 82
 
 /** Le fotografie di gioco. `maglia.jpg` non è qui dentro: vedi la nota in
  *  fondo al file. */
-const FOTO = ['hero-urbinati', 'azione-1', 'azione-2', 'azione-3']
+const FOTO = [
+  'hero-urbinati',
+  'azione-contrasto',
+  'azione-corsa',
+  'portiere',
+  'giovanili-squadra',
+  'gruppo',
+  'pista-tramonto',
+  'azione-1',
+  'azione-2',
+  'azione-3',
+]
 
 /** Da dove ritagliare, quando la foto non è panoramica. `hero-urbinati` è un
  *  ritratto quasi quadrato: il ritaglio 16:9 di scrivania, preso dal centro,
@@ -120,10 +131,18 @@ async function main() {
 async function scriviElencoPerIlSito(generati) {
   const perFoto = new Map()
   for (const r of generati) {
-    const [nome1, nome2, taglio] = r.file.replace('.webp', '').split('-')
-    const nome = `${nome1}-${nome2}`
+    /* Il nome si legge DALLA FINE: le ultime due parti sono sempre taglio e
+     * larghezza, tutto quello che viene prima è il nome della fotografia.
+     * Leggerlo dall'inizio — `[nome1, nome2, taglio]` — dava per scontato che
+     * ogni nome fosse di due parole: `portiere-largo-1440` finiva con
+     * taglio = '1440', e lo script moriva su `undefined.push`. */
+    const pezzi = r.file.replace('.webp', '').split('-')
+    const larghezza = pezzi.pop()
+    const taglio = pezzi.pop()
+    const nome = pezzi.join('-')
+    if (taglio !== 'largo' && taglio !== 'alto') throw new Error(`nome di file inatteso: ${r.file}`)
     if (!perFoto.has(nome)) perFoto.set(nome, { largo: [], alto: [] })
-    perFoto.get(nome)[taglio].push({ file: r.file, larghezza: r.larghezza, altezza: r.altezza })
+    perFoto.get(nome)[taglio].push({ file: r.file, larghezza: Number(larghezza), altezza: r.altezza })
   }
 
   const varianti = (elenco) =>

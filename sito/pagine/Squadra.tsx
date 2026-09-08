@@ -67,8 +67,8 @@ export function Squadra() {
       <section className="su-nero relative isolate flex min-h-[46vh] items-end overflow-hidden bg-nero-fondo text-white sm:min-h-[56vh]">
         <div className="absolute inset-0 -z-10">
           <Foto
-            nome="azione-1"
-            alt="Due giocatori dell'Amatori Hockey Pesaro in azione sulla pista."
+            nome="azione-contrasto"
+            alt="Due giocatori si contendono la palla in una partita dell'Amatori Hockey Pesaro."
             primaCosa
           />
           <Velatura />

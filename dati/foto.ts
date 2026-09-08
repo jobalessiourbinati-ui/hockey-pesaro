@@ -41,6 +41,77 @@ export const FOTO = {
       { file: 'hero-urbinati-alto-741.webp', larghezza: 741, altezza: 926 },
     ],
   },
+  'azione-contrasto': {
+    largo: [
+      { file: 'azione-contrasto-largo-800.webp', larghezza: 800, altezza: 450 },
+      { file: 'azione-contrasto-largo-1200.webp', larghezza: 1200, altezza: 675 },
+      { file: 'azione-contrasto-largo-1440.webp', larghezza: 1440, altezza: 810 },
+    ],
+    alto: [
+      { file: 'azione-contrasto-alto-400.webp', larghezza: 400, altezza: 500 },
+      { file: 'azione-contrasto-alto-600.webp', larghezza: 600, altezza: 750 },
+      { file: 'azione-contrasto-alto-900.webp', larghezza: 900, altezza: 1125 },
+    ],
+  },
+  'azione-corsa': {
+    largo: [
+      { file: 'azione-corsa-largo-800.webp', larghezza: 800, altezza: 450 },
+      { file: 'azione-corsa-largo-1200.webp', larghezza: 1200, altezza: 675 },
+      { file: 'azione-corsa-largo-1600.webp', larghezza: 1600, altezza: 900 },
+    ],
+    alto: [
+      { file: 'azione-corsa-alto-400.webp', larghezza: 400, altezza: 500 },
+      { file: 'azione-corsa-alto-600.webp', larghezza: 600, altezza: 750 },
+      { file: 'azione-corsa-alto-900.webp', larghezza: 900, altezza: 1125 },
+    ],
+  },
+  'portiere': {
+    largo: [
+      { file: 'portiere-largo-800.webp', larghezza: 800, altezza: 450 },
+      { file: 'portiere-largo-1200.webp', larghezza: 1200, altezza: 675 },
+      { file: 'portiere-largo-1440.webp', larghezza: 1440, altezza: 810 },
+    ],
+    alto: [
+      { file: 'portiere-alto-400.webp', larghezza: 400, altezza: 500 },
+      { file: 'portiere-alto-600.webp', larghezza: 600, altezza: 750 },
+      { file: 'portiere-alto-900.webp', larghezza: 900, altezza: 1125 },
+    ],
+  },
+  'giovanili-squadra': {
+    largo: [
+      { file: 'giovanili-squadra-largo-800.webp', larghezza: 800, altezza: 450 },
+      { file: 'giovanili-squadra-largo-1200.webp', larghezza: 1200, altezza: 675 },
+      { file: 'giovanili-squadra-largo-1600.webp', larghezza: 1600, altezza: 900 },
+    ],
+    alto: [
+      { file: 'giovanili-squadra-alto-400.webp', larghezza: 400, altezza: 500 },
+      { file: 'giovanili-squadra-alto-600.webp', larghezza: 600, altezza: 750 },
+      { file: 'giovanili-squadra-alto-900.webp', larghezza: 900, altezza: 1125 },
+    ],
+  },
+  'gruppo': {
+    largo: [
+      { file: 'gruppo-largo-800.webp', larghezza: 800, altezza: 450 },
+      { file: 'gruppo-largo-1200.webp', larghezza: 1200, altezza: 675 },
+      { file: 'gruppo-largo-1440.webp', larghezza: 1440, altezza: 810 },
+    ],
+    alto: [
+      { file: 'gruppo-alto-400.webp', larghezza: 400, altezza: 500 },
+      { file: 'gruppo-alto-600.webp', larghezza: 600, altezza: 750 },
+      { file: 'gruppo-alto-900.webp', larghezza: 900, altezza: 1125 },
+    ],
+  },
+  'pista-tramonto': {
+    largo: [
+      { file: 'pista-tramonto-largo-800.webp', larghezza: 800, altezza: 450 },
+      { file: 'pista-tramonto-largo-1080.webp', larghezza: 1080, altezza: 608 },
+    ],
+    alto: [
+      { file: 'pista-tramonto-alto-400.webp', larghezza: 400, altezza: 500 },
+      { file: 'pista-tramonto-alto-600.webp', larghezza: 600, altezza: 750 },
+      { file: 'pista-tramonto-alto-864.webp', larghezza: 864, altezza: 1080 },
+    ],
+  },
   'azione-1': {
     largo: [
       { file: 'azione-1-largo-800.webp', larghezza: 800, altezza: 450 },

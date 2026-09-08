@@ -11,12 +11,17 @@
  * sa davvero — in due righe, non in un paragrafo. Dove non si sa niente la
  * riga lo dice, resta corta, e non viene riempita.
  *
- * ⚠️ NIENTE NOMI DI RAGAZZI, NIENTE FOTOGRAFIE DI RAGAZZI (CONTESTO §9.2).
- * Le giovanili sono minori, le liberatorie dei genitori non ce le ha nessuno,
- * e senza quelle non si pubblica niente di riconoscibile. È anche il motivo
- * per cui in questa pagina l'unica fotografia è della PRIMA SQUADRA, ed è
- * didascalata come tale: sono adulti, e sta esattamente dove il testo parla di
- * chi dalle giovanili è arrivato lassù.
+ * ⚠️ LE FOTOGRAFIE DEI RAGAZZI, E A QUALE CONDIZIONE.
+ * Fino all'08/09/2026 questa pagina non mostrava nessun minore: la regola
+ * (CONTESTO §9.2) è che senza liberatoria non si pubblica niente di
+ * riconoscibile. Quel giorno **la società ha dichiarato che le famiglie hanno
+ * firmato la circolare per le foto** (Alessio Urbinati), e da lì la fotografia
+ * di questa pagina è il gruppo delle giovanili.
+ *
+ * Il permesso poggia su quella dichiarazione, non su un documento che abbiamo
+ * letto noi: se la circolare non coprisse la pubblicazione sul sito — una cosa
+ * diversa dalle foto interne — si torna alla fotografia della prima squadra,
+ * che sono adulti, e si cambia una riga sola.
  *
  * L'UNICA ECCEZIONE SUI NOMI, e perché. Jordan Boniolo e Gianluca Gasparini
  * sono nominati nell'Under 17: il nome è già pubblico due volte — la società
@@ -133,7 +138,7 @@ export function Giovanili() {
         className="su-nero relative isolate flex min-h-[46vh] items-end overflow-hidden bg-nero-fondo text-white sm:min-h-[54vh]"
       >
         <div className="absolute inset-0 -z-10">
-          <Foto nome="azione-2" alt="Un'azione di gioco dell'Amatori Hockey Pesaro." primaCosa />
+          <Foto nome="giovanili-squadra" alt="Il gruppo delle giovanili dell'Amatori Hockey Pesaro sulla pista." primaCosa />
           <Velatura />
         </div>
 
@@ -146,13 +151,7 @@ export function Giovanili() {
           <h2 id="titolo-minori" className="titolo mt-2 max-w-2xl text-[clamp(1.75rem,8vw,3rem)] text-white">
             tesserati ancora minorenni nella rosa di Serie B
           </h2>
-          <p className="mt-3 max-w-lg text-[16px] leading-snug text-white">
-            Saliti da queste categorie. I loro nomi e le loro foto qui non ci sono: sono minori, e senza la
-            liberatoria dei genitori non si pubblica niente.
-          </p>
-          <p className="mt-4 max-w-lg text-[13px] leading-snug text-grigio-chiaro">
-            La fotografia è una gara della prima squadra, non delle giovanili.
-          </p>
+          <p className="mt-3 max-w-lg text-[16px] leading-snug text-white">Saliti da queste categorie.</p>
         </div>
       </section>
 
