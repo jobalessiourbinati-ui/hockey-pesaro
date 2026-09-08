@@ -308,9 +308,9 @@ function TreNumeri() {
   return (
     <section aria-labelledby="titolo-numeri" className="border-y-4 border-nero bg-panna">
       <div className="mx-auto max-w-[1240px] px-4 py-12 sm:px-6 sm:py-16">
-        <p className="occhiello text-rosso-cupo">La prima squadra · Serie B {STAGIONE_ROSA}</p>
+        <p className="occhiello text-rosso-cupo">La prima squadra · Serie B</p>
         <h2 id="titolo-numeri" className="titolo mt-1 text-[clamp(2.5rem,11vw,4.5rem)]">
-          Tre numeri
+          La stagione {STAGIONE_ROSA}
         </h2>
 
         <dl className="mt-8 grid gap-px border-2 border-nero bg-nero sm:grid-cols-3">
@@ -449,12 +449,8 @@ function DoveGiochiamo() {
                 Le altre del girone sono tutte in Emilia: Modena, Correggio, Mirandola, Scandiano. Chi da queste parti
                 vuole giocare a hockey su pista, gioca qui.
               </p>
-              {/* Le fonti della pagina, tutte insieme e una volta sola. */}
-              <p className="mt-5 max-w-2xl text-[13px] leading-relaxed text-grigio">
-                Fonti: registro delle società affiliate FISR; AHP · La Storia (documento della società) per lo Skating
-                Club e la pista; registro degli impianti del Comune di Pesaro. L'impianto coperto della stagione
-                2026/27 non è ancora confermato: appena lo sarà, sta scritto qui.
-              </p>
+              {/* Le fonti stanno nelle pagine di dentro, non in vetrina: la
+                  home di una squadra si guarda, non si legge. */}
             </div>
           </div>
         </div>

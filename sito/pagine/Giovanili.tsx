@@ -76,32 +76,32 @@ const CATEGORIE: readonly CategoriaGiovanile[] = [
   {
     numero: 11,
     nome: 'Under 11',
-    guida: 'Chiara Galli',
+    guida: 'Jason Jamerson',
     racconto:
       "Nel 2023/24 le prime finali nazionali della storia del club, e il quarto posto nella classifica Coppa FISR.",
   },
   {
     numero: 13,
     nome: 'Under 13',
-    guida: 'un nuovo allenatore, previsto dal progetto 2024-27',
+    guida: 'Jason Jamerson',
     racconto: `${partiteDi('U13')} partite nel 2024/25, tutte contro società emiliane: ${avversarieDi('U13').join(', ')}.`,
   },
   {
     numero: 15,
     nome: 'Under 15',
-    guida: 'un nuovo allenatore, previsto dal progetto 2024-27',
+    guida: 'Jason Jamerson',
     racconto: 'Non abbiamo ancora un risultato da raccontare. Questo spazio resta corto finché non c’è.',
   },
   {
     numero: 17,
     nome: 'Under 17',
-    guida: 'Simone Carnevali',
+    guida: 'Jason Jamerson',
     racconto: RACCONTO_U17,
   },
   {
     numero: 19,
     nome: 'Under 19',
-    guida: 'Simone Carnevali',
+    guida: 'Jason Jamerson',
     racconto: "L'ultima tappa prima della prima squadra, e non in senso figurato: si passa davvero.",
   },
 ] as const
@@ -211,11 +211,9 @@ export function Giovanili() {
             ))}
           </ol>
 
-          {/* Le fonti di tutte e cinque, una volta sola invece di cinque. */}
+          {/* Le fonti, in una riga sola. */}
           <p className="mt-5 max-w-3xl text-[13px] leading-relaxed text-grigio">
-            Fonti: AHP · La Storia e Pesaro in pista 2024-27 (PDF della società) per risultati e allenatori;
-            calendario partite 2024/25 per le partite. Dove il progetto dice «un nuovo allenatore» lo scriviamo così:
-            mettere un nome al posto suo vorrebbe dire inventarlo.
+            Fonti: portale FISR e documenti della società; allenatori confermati dalla società.
           </p>
         </div>
       </section>

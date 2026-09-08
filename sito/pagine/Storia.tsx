@@ -90,14 +90,10 @@ const RECENTI: readonly Tappa[] = [
       "Urbinati, Roberti e Ridolfi in prima squadra. L'Under 11 arriva alle prime finali nazionali della storia del club.",
   },
   {
-    anno: '2024/25',
-    titolo: 'Arriva Simone Carnevali',
-    testo: 'Dalla Serie A di Modena, Vercelli e Scandiano alla panchina della prima squadra e dell’Under 19.',
-  },
-  {
     anno: STAGIONE_ROSA,
-    titolo: 'Cambio in panchina',
-    testo: 'Il capo allenatore depositato in federazione è Edoardo Rubien Escardilla. Carnevali resta nello staff.',
+    titolo: 'La squadra di oggi',
+    testo:
+      'La prima squadra la allena Edgar Barberi, che la società l’ha fondata. Il vivaio, dall’Under 11 all’Under 19, lo segue Jason Jamerson, che gioca anche in prima squadra.',
   },
 ]
 

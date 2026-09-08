@@ -79,7 +79,12 @@ body {
   font-family: var(--font-titolo);
   font-weight: 400;
   text-transform: uppercase;
-  line-height: 0.86;
+  /* 0,86 accavallava i titoli su più righe: in italiano le maiuscole
+   * accentate (À di SOCIETÀ, È) portano il segno SOPRA la lettera, e con
+   * un'interlinea più stretta dell'occhio del carattere quel segno finisce
+   * dentro la riga di sopra. 0,95 lascia passare gli accenti e i titoli
+   * restano comunque compatti. */
+  line-height: 0.95;
   letter-spacing: 0.005em;
   text-wrap: balance;
 }

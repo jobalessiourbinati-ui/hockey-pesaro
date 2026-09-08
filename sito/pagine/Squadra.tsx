@@ -180,8 +180,7 @@ export function Squadra() {
           </ul>
 
           <p className="mt-5 max-w-3xl text-[13px] leading-relaxed text-grigio-chiaro">
-            Fonte: staff tesserato per la Serie B {STAGIONE_ROSA} sul portale FISR. Il capo allenatore depositato è
-            Edoardo Rubien Escardilla.
+            Fonte: staff tesserato sul portale FISR; ruoli confermati dalla società.
           </p>
         </div>
       </section>

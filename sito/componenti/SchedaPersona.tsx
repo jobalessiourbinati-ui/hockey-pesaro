@@ -36,14 +36,14 @@ import { BastoniIncrociati } from './Scudetto.tsx'
 
 /* ---------------------------------------------------------------------------
  * L'ordine con cui si leggono i ruoli di una persona. Edgar Barberi ne ha
- * quattro — proprietario, dirigente, allenatore, giocatore — e in una società
+ * quattro — presidente, dirigente, allenatore, giocatore — e in una società
  * di questa dimensione è normale, non è un errore del database. Elencarli
  * nell'ordine in cui capitano nell'array darebbe «giocatore, allenatore,
- * dirigente, proprietario», che si legge come una lista sbagliata; ordinarli
+ * dirigente, presidente», che si legge come una lista sbagliata; ordinarli
  * dal ruolo che spiega gli altri li fa leggere come una biografia corta.
  * ------------------------------------------------------------------------- */
 const PESO_RUOLO: Record<Ruolo, number> = {
-  proprietario: 0,
+  presidente: 0,
   dirigente: 1,
   allenatore: 2,
   portiere: 3,
@@ -54,7 +54,7 @@ const ruoliOrdinati = (p: Persona): readonly Ruolo[] => [...p.ruoli].sort((a, b)
 
 /** I ruoli che qualificano la persona nella società, non in pista: si
  *  segnano in rosso perché sono la cosa che distingue una scheda dall'altra. */
-const RUOLO_DI_SOCIETA: ReadonlySet<Ruolo> = new Set<Ruolo>(['proprietario', 'dirigente'])
+const RUOLO_DI_SOCIETA: ReadonlySet<Ruolo> = new Set<Ruolo>(['presidente', 'dirigente'])
 
 export interface ProprietaScheda {
   readonly persona: Persona
@@ -187,6 +187,14 @@ export function SchedaPersona({ persona, formato = 'compatta', tono = 'chiaro' }
         {/* I ruoli come elenco di etichette: con quattro ruoli si dispongono
             su due righe e continuano a sembrare voluti. */}
         <ul className={`flex flex-wrap gap-1 ${estesa ? 'mt-2.5' : 'mt-2'}`}>
+          {/* Il capitano è pieno, non contornato: è l'unica etichetta che
+              distingue una persona da tutte le altre della rosa, e la fascia
+              al braccio nello sport è piena anche lei. */}
+          {persona.capitano === true && (
+            <li className="border border-rosso-cupo bg-rosso-cupo px-1.5 py-0.5 text-[0.6875rem] leading-tight tracking-[0.08em] text-white uppercase">
+              capitano
+            </li>
+          )}
           {ruoli.map((r) => (
             <li
               key={r}
