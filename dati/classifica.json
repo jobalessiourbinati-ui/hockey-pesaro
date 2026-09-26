@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-09-15T03:32:18.302Z",
+  "aggiornato": "2026-09-26T07:47:56.235Z",
   "fonte": {
     "portale": "https://hockeypista.fisr.it/",
     "calendario": "https://www.server2.sidgad.es/fisr/fisr_cal_idc_1894_1.php",
@@ -134,8 +134,8 @@
       "nostra": true
     },
     {
-      "data": "2027-02-07",
-      "ora": "18:00",
+      "data": "2027-02-12",
+      "ora": "21:30",
       "casaId": 5187,
       "ospitiId": 5192,
       "casa": "ROTELLISTICA SCANDIANESE",
