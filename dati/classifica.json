@@ -1,5 +1,5 @@
 {
-  "aggiornato": "2026-10-06T03:03:47.527Z",
+  "aggiornato": "2026-10-15T13:29:30.135Z",
   "fonte": {
     "portale": "https://hockeypista.fisr.it/",
     "calendario": "https://www.server2.sidgad.es/fisr/fisr_cal_idc_1894_1.php",
@@ -19,9 +19,94 @@
     "MINIMOTOR CORREGGIO",
     "ROTELLISTICA SCANDIANESE"
   ],
-  "classificaDisponibile": false,
-  "classifica": [],
-  "classificaNota": "La FISR non pubblica ancora la classifica di questo girone: il campionato non è cominciato. La pagina deve dirlo, non mostrare una tabella di zeri.",
+  "classificaDisponibile": true,
+  "classifica": [
+    {
+      "posizione": 1,
+      "squadra": "AMATORI PESARO",
+      "punti": 0,
+      "giocate": 0,
+      "vinte": 0,
+      "pareggiate": 0,
+      "perse": 0,
+      "fatte": 0,
+      "subite": 0,
+      "differenza": 0,
+      "penalita": 0,
+      "noi": true
+    },
+    {
+      "posizione": 2,
+      "squadra": "HOCKEY PICO MIRANDOLA",
+      "punti": 0,
+      "giocate": 0,
+      "vinte": 0,
+      "pareggiate": 0,
+      "perse": 0,
+      "fatte": 0,
+      "subite": 0,
+      "differenza": 0,
+      "penalita": 0,
+      "noi": false
+    },
+    {
+      "posizione": 3,
+      "squadra": "MINIMOTOR CORREGGIO",
+      "punti": 0,
+      "giocate": 0,
+      "vinte": 0,
+      "pareggiate": 0,
+      "perse": 0,
+      "fatte": 0,
+      "subite": 0,
+      "differenza": 0,
+      "penalita": 0,
+      "noi": false
+    },
+    {
+      "posizione": 4,
+      "squadra": "ROTELLISTICA SCANDIANESE",
+      "punti": 0,
+      "giocate": 0,
+      "vinte": 0,
+      "pareggiate": 0,
+      "perse": 0,
+      "fatte": 0,
+      "subite": 0,
+      "differenza": 0,
+      "penalita": 0,
+      "noi": false
+    },
+    {
+      "posizione": 5,
+      "squadra": "HOCKEY SCANDIANO",
+      "punti": 0,
+      "giocate": 0,
+      "vinte": 0,
+      "pareggiate": 0,
+      "perse": 0,
+      "fatte": 0,
+      "subite": 0,
+      "differenza": 0,
+      "penalita": 0,
+      "noi": false
+    },
+    {
+      "posizione": 6,
+      "squadra": "AMATORI MODENA",
+      "punti": 0,
+      "giocate": 0,
+      "vinte": 0,
+      "pareggiate": 0,
+      "perse": 0,
+      "fatte": 0,
+      "subite": 0,
+      "differenza": 0,
+      "penalita": 0,
+      "noi": false
+    }
+  ],
+  "classificaNota": "Letta dalla tabella intitolata «SERIE B - GIRONE D» del portale federale.",
   "partite": [
     {
       "data": "2027-01-08",
